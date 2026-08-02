@@ -24,36 +24,47 @@ function spin(){
 
 
 
-    if(spinning) return;
+    if(spinning)
+    return;
 
 
 
-    const bet =
-    Number(document.getElementById("bet").value);
+    let bet =
+    Number(
+    document.getElementById("bet").value
+    );
 
 
 
-    if(!bet || bet <=0){
+    if(!bet || bet <= 0){
 
 
-        result.innerHTML="Enter a bet!";
+        result.innerHTML =
+        "Enter a bet!";
+
 
         return;
 
+
     }
+
+
 
 
 
     if(bet > getCoins()){
 
 
-        result.innerHTML="Not enough coins!";
+        result.innerHTML =
+        "Not enough coins!";
 
 
         return;
 
 
     }
+
+
 
 
 
@@ -66,13 +77,13 @@ function spin(){
 
 
 
-    LuckySounds.spin();
+    LuckySounds.slotSpin();
 
 
 
 
 
-    const slots=[
+    let slots=[
 
     document.getElementById("slot1"),
 
@@ -91,16 +102,19 @@ function spin(){
 
 
 
-    let animation=setInterval(()=>{
+
+    let animation =
+    setInterval(()=>{
 
 
         slots.forEach(slot=>{
 
 
             slot.innerHTML =
-
             symbols[
-            Math.floor(Math.random()*symbols.length)
+            Math.floor(
+            Math.random()*symbols.length
+            )
             ];
 
 
@@ -112,11 +126,10 @@ function spin(){
 
 
 
-        if(count>=20){
+        if(count>=25){
 
 
             clearInterval(animation);
-
 
 
             finishSpin(slots,bet);
@@ -124,6 +137,7 @@ function spin(){
 
 
         }
+
 
 
     },100);
@@ -140,33 +154,39 @@ function spin(){
 function finishSpin(slots,bet){
 
 
+    LuckySounds.slotStop();
 
-    let resultSlots = slots.map(slot=>slot.innerHTML);
+
+
+    let results =
+    slots.map(slot=>slot.innerHTML);
+
+
 
 
 
     if(
-
-    resultSlots[0] === resultSlots[1] &&
-
-    resultSlots[1] === resultSlots[2]
-
+    results[0] === results[1] &&
+    results[1] === results[2]
     ){
+
 
 
         let multiplier=3;
 
 
 
-        if(resultSlots[0]=="💎")
+        if(results[0]=="💎")
         multiplier=5;
 
 
-        if(resultSlots[0]=="7️⃣")
+
+        if(results[0]=="7️⃣")
         multiplier=10;
 
 
-        if(resultSlots[0]=="👑")
+
+        if(results[0]=="👑")
         multiplier=25;
 
 
@@ -180,17 +200,30 @@ function finishSpin(slots,bet){
 
 
 
+
         result.innerHTML =
         "🎉 WIN +" + reward;
 
 
 
-        LuckySounds.win();
+        if(results[0]=="👑"){
+
+
+            LuckySounds.jackpot();
+
+
+        }
+        else{
+
+
+            LuckySounds.win();
+
+
+        }
 
 
 
     }
-
     else{
 
 
@@ -202,8 +235,6 @@ function finishSpin(slots,bet){
 
 
     }
-
-
 
 
 
