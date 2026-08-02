@@ -2,38 +2,60 @@ let cupLocked = false;
 
 
 
+let winningCup = 0;
+
+
+
+
+
 function chooseCup(number){
 
 
-    if(cupLocked) return;
+
+    if(cupLocked)
+    return;
 
 
 
-    const bet =
-    Number(document.getElementById("bet").value);
+    let bet =
+    Number(
+    document.getElementById("bet").value
+    );
+
+
 
 
 
     if(!bet || bet <= 0){
 
-        document.getElementById("result").innerHTML =
-        "Enter a bet!";
+
+        result.innerHTML =
+        "Enter a bet amount!";
+
 
         return;
 
+
     }
+
+
+
 
 
 
     if(bet > getCoins()){
 
 
-        document.getElementById("result").innerHTML =
+        result.innerHTML =
         "Not enough coins!";
+
 
         return;
 
+
     }
+
+
 
 
 
@@ -47,26 +69,46 @@ function chooseCup(number){
 
 
 
-    const cups =
+
+    LuckySounds.click();
+
+
+
+
+
+    result.innerHTML =
+    "🥤 Mixing cups...";
+
+
+
+
+
+    let cups =
     document.querySelectorAll(".cup");
 
 
 
-    cups.forEach(c=>{
 
-        c.disabled=true;
+
+    cups.forEach(cup=>{
+
+
+        cup.disabled=true;
+
 
     });
 
 
 
 
-    LuckySounds.click();
 
 
 
-    document.getElementById("result").innerHTML =
-    "🥤 Mixing...";
+    winningCup =
+    Math.floor(Math.random()*3)+1;
+
+
+
 
 
 
@@ -75,12 +117,10 @@ function chooseCup(number){
 
 
 
-        let winning =
-        Math.floor(Math.random()*3)+1;
 
 
 
-        if(number === winning){
+        if(number === winningCup){
 
 
 
@@ -93,8 +133,14 @@ function chooseCup(number){
 
 
 
-            document.getElementById("result").innerHTML =
-            "🎉 You found the ball! +" + reward;
+
+            result.innerHTML =
+
+            "🎉 You found the ball! +" +
+
+            reward +
+
+            " Coins";
 
 
 
@@ -104,14 +150,18 @@ function chooseCup(number){
 
         }
 
-        else{
+        else {
 
 
-            document.getElementById("result").innerHTML =
+
+            result.innerHTML =
+
             "❌ Wrong cup!";
 
 
+
             LuckySounds.lose();
+
 
 
         }
@@ -120,11 +170,19 @@ function chooseCup(number){
 
 
 
-        cups.forEach(c=>{
 
-            c.disabled=false;
+
+
+        cups.forEach(cup=>{
+
+
+            cup.disabled=false;
+
 
         });
+
+
+
 
 
 
@@ -132,7 +190,12 @@ function chooseCup(number){
 
 
 
+
+
+
     },2000);
+
+
 
 
 
