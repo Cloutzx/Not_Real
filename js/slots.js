@@ -1,3 +1,8 @@
+/* =========================================================
+   LUCKY LOUNGE SLOTS
+========================================================= */
+
+
 let spinning = false;
 
 
@@ -29,10 +34,14 @@ function spin(){
 
 
 
+
+
     let bet =
     Number(
-    document.getElementById("bet").value
+        document.getElementById("bet").value
     );
+
+
 
 
 
@@ -47,6 +56,8 @@ function spin(){
 
 
     }
+
+
 
 
 
@@ -69,11 +80,18 @@ function spin(){
 
 
 
-    spinning=true;
+
+    spinning = true;
+
 
 
 
     removeCoins(bet);
+
+
+    updateCoins();
+
+
 
 
 
@@ -83,13 +101,15 @@ function spin(){
 
 
 
-    let slots=[
 
-    document.getElementById("slot1"),
 
-    document.getElementById("slot2"),
+    let slots = [
 
-    document.getElementById("slot3")
+        document.getElementById("slot1"),
+
+        document.getElementById("slot2"),
+
+        document.getElementById("slot3")
 
     ];
 
@@ -97,7 +117,11 @@ function spin(){
 
 
 
-    let count=0;
+
+
+    let count = 0;
+
+
 
 
 
@@ -107,18 +131,27 @@ function spin(){
     setInterval(()=>{
 
 
+
+
+
         slots.forEach(slot=>{
 
 
             slot.innerHTML =
+
             symbols[
-            Math.floor(
-            Math.random()*symbols.length
-            )
+                Math.floor(
+                    Math.random()
+                    *
+                    symbols.length
+                )
             ];
 
 
+
         });
+
+
 
 
 
@@ -126,21 +159,32 @@ function spin(){
 
 
 
-        if(count>=25){
+
+
+
+        if(count >= 25){
+
 
 
             clearInterval(animation);
 
 
-            finishSpin(slots,bet);
 
+            finishSpin(
+                slots,
+                bet
+            );
 
 
         }
 
 
 
+
+
     },100);
+
+
 
 
 
@@ -151,48 +195,79 @@ function spin(){
 
 
 
+
+
+
 function finishSpin(slots,bet){
+
 
 
     LuckySounds.slotStop();
 
 
 
+
+
     let results =
-    slots.map(slot=>slot.innerHTML);
+
+    slots.map(
+        slot=>slot.innerHTML
+    );
+
+
 
 
 
 
 
     if(
-    results[0] === results[1] &&
-    results[1] === results[2]
+        results[0] === results[1]
+        &&
+        results[1] === results[2]
     ){
 
 
 
-        let multiplier=3;
+        let multiplier = 3;
 
 
 
-        if(results[0]=="💎")
-        multiplier=5;
+
+
+        if(results[0] === "💎")
+
+            multiplier = 5;
 
 
 
-        if(results[0]=="7️⃣")
-        multiplier=10;
+
+
+        if(results[0] === "7️⃣")
+
+            multiplier = 10;
 
 
 
-        if(results[0]=="👑")
-        multiplier=25;
+
+
+        if(results[0] === "👑")
+
+            multiplier = 25;
+
+
+
+
+
+
 
 
 
         let reward =
+
         bet * multiplier;
+
+
+
 
 
 
@@ -200,19 +275,38 @@ function finishSpin(slots,bet){
 
 
 
+        updateCoins();
+
+
+
+
+
+
 
         result.innerHTML =
-        "🎉 WIN +" + reward;
+
+        `
+        🎉 WIN!<br>
+        🪙 +${reward} Coins
+        `;
 
 
 
-        if(results[0]=="👑"){
+
+
+
+
+
+        if(results[0] === "👑"){
+
 
 
             LuckySounds.jackpot();
 
 
+
         }
+
         else{
 
 
@@ -223,22 +317,35 @@ function finishSpin(slots,bet){
 
 
 
+
+
     }
+
     else{
 
 
+
         result.innerHTML =
+
         "❌ Lost";
+
 
 
         LuckySounds.lose();
 
 
+
     }
 
 
 
+
+
+
+
     spinning=false;
+
+
 
 
 
