@@ -3,40 +3,17 @@
 ========================================================= */
 
 
-const soundPath = window.location.pathname.includes("/games/")
-    ? "../sounds/"
-    : "sounds/";
-
-
-
 const Sounds = {
 
-
-    click: new Audio(soundPath + "click.mp3"),
-
-
-    spin: new Audio(soundPath + "spin.mp3"),
-
-
-    win: new Audio(soundPath + "win.mp3"),
-
-
-    lose: new Audio(soundPath + "lose.mp3"),
-
-
-    fish: new Audio(soundPath + "fish.mp3"),
-
-
-    reward: new Audio(soundPath + "reward.mp3"),
-
-
-    coinflip: new Audio(soundPath + "coinflip.mp3")
-
-
+    click: new Audio("/sounds/click.mp3"),
+    spin: new Audio("/sounds/spin.mp3"),
+    win: new Audio("/sounds/win.mp3"),
+    lose: new Audio("/sounds/lose.mp3"),
+    fish: new Audio("/sounds/fish.mp3"),
+    reward: new Audio("/sounds/reward.mp3"),
+    coinflip: new Audio("/sounds/coinflip.mp3")
 
 };
-
-
 
 
 
@@ -49,23 +26,23 @@ Object.values(Sounds).forEach(sound=>{
 
 
 
+function playSound(sound){
 
 
-function playSound(name){
+    if(!Sounds[sound]) return;
 
 
-    if(!Sounds[name]) return;
+    Sounds[sound].currentTime = 0;
 
 
-    Sounds[name].currentTime = 0;
+    Sounds[sound].play().catch(error=>{
 
+        console.log("Sound blocked:", error);
 
-    Sounds[name].play().catch(()=>{});
-
+    });
 
 
 }
-
 
 
 
@@ -121,16 +98,11 @@ window.LuckySounds = {
 
     }
 
-
 };
 
 
 
 
-
-
-
-// Button click sound
 
 document.addEventListener("DOMContentLoaded",()=>{
 
