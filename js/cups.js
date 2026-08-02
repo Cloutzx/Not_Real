@@ -2,7 +2,7 @@ let cupLocked = false;
 
 
 
-function chooseCup(choice){
+function chooseCup(number){
 
 
     if(cupLocked) return;
@@ -16,37 +16,30 @@ function chooseCup(choice){
 
     if(!bet || bet <= 0){
 
-
         document.getElementById("result").innerHTML =
-        "Enter a bet amount!";
-
+        "Enter a bet!";
 
         return;
-
 
     }
 
 
 
-    let coins = getCoins();
-
-
-
-    if(bet > coins){
+    if(bet > getCoins()){
 
 
         document.getElementById("result").innerHTML =
         "Not enough coins!";
 
-
         return;
-
 
     }
 
 
 
-    cupLocked = true;
+
+
+    cupLocked=true;
 
 
 
@@ -59,20 +52,12 @@ function chooseCup(choice){
 
 
 
-    cups.forEach(cup=>{
+    cups.forEach(c=>{
 
-
-        cup.style.pointerEvents="none";
-
+        c.disabled=true;
 
     });
 
-
-
-
-
-    document.getElementById("result").innerHTML =
-    "🥤 Mixing cups...";
 
 
 
@@ -80,17 +65,22 @@ function chooseCup(choice){
 
 
 
+    document.getElementById("result").innerHTML =
+    "🥤 Mixing...";
+
+
 
 
     setTimeout(()=>{
 
 
-        const winningCup =
+
+        let winning =
         Math.floor(Math.random()*3)+1;
 
 
 
-        if(choice === winningCup){
+        if(number === winning){
 
 
 
@@ -104,8 +94,7 @@ function chooseCup(choice){
 
 
             document.getElementById("result").innerHTML =
-
-            "🎉 Correct Cup! +" + reward + " Coins";
+            "🎉 You found the ball! +" + reward;
 
 
 
@@ -115,18 +104,14 @@ function chooseCup(choice){
 
         }
 
-        else {
-
+        else{
 
 
             document.getElementById("result").innerHTML =
-
-            "❌ Wrong Cup!";
-
+            "❌ Wrong cup!";
 
 
             LuckySounds.lose();
-
 
 
         }
@@ -135,12 +120,9 @@ function chooseCup(choice){
 
 
 
+        cups.forEach(c=>{
 
-        cups.forEach(cup=>{
-
-
-            cup.style.pointerEvents="auto";
-
+            c.disabled=false;
 
         });
 
