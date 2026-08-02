@@ -1,5 +1,5 @@
 /* ==========================
-   Lucky Lounge Style
+   Lucky Lounge Premium UI
 ========================== */
 
 
@@ -8,34 +8,72 @@
 }
 
 
-
-html, body {
-
-    width: 100%;
-
-    min-height: 100%;
+body {
 
     margin: 0;
 
-    padding: 0;
+    min-height: 100vh;
+
+    background:
+    radial-gradient(circle at top, #302b63, #111);
+
+    color:white;
+
+    font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow-x:hidden;
 
 }
 
 
 
-body {
+/* Animated background */
 
-    background: #111;
+body::before {
 
-    color: white;
+    content:"";
 
-    font-family: Arial, sans-serif;
+    position:fixed;
 
-    display: flex;
+    width:500px;
 
-    justify-content: center;
+    height:500px;
 
-    align-items: center;
+    background:
+    radial-gradient(circle,#8a2be2,transparent);
+
+    filter:blur(100px);
+
+    animation:
+    float 8s infinite alternate;
+
+}
+
+
+
+@keyframes float {
+
+    from{
+
+        transform:translate(-200px,-100px);
+
+    }
+
+
+    to{
+
+        transform:translate(200px,100px);
+
+    }
 
 }
 
@@ -43,29 +81,72 @@ body {
 
 
 
-/* Main Game Box */
+
+/* Main card */
 
 .game-container {
 
-    width: 100%;
 
-    max-width: 700px;
+    width:90%;
 
-    min-height: 100vh;
+    max-width:700px;
 
-    margin: auto;
 
-    padding: 40px 20px;
+    padding:40px;
 
-    display: flex;
 
-    flex-direction: column;
+    background:
 
-    align-items: center;
+    rgba(255,255,255,0.08);
 
-    justify-content: center;
 
-    text-align: center;
+    backdrop-filter:
+
+    blur(20px);
+
+
+    border-radius:25px;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.2);
+
+
+    box-shadow:
+
+    0 0 40px rgba(138,43,226,.4);
+
+
+
+    text-align:center;
+
+
+    animation:
+
+    appear .5s ease;
+
+
+}
+
+
+
+@keyframes appear {
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+    }
 
 }
 
@@ -73,13 +154,23 @@ body {
 
 
 
-/* Title */
+
+/* Titles */
+
 
 .game-title {
 
-    font-size: 42px;
+
+    font-size:45px;
+
+
+    text-shadow:
+
+    0 0 20px #9d4edd;
+
 
 }
+
 
 
 
@@ -87,11 +178,31 @@ body {
 
 /* Coins */
 
+
 .game-balance {
 
-    font-size: 24px;
 
-    margin-bottom: 20px;
+    margin:20px;
+
+
+    padding:15px;
+
+
+    border-radius:15px;
+
+
+    background:
+
+    rgba(0,0,0,.35);
+
+
+    font-size:24px;
+
+
+    box-shadow:
+
+    inset 0 0 20px rgba(255,255,255,.1);
+
 
 }
 
@@ -100,62 +211,98 @@ body {
 
 
 
-/* ==========================
-        SLOTS FIX
-========================== */
+/* Slots */
 
 
 .slots {
 
-    display: flex !important;
 
-    flex-direction: row !important;
+    display:flex;
 
-    flex-wrap: nowrap !important;
 
-    justify-content: center !important;
+    justify-content:center;
 
-    align-items: center !important;
 
-    gap: 20px !important;
+    align-items:center;
 
-    width: 100% !important;
 
-    margin: 30px auto !important;
+    gap:20px;
+
+
+    margin:35px 0;
+
 
 }
 
 
 
-.slots .slot {
-
-    width: 100px;
-
-    height: 100px;
-
-    flex: 0 0 auto !important;
-
-    
-
-    background: #222;
-
-    border: 2px solid white;
-
-    border-radius: 15px;
+.slot {
 
 
-
-    display: flex !important;
-
-    justify-content: center !important;
-
-    align-items: center !important;
+    width:110px;
 
 
+    height:110px;
 
-    font-size: 50px;
+
+    background:
+
+
+    linear-gradient(
+
+    145deg,
+
+    #333,
+
+    #111
+
+    );
+
+
+    border-radius:20px;
+
+
+    border:2px solid #9d4edd;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    font-size:55px;
+
+
+    box-shadow:
+
+
+    0 0 25px rgba(157,78,221,.7);
+
+
+
+    transition:.3s;
+
 
 }
+
+
+
+.slot:hover {
+
+
+    transform:
+
+    translateY(-10px)
+
+    scale(1.05);
+
+
+}
+
 
 
 
@@ -164,27 +311,44 @@ body {
 
 /* Inputs */
 
+
 input {
 
-    width: 260px;
 
-    height: 45px;
+    width:260px;
 
-    margin: 15px auto;
 
-    padding: 10px;
+    padding:15px;
 
-    display: block;
 
-    text-align: center;
+    border-radius:15px;
 
-    font-size: 18px;
 
-    border-radius: 10px;
+    border:none;
 
-    border: none;
+
+    outline:none;
+
+
+    text-align:center;
+
+
+    font-size:18px;
+
+
+    background:#222;
+
+
+    color:white;
+
+
+    box-shadow:
+
+    0 0 15px rgba(255,255,255,.2);
+
 
 }
+
 
 
 
@@ -193,29 +357,76 @@ input {
 
 /* Buttons */
 
+
 button {
 
-    display: block;
 
-    margin: 10px auto;
+    margin:10px;
 
-    padding: 12px 30px;
 
-    font-size: 18px;
+    padding:15px 35px;
 
-    border-radius: 10px;
 
-    border: none;
+    border-radius:15px;
 
-    cursor: pointer;
+
+    border:none;
+
+
+    cursor:pointer;
+
+
+    font-size:18px;
+
+
+    font-weight:bold;
+
+
+    color:white;
+
+
+    background:
+
+
+    linear-gradient(
+
+    135deg,
+
+    #7b2ff7,
+
+    #f107a3
+
+    );
+
+
+    box-shadow:
+
+
+    0 0 20px rgba(241,7,163,.5);
+
+
+    transition:.3s;
+
 
 }
 
 
 
+
 button:hover {
 
-    transform: scale(1.05);
+
+    transform:
+
+    translateY(-5px)
+
+    scale(1.05);
+
+
+    box-shadow:
+
+    0 0 35px #f107a3;
+
 
 }
 
@@ -226,17 +437,18 @@ button:hover {
 
 /* Cards */
 
+
 .cards {
 
-    display: flex;
 
-    flex-direction: row;
+    display:flex;
 
-    justify-content: center;
 
-    align-items: center;
+    justify-content:center;
 
-    gap: 15px;
+
+    gap:15px;
+
 
 }
 
@@ -244,23 +456,38 @@ button:hover {
 
 .card {
 
-    width: 70px;
 
-    height: 100px;
+    width:80px;
 
-    background: white;
 
-    color: black;
+    height:110px;
 
-    display: flex;
 
-    justify-content: center;
+    background:white;
 
-    align-items: center;
 
-    border-radius: 10px;
+    color:black;
 
-    font-size: 25px;
+
+    border-radius:15px;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    font-size:28px;
+
+
+    box-shadow:
+
+    0 0 20px white;
+
 
 }
 
@@ -268,20 +495,12 @@ button:hover {
 
 
 
+.card.back {
 
-/* Cups */
 
-.cups {
+    background:#222;
 
-    display: flex;
-
-    flex-direction: row;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 20px;
+    color:white;
 
 }
 
@@ -289,29 +508,17 @@ button:hover {
 
 
 
+/* Result */
 
-/* Coin */
-
-.coin {
-
-    font-size: 80px;
-
-}
-
-
-
-
-
-
-/* Results */
 
 #result {
 
-    text-align: center;
 
-    font-size: 25px;
+    margin-top:25px;
 
-    margin-top: 20px;
+
+    font-size:28px;
+
 
 }
 
@@ -319,7 +526,14 @@ button:hover {
 
 .win {
 
-    color: lime;
+
+    color:#00ff88;
+
+
+    text-shadow:
+
+    0 0 20px lime;
+
 
 }
 
@@ -327,7 +541,14 @@ button:hover {
 
 .lose {
 
-    color: red;
+
+    color:#ff4444;
+
+
+    text-shadow:
+
+    0 0 20px red;
+
 
 }
 
@@ -336,14 +557,35 @@ button:hover {
 
 
 
-/* Back */
+
+/* Back Button */
+
 
 .back {
 
-    margin-top: 30px;
 
-    color: white;
+    display:inline-block;
 
-    text-decoration: none;
+
+    margin-top:30px;
+
+
+    color:white;
+
+
+    text-decoration:none;
+
+
+    opacity:.8;
+
+
+}
+
+
+.back:hover {
+
+
+    opacity:1;
+
 
 }
