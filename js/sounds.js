@@ -3,7 +3,7 @@
 ========================================================= */
 
 
-const SOUND_VOLUME = 0.25; // Change volume here (0.0 - 1.0)
+const SOUND_VOLUME = 0.1; // Change volume here (0.0 - 1.0)
 
 
 
