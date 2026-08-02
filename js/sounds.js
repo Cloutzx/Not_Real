@@ -1,55 +1,40 @@
-// ==========================
-// Lucky Lounge Sound System
-// ==========================
+/* =========================================================
+   LUCKY LOUNGE SOUND SYSTEM
+========================================================= */
 
+
+// Detect if we are inside /games/
+const soundPath = window.location.pathname.includes("/games/")
+    ? "../sounds/"
+    : "sounds/";
+
+
+
+
+// Sounds
 
 const Sounds = {
 
-    click: new Audio(
-        "../assets/sounds/click.mp3"
-    ),
+    click: new Audio(soundPath + "click.mp3"),
 
-    win: new Audio(
-        "../assets/sounds/win.mp3"
-    ),
+    spin: new Audio(soundPath + "spin.mp3"),
 
-    lose: new Audio(
-        "../assets/sounds/lose.mp3"
-    ),
+    win: new Audio(soundPath + "win.mp3"),
 
-    jackpot: new Audio(
-        "../assets/sounds/jackpot.mp3"
-    ),
+    lose: new Audio(soundPath + "lose.mp3"),
 
-    slotSpin: new Audio(
-        "../assets/sounds/slot-spin.mp3"
-    ),
+    fish: new Audio(soundPath + "fish.mp3"),
 
-    slotStop: new Audio(
-        "../assets/sounds/slot-stop.mp3"
-    ),
+    reward: new Audio(soundPath + "reward.mp3"),
 
-    coinFlip: new Audio(
-        "../assets/sounds/coin-flip.mp3"
-    ),
-
-    cardFlip: new Audio(
-        "../assets/sounds/card-flip.mp3"
-    ),
-
-    cardDeal: new Audio(
-        "../assets/sounds/card-deal.mp3"
-    ),
-
-    reward: new Audio(
-        "../assets/sounds/reward.mp3"
-    )
+    coinflip: new Audio(soundPath + "coinflip.mp3")
 
 };
 
 
 
-// Volume
+
+// Volume settings
 
 Object.values(Sounds).forEach(sound => {
 
@@ -59,25 +44,119 @@ Object.values(Sounds).forEach(sound => {
 
 
 
+
+
+
 // Play sound function
 
 function playSound(name){
 
-    let sound = Sounds[name];
+
+    if(!Sounds[name]) return;
 
 
-    if(sound){
 
-        sound.currentTime = 0;
+    Sounds[name].currentTime = 0;
 
-        sound.play().catch(() => {
 
-            console.log(
-                "Sound requires user interaction"
-            );
+
+    Sounds[name].play().catch(()=>{});
+
+
+}
+
+
+
+
+
+
+
+// Automatic button sounds
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+
+    const buttons = document.querySelectorAll("button");
+
+
+
+    buttons.forEach(button=>{
+
+
+        button.addEventListener("click",()=>{
+
+
+            playSound("click");
+
 
         });
 
+
+
+    });
+
+
+
+});
+
+
+
+
+
+
+
+// Export for other scripts
+
+window.LuckySounds = {
+
+
+    click(){
+
+        playSound("click");
+
+    },
+
+
+    spin(){
+
+        playSound("spin");
+
+    },
+
+
+    win(){
+
+        playSound("win");
+
+    },
+
+
+    lose(){
+
+        playSound("lose");
+
+    },
+
+
+    fish(){
+
+        playSound("fish");
+
+    },
+
+
+    reward(){
+
+        playSound("reward");
+
+    },
+
+
+    coinflip(){
+
+        playSound("coinflip");
+
     }
 
-}
+
+};
