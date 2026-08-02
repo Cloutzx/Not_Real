@@ -1,387 +1,184 @@
-// ==========================
-// Lucky Lounge Slots
-// ==========================
-
-
-const slotSymbols = [
-    "🍒",
-    "🍋",
-    "🍀",
-    "⭐",
-    "💎",
-    "7️⃣"
+const symbols = [
+    {
+        emoji: "🍒",
+        multiplier: 3
+    },
+    {
+        emoji: "💎",
+        multiplier: 5
+    },
+    {
+        emoji: "7️⃣",
+        multiplier: 10
+    },
+    {
+        emoji: "👑",
+        multiplier: 25
+    }
 ];
-
 
 let spinning = false;
 
+function spin() {
 
-
-function spinSlots(){
-
-
-    if(spinning){
-
+    if (spinning) {
         return;
-
     }
 
+    const betInput = document.getElementById("bet");
+    const result = document.getElementById("result");
 
+    const slot1 = document.getElementById("slot1");
+    const slot2 = document.getElementById("slot2");
+    const slot3 = document.getElementById("slot3");
 
-    let bet = Number(
-        document.getElementById("bet").value
-    );
-
-
-
-    if(!bet || bet <= 0){
-
-        alert("Enter a valid bet");
-
+    if (!betInput || !result || !slot1 || !slot2 || !slot3) {
+        console.error("[Slots] Required elements are missing.");
         return;
-
     }
 
+    const bet = Number(betInput.value);
 
-
-    if(bet > coins){
-
-        alert("Not enough coins");
-
+    if (!Number.isFinite(bet) || bet <= 0) {
+        result.textContent = "❌ Enter a valid bet!";
         return;
-
     }
 
+    /*
+        Supports common currency systems where the
+        balance is stored in localStorage as "coins".
+    */
 
+    let coins = Number(localStorage.getItem("coins"));
+
+    if (!Number.isFinite(coins)) {
+        coins = 1000;
+        localStorage.setItem("coins", coins);
+    }
+
+    if (bet > coins) {
+        result.textContent = "❌ Not enough coins!";
+        return;
+    }
 
     spinning = true;
 
-
-
     coins -= bet;
+
+    localStorage.setItem("coins", coins);
 
     updateCoins();
 
+    result.textContent = "🎰 Spinning...";
 
+    const slots = [slot1, slot2, slot3];
 
-    if(typeof playSound === "function"){
+    let animationCount = 0;
 
-        playSound("slotSpin");
+    const animation = setInterval(() => {
 
-    }
+        slots.forEach(slot => {
+            const random =
+                symbols[
+                    Math.floor(Math.random() * symbols.length)
+                ];
 
+            slot.textContent = random.emoji;
+        });
 
+        animationCount++;
 
-    let slot1 =
-    document.getElementById("slot1");
-
-
-    let slot2 =
-    document.getElementById("slot2");
-
-
-    let slot3 =
-    document.getElementById("slot3");
-
-
-    let result =
-    document.getElementById("result");
-
-
-
-    result.innerText =
-    "🎰 Spinning...";
-
-
-
-    let count = 0;
-
-
-
-    let animation =
-    setInterval(function(){
-
-
-
-        slot1.innerText =
-        randomSlot();
-
-
-
-        slot2.innerText =
-        randomSlot();
-
-
-
-        slot3.innerText =
-        randomSlot();
-
-
-
-        count++;
-
-
-
-
-        if(count >= 25){
-
+        if (animationCount >= 12) {
 
             clearInterval(animation);
 
-
-
-            if(typeof playSound === "function"){
-
-                playSound("slotStop");
-
-            }
-
-
-
-            finishSlots(
-
+            finishSpin(
                 bet,
-
-                slot1.innerText,
-
-                slot2.innerText,
-
-                slot3.innerText
-
+                slots,
+                result
             );
-
-
         }
 
-
-
-    },100);
-
-
-
+    }, 80);
 }
 
 
+function finishSpin(bet, slots, result) {
 
+    const first =
+        symbols[
+            Math.floor(Math.random() * symbols.length)
+        ];
 
+    const second =
+        symbols[
+            Math.floor(Math.random() * symbols.length)
+        ];
 
+    const third =
+        symbols[
+            Math.floor(Math.random() * symbols.length)
+        ];
 
+    slots[0].textContent = first.emoji;
+    slots[1].textContent = second.emoji;
+    slots[2].textContent = third.emoji;
 
-function randomSlot(){
+    let winnings = 0;
 
+    if (
+        first.emoji === second.emoji &&
+        second.emoji === third.emoji
+    ) {
 
-    return slotSymbols[
-        Math.floor(
-            Math.random() *
-            slotSymbols.length
-        )
-    ];
+        winnings = bet * first.multiplier;
 
+        const profit = winnings - bet;
 
-}
+        result.textContent =
+            `🎉 ${first.emoji} JACKPOT! +${profit} coins!`;
 
+    } else {
 
-
-
-
-
-
-function finishSlots(
-
-    bet,
-    first,
-    second,
-    third
-
-){
-
-
-    let multiplier = 0;
-
-    let message = "";
-
-
-
-
-
-    if(
-
-        first === "7️⃣" &&
-        second === "7️⃣" &&
-        third === "7️⃣"
-
-    ){
-
-
-        multiplier = 100;
-
-        message =
-        "🔥 777 JACKPOT x100";
-
-
-
-        playGameSound("jackpot");
-
-
+        result.textContent =
+            "😢 No match. Better luck next spin!";
     }
 
-
-
-    else if(
-
-        first === "💎" &&
-        second === "💎" &&
-        third === "💎"
-
-    ){
-
-
-        multiplier = 50;
-
-        message =
-        "💎 Diamond Jackpot x50";
-
-
-
-        playGameSound("jackpot");
-
-
-    }
-
-
-
-    else if(
-
-        first === second &&
-        second === third
-
-    ){
-
-
-        multiplier = 10;
-
-        message =
-        "⭐ Triple Match x10";
-
-
-    }
-
-
-
-    else if(
-
-        first === second ||
-        second === third ||
-        first === third
-
-    ){
-
-
-        multiplier = 3;
-
-        message =
-        "✨ Double Match x3";
-
-
-    }
-
-
-
-    else{
-
-
-        message =
-        "❌ No Match";
-
-
-    }
-
-
-
-
-
-    let winnings =
-    bet * multiplier;
-
-
+    let coins =
+        Number(localStorage.getItem("coins")) || 0;
 
     coins += winnings;
 
+    localStorage.setItem("coins", coins);
 
     updateCoins();
 
-
-
-
-    let result =
-    document.getElementById("result");
-
-
-
-
-    if(multiplier > 0){
-
-
-
-        result.innerText =
-        message
-        + "\n+"
-        + winnings.toLocaleString()
-        + " coins";
-
-
-
-        result.className =
-        "win";
-
-
-
-        playGameSound("win");
-
-
-
-    }
-
-    else{
-
-
-        result.innerText =
-        message;
-
-
-
-        result.className =
-        "lose";
-
-
-
-        playGameSound("lose");
-
-
-    }
-
-
-
-
-
     spinning = false;
-
-
 }
 
 
+function updateCoins() {
 
+    const coinsElement =
+        document.getElementById("coins");
 
-
-
-function playGameSound(sound){
-
-
-    if(typeof playSound === "function"){
-
-        playSound(sound);
-
+    if (!coinsElement) {
+        return;
     }
 
+    const coins =
+        Number(localStorage.getItem("coins")) || 0;
 
+    coinsElement.textContent =
+        coins.toLocaleString();
 }
+
+
+/*
+    Make sure the balance displays
+    as soon as the page loads.
+*/
+
+document.addEventListener("DOMContentLoaded", () => {
+    updateCoins();
+});
