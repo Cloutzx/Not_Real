@@ -7,24 +7,24 @@ let coins = 0;
 
 
 
+
+
 function loadCoins(){
 
 
-    let savedCoins = localStorage.getItem("coins");
+    let saved = localStorage.getItem("coins");
 
 
 
-    // First time player only
-
-    if(savedCoins === null){
+    if(saved === null){
 
 
-        coins = 1000;
+        coins = 0;
 
 
         localStorage.setItem(
             "coins",
-            coins
+            0
         );
 
 
@@ -32,7 +32,7 @@ function loadCoins(){
     else{
 
 
-        coins = Number(savedCoins);
+        coins = Number(saved);
 
 
 
@@ -44,7 +44,7 @@ function loadCoins(){
 
             localStorage.setItem(
                 "coins",
-                coins
+                0
             );
 
 
@@ -54,13 +54,34 @@ function loadCoins(){
     }
 
 
+
+    updateCoins();
+
+
 }
 
 
 
 
 
-loadCoins();
+
+
+
+
+function saveCoins(){
+
+
+    localStorage.setItem(
+        "coins",
+        coins
+    );
+
+
+    updateCoins();
+
+
+}
+
 
 
 
@@ -77,7 +98,7 @@ function updateCoins(){
     .forEach(display=>{
 
 
-        display.textContent =
+        display.innerHTML =
         coins.toLocaleString();
 
 
@@ -85,6 +106,7 @@ function updateCoins(){
 
 
 }
+
 
 
 
@@ -108,6 +130,7 @@ function getCoins(){
 
 
 
+
 function addCoins(amount){
 
 
@@ -115,17 +138,20 @@ function addCoins(amount){
 
 
 
-    if(isNaN(amount)) return;
+    if(isNaN(amount))
+    return;
 
 
 
     coins += amount;
 
 
+
     saveCoins();
 
 
 }
+
 
 
 
@@ -141,21 +167,18 @@ function removeCoins(amount){
 
 
 
-    if(isNaN(amount)) return false;
+    if(isNaN(amount))
+    return false;
 
 
 
-    if(coins < amount){
-
-
-        return false;
-
-
-    }
+    if(coins < amount)
+    return false;
 
 
 
     coins -= amount;
+
 
 
     saveCoins();
@@ -174,32 +197,11 @@ function removeCoins(amount){
 
 
 
-function saveCoins(){
-
-
-    localStorage.setItem(
-        "coins",
-        coins
-    );
-
-
-
-    updateCoins();
-
-
-}
-
-
-
-
-
-
-
 
 function resetCoins(){
 
 
-    coins = 1000;
+    coins = 0;
 
 
     saveCoins();
@@ -214,7 +216,16 @@ function resetCoins(){
 
 
 
-// Update when page opens
+
+// Load when script starts
+
+loadCoins();
+
+
+
+
+
+// Update after page loads
 
 document.addEventListener(
 "DOMContentLoaded",
@@ -223,15 +234,14 @@ document.addEventListener(
 
     loadCoins();
 
-    updateCoins();
-
 
 });
 
 
 
 
-// Update when returning to page
+
+// Update when returning from another page
 
 window.addEventListener(
 "pageshow",
@@ -239,8 +249,6 @@ window.addEventListener(
 
 
     loadCoins();
-
-    updateCoins();
 
 
 });
