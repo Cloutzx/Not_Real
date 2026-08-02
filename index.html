@@ -9,9 +9,7 @@
 
 <title>Lucky Lounge</title>
 
-
 <link rel="stylesheet" href="style.css">
-
 
 </head>
 
@@ -19,42 +17,34 @@
 <body>
 
 
-<div class="container">
+<div class="lobby">
 
 
 
-    <!-- TOP HUD -->
+    <!-- HEADER -->
 
-    <div class="topbar">
+    <div class="header">
 
 
-        <div class="currency">
+        <div class="logo">
 
-            💰 Coins:
-
-            <span id="coins">
-                0
-            </span>
-
+            🎲 LUCKY LOUNGE
 
         </div>
 
 
 
-
-        <div class="daily">
-
-
-            <h2>
-                🎁 Daily Reward
-            </h2>
+        <div class="currency-box">
 
 
-            <button onclick="claimDailyReward()">
+            <span class="coin-icon">
+                🪙
+            </span>
 
-                CLAIM
 
-            </button>
+            <span id="coins">
+                0
+            </span>
 
 
         </div>
@@ -67,10 +57,55 @@
 
 
 
+    <!-- DAILY -->
 
-    <h1 class="title">
 
-        LUCKY LOUNGE
+    <div class="daily-card">
+
+
+        <div class="daily-icon">
+
+            🎁
+
+        </div>
+
+
+        <div>
+
+            <h2>
+                Daily Reward
+            </h2>
+
+
+            <p>
+                Come back every day for bonus coins!
+            </p>
+
+
+        </div>
+
+
+        <button onclick="claimDailyReward()">
+
+            CLAIM
+
+        </button>
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- TITLE -->
+
+
+    <h1 class="main-title">
+
+        CHOOSE A GAME
 
     </h1>
 
@@ -78,50 +113,27 @@
 
 
 
-    <p style="text-align:center;opacity:.8;font-size:20px;">
+    <!-- GAMES -->
 
-        Choose a game and test your luck
 
-    </p>
-
+    <div class="game-menu">
 
 
 
+        <div class="game-card slots"
+        onclick="location.href='games/slots.html'">
 
-
-
-    <!-- GAME BUTTONS -->
-
-
-    <div class="games">
-
-
-
-
-
-        <div class="game" onclick="location.href='games/slots.html'">
-
-
-            <div class="game-icon">
-
+            <div class="game-image">
                 🎰
-
             </div>
 
+            <h2>
+                SLOTS
+            </h2>
 
-            <div class="game-name">
-
-                Slots
-
-            </div>
-
-
-            <button class="game-button">
-
-                PLAY
-
+            <button>
+                PLAY NOW
             </button>
-
 
         </div>
 
@@ -130,31 +142,20 @@
 
 
 
+        <div class="game-card blackjack"
+        onclick="location.href='games/blackjack.html'">
 
-
-        <div class="game" onclick="location.href='games/blackjack.html'">
-
-
-            <div class="game-icon">
-
+            <div class="game-image">
                 🃏
-
             </div>
 
+            <h2>
+                BLACKJACK
+            </h2>
 
-            <div class="game-name">
-
-                Blackjack
-
-            </div>
-
-
-            <button class="game-button">
-
-                PLAY
-
+            <button>
+                PLAY NOW
             </button>
-
 
         </div>
 
@@ -164,30 +165,20 @@
 
 
 
+        <div class="game-card cups"
+        onclick="location.href='games/cups.html'">
 
-        <div class="game" onclick="location.href='games/cups.html'">
-
-
-            <div class="game-icon">
-
+            <div class="game-image">
                 🥤
-
             </div>
 
+            <h2>
+                LUCKY CUPS
+            </h2>
 
-            <div class="game-name">
-
-                Lucky Cups
-
-            </div>
-
-
-            <button class="game-button">
-
-                PLAY
-
+            <button>
+                PLAY NOW
             </button>
-
 
         </div>
 
@@ -197,30 +188,20 @@
 
 
 
+        <div class="game-card coin"
+        onclick="location.href='games/coinflip.html'">
 
-        <div class="game" onclick="location.href='games/coinflip.html'">
-
-
-            <div class="game-icon">
-
+            <div class="game-image">
                 🪙
-
             </div>
 
+            <h2>
+                COIN FLIP
+            </h2>
 
-            <div class="game-name">
-
-                Coin Flip
-
-            </div>
-
-
-            <button class="game-button">
-
-                PLAY
-
+            <button>
+                PLAY NOW
             </button>
-
 
         </div>
 
@@ -230,33 +211,22 @@
 
 
 
-        <div class="game" onclick="location.href='games/fishing.html'">
+        <div class="game-card fishing"
+        onclick="location.href='games/fishing.html'">
 
-
-            <div class="game-icon">
-
+            <div class="game-image">
                 🎣
-
             </div>
 
+            <h2>
+                FISHING
+            </h2>
 
-            <div class="game-name">
-
-                Fishing
-
-            </div>
-
-
-            <button class="game-button">
-
-                PLAY
-
+            <button>
+                PLAY NOW
             </button>
 
-
         </div>
-
-
 
 
 
@@ -272,13 +242,9 @@
 
 
 
-
-
-
 <script src="js/currency.js"></script>
 
 <script src="js/sounds.js"></script>
-
 
 
 </body>
