@@ -1,68 +1,35 @@
 /* =========================================================
    LUCKY LOUNGE SOUND SYSTEM
-   Supports:
-   index.html
-   games/*.html
 ========================================================= */
 
 
-
-const soundPath =
-location.pathname.includes("/games/")
-?
-"../assets/sounds/"
-:
-"assets/sounds/";
+const SOUND_VOLUME = 0.25; // Change volume here (0.0 - 1.0)
 
 
 
+const sounds = {
 
+    click: new Audio("assets/sounds/click.mp3"),
 
-const Sounds = {
+    cardDeal: new Audio("assets/sounds/card-deal.mp3"),
 
+    cardFlip: new Audio("assets/sounds/card-flip.mp3"),
 
-    click:
-    new Audio(soundPath + "click.mp3"),
+    coinFlip: new Audio("assets/sounds/coin-flip.mp3"),
 
+    fish: new Audio("assets/sounds/fish.mp3"),
 
-    cardDeal:
-    new Audio(soundPath + "card-deal.mp3"),
+    jackpot: new Audio("assets/sounds/jackpot.mp3"),
 
+    lose: new Audio("assets/sounds/lose.mp3"),
 
-    cardFlip:
-    new Audio(soundPath + "card-flip.mp3"),
+    reward: new Audio("assets/sounds/reward.mp3"),
 
+    slotSpin: new Audio("assets/sounds/slot-spin.mp3"),
 
-    coinFlip:
-    new Audio(soundPath + "coin-flip.mp3"),
+    slotStop: new Audio("assets/sounds/slot-stop.mp3"),
 
-
-    fish:
-    new Audio(soundPath + "fish.mp3"),
-
-
-    jackpot:
-    new Audio(soundPath + "jackpot.mp3"),
-
-
-    lose:
-    new Audio(soundPath + "lose.mp3"),
-
-
-    reward:
-    new Audio(soundPath + "reward.mp3"),
-
-
-    slotSpin:
-    new Audio(soundPath + "slot-spin.mp3"),
-
-
-    slotStop:
-    new Audio(soundPath + "slot-stop.mp3"),
-
-
-    win:
-    new Audio(soundPath + "win.mp3")
+    win: new Audio("assets/sounds/win.mp3")
 
 };
 
@@ -70,13 +37,13 @@ const Sounds = {
 
 
 
+/*
+    Set volume for every sound
+*/
 
+Object.values(sounds).forEach(sound => {
 
-// Volume settings
-
-Object.values(Sounds).forEach(sound => {
-
-    sound.volume = 0.5;
+    sound.volume = SOUND_VOLUME;
 
 });
 
@@ -86,17 +53,25 @@ Object.values(Sounds).forEach(sound => {
 
 
 
+/*
+    Play Sound Function
+
+    Example:
+    playSound("click");
+    playSound("fish");
+*/
+
+
 function playSound(name){
 
 
-    if(!Sounds[name]){
+    let sound = sounds[name];
 
 
-        console.log(
-            "Sound does not exist:",
-            name
-        );
 
+    if(!sound){
+
+        console.log("Missing sound:", name);
 
         return;
 
@@ -104,26 +79,14 @@ function playSound(name){
 
 
 
-    Sounds[name].pause();
+    sound.pause();
 
 
-    Sounds[name].currentTime = 0;
+    sound.currentTime = 0;
 
 
-
-    Sounds[name]
-    .play()
-    .catch(error=>{
-
-
-        console.log(
-            "Audio blocked:",
-            error
-        );
-
-
-    });
-
+    sound.play()
+    .catch(()=>{});
 
 
 }
@@ -135,110 +98,9 @@ function playSound(name){
 
 
 
-
-window.LuckySounds = {
-
-
-
-    click(){
-
-        playSound("click");
-
-    },
-
-
-
-    cardDeal(){
-
-        playSound("cardDeal");
-
-    },
-
-
-
-    cardFlip(){
-
-        playSound("cardFlip");
-
-    },
-
-
-
-    coinFlip(){
-
-        playSound("coinFlip");
-
-    },
-
-
-
-    fish(){
-
-        playSound("fish");
-
-    },
-
-
-
-    jackpot(){
-
-        playSound("jackpot");
-
-    },
-
-
-
-    lose(){
-
-        playSound("lose");
-
-    },
-
-
-
-    reward(){
-
-        playSound("reward");
-
-    },
-
-
-
-    slotSpin(){
-
-        playSound("slotSpin");
-
-    },
-
-
-
-    slotStop(){
-
-        playSound("slotStop");
-
-    },
-
-
-
-    win(){
-
-        playSound("win");
-
-    }
-
-
-
-};
-
-
-
-
-
-
-
-
-
-// Button click sounds everywhere
+/*
+    Add button click sounds automatically
+*/
 
 document.addEventListener(
 "DOMContentLoaded",
@@ -255,7 +117,7 @@ document.addEventListener(
         ()=>{
 
 
-            LuckySounds.click();
+            playSound("click");
 
 
         });
