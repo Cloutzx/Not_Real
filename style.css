@@ -1,7 +1,8 @@
-/* ======================================
+/* =====================================
         LUCKY LOUNGE
-        FULL GAME UI STYLE
-====================================== */
+        CRIMSON PREMIUM UI
+        Theme: #e31d39
+===================================== */
 
 
 * {
@@ -12,33 +13,38 @@
 
 
 
-html, body {
-
-    width:100%;
-
-    min-height:100%;
+html,
+body {
 
     margin:0;
 
     padding:0;
 
+    width:100%;
+
+    min-height:100%;
+
 }
+
+
 
 
 
 body {
 
 
-    min-height:100vh;
-
-
     background:
 
     radial-gradient(
+
         circle at top,
-        #4c1d95,
-        #090014 45%,
-        #020617
+
+        #e31d39,
+
+        #210006 35%,
+
+        #050505 80%
+
     );
 
 
@@ -52,6 +58,7 @@ body {
     sans-serif;
 
 
+
     overflow-x:hidden;
 
 
@@ -61,8 +68,9 @@ body {
 
 
 
-
-/* BACKGROUND GLOW */
+/* ==========================
+   BACKGROUND EFFECTS
+========================== */
 
 
 body::before {
@@ -74,36 +82,41 @@ body::before {
     position:fixed;
 
 
-    width:700px;
+    width:800px;
 
 
-    height:700px;
+    height:800px;
 
 
 
     background:
 
+
     radial-gradient(
+
         circle,
-        rgba(168,85,247,.6),
-        transparent 70%
+
+        rgba(227,29,57,.55),
+
+        transparent 65%
+
     );
 
 
 
-    filter:blur(100px);
+    filter:blur(120px);
 
 
 
-    top:-250px;
+    top:-300px;
 
-    left:-250px;
+    left:-300px;
 
 
 
     animation:
 
-    backgroundMove 10s infinite alternate;
+    redGlow 8s infinite alternate;
 
 
 }
@@ -112,19 +125,19 @@ body::before {
 
 
 
-@keyframes backgroundMove {
+@keyframes redGlow {
 
 
     from {
 
-        transform:translate(0,0);
+        transform:translate(0,0) scale(1);
 
     }
 
 
     to {
 
-        transform:translate(500px,400px);
+        transform:translate(500px,300px) scale(1.3);
 
     }
 
@@ -137,7 +150,9 @@ body::before {
 
 
 
-/* MAIN CONTAINER */
+/* ==========================
+        HOME CONTAINER
+========================== */
 
 
 .container {
@@ -162,9 +177,9 @@ body::before {
 
 
 
-
-
-/* TOP HUD */
+/* ==========================
+        TOP HUD
+========================== */
 
 
 .topbar {
@@ -207,9 +222,7 @@ body::before {
 
 
 
-    backdrop-filter:
-
-    blur(20px);
+    backdrop-filter:blur(20px);
 
 
 
@@ -223,14 +236,15 @@ body::before {
 
 
 
-    font-weight:bold;
+    font-weight:900;
 
 
 
     box-shadow:
 
 
-    0 0 35px rgba(168,85,247,.5);
+    0 0 35px rgba(227,29,57,.8);
+
 
 
 }
@@ -242,11 +256,10 @@ body::before {
 .currency span {
 
 
-    color:#facc15;
+    color:#ffd700;
 
 
     text-shadow:
-
 
     0 0 15px gold;
 
@@ -265,13 +278,10 @@ body::before {
 .daily {
 
 
-    padding:25px 40px;
+    padding:25px 45px;
 
 
     border-radius:30px;
-
-
-    text-align:center;
 
 
 
@@ -282,9 +292,9 @@ body::before {
 
         135deg,
 
-        #ec4899,
+        #e31d39,
 
-        #8b5cf6
+        #ff6b81
 
     );
 
@@ -293,16 +303,17 @@ body::before {
     box-shadow:
 
 
-    0 0 40px rgba(236,72,153,.8);
+    0 0 50px #e31d39;
 
 
 
     animation:
 
-    rewardFloat 4s infinite;
+    rewardFloat 3s infinite;
 
 
 }
+
 
 
 
@@ -310,25 +321,12 @@ body::before {
 @keyframes rewardFloat {
 
 
-    50% {
+    50%{
 
-        transform:translateY(-10px);
+        transform:translateY(-12px);
 
     }
 
-}
-
-
-
-
-.daily h2 {
-
-
-    margin:0 0 15px;
-
-
-    font-size:28px;
-
 
 }
 
@@ -339,14 +337,12 @@ body::before {
 
 
 
-
-/* TITLE */
+/* ==========================
+        TITLE
+========================== */
 
 
 .title {
-
-
-    margin-top:60px;
 
 
     text-align:center;
@@ -355,7 +351,7 @@ body::before {
     font-size:75px;
 
 
-    font-weight:900;
+    font-weight:1000;
 
 
 
@@ -366,11 +362,11 @@ body::before {
 
         90deg,
 
-        #f472b6,
+        #ffccd5,
 
-        #a855f7,
+        #e31d39,
 
-        #38bdf8
+        white
 
     );
 
@@ -386,25 +382,8 @@ body::before {
     text-shadow:
 
 
-    0 0 40px #a855f7;
+    0 0 40px #e31d39;
 
-
-}
-
-
-
-
-
-.subtitle {
-
-
-    text-align:center;
-
-
-    font-size:22px;
-
-
-    opacity:.8;
 
 
 }
@@ -416,8 +395,9 @@ body::before {
 
 
 
-
-/* GAME GRID */
+/* ==========================
+        GAME GRID
+========================== */
 
 
 .games {
@@ -433,7 +413,7 @@ body::before {
 
     auto-fit,
 
-    minmax(240px,1fr)
+    minmax(260px,1fr)
 
     );
 
@@ -453,35 +433,15 @@ body::before {
 
 
 
-
-/* GAME BUTTONS */
+/* ==========================
+        GAME BUTTONS
+========================== */
 
 
 .game {
 
 
-    height:240px;
-
-
-
-    border-radius:35px;
-
-
-
-    cursor:pointer;
-
-
-
-    display:flex;
-
-
-    flex-direction:column;
-
-
-    justify-content:center;
-
-
-    align-items:center;
+    height:260px;
 
 
 
@@ -493,32 +453,61 @@ body::before {
 
 
 
+    cursor:pointer;
+
+
+
+    border-radius:35px;
+
+
+
+    display:flex;
+
+
+
+    flex-direction:column;
+
+
+
+    justify-content:center;
+
+
+
+    align-items:center;
+
+
+
+
+
     background:
 
 
     linear-gradient(
 
-        135deg,
+        145deg,
 
-        #7c3aed,
+        #260009,
 
-        #ec4899
+        #e31d39
 
     );
 
 
 
+
+
     border:
 
+    3px solid rgba(255,255,255,.25);
 
-    2px solid rgba(255,255,255,.3);
+
 
 
 
     box-shadow:
 
 
-    0 20px 50px rgba(0,0,0,.5);
+    0 20px 50px rgba(0,0,0,.7);
 
 
 
@@ -526,7 +515,6 @@ body::before {
 
 
 }
-
 
 
 
@@ -555,7 +543,7 @@ body::before {
 
         circle,
 
-        rgba(255,255,255,.5),
+        rgba(255,255,255,.35),
 
         transparent
 
@@ -596,13 +584,86 @@ body::before {
 
 
 
+.game::after {
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    width:200%;
+
+
+    height:100%;
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        120deg,
+
+        transparent,
+
+        rgba(255,255,255,.35),
+
+        transparent
+
+    );
+
+
+
+    transform:
+
+    translateX(-100%);
+
+
+}
+
+
+
+
+
+.game:hover::after {
+
+
+    animation:
+
+    shine .8s;
+
+
+}
+
+
+
+
+@keyframes shine {
+
+
+    to {
+
+        transform:translateX(100%);
+
+    }
+
+
+}
+
+
+
+
+
 .game:hover {
 
 
     transform:
 
 
-    translateY(-15px)
+    translateY(-18px)
 
     scale(1.06);
 
@@ -611,24 +672,10 @@ body::before {
     box-shadow:
 
 
-    0 0 70px #ec4899;
+    0 0 70px #e31d39;
 
 
 }
-
-
-
-
-
-.game:active {
-
-
-    transform:scale(.95);
-
-
-}
-
-
 
 
 
@@ -637,7 +684,7 @@ body::before {
 .game-icon {
 
 
-    font-size:80px;
+    font-size:90px;
 
 
     z-index:2;
@@ -660,25 +707,22 @@ body::before {
 
 
 
-
-
 .game-name {
 
 
     z-index:2;
 
 
-    font-size:35px;
+    font-size:38px;
 
 
-    font-weight:900;
+    font-weight:1000;
 
 
-    margin-top:10px;
+    text-transform:uppercase;
 
 
 }
-
 
 
 
@@ -692,27 +736,21 @@ body::before {
     z-index:2;
 
 
-
-    margin-top:15px;
-
+    margin-top:20px;
 
 
-    padding:
+    width:180px;
 
 
-    12px 45px;
+    height:55px;
 
 
 
-    border-radius:25px;
+    border-radius:30px;
 
 
 
     border:none;
-
-
-
-    cursor:pointer;
 
 
 
@@ -720,69 +758,20 @@ body::before {
 
 
 
-    color:#7c3aed;
+    color:#e31d39;
 
 
 
-    font-weight:bold;
+    font-size:20px;
 
 
+    font-weight:1000;
 
-    font-size:18px;
-
-
-
-    transition:.3s;
-
-
-}
-
-
-
-
-
-.game-button:hover {
-
-
-    background:#111;
-
-
-    color:white;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ALL BUTTONS */
-
-
-button {
-
-
-    padding:14px 35px;
-
-
-    border-radius:25px;
-
-
-    border:none;
 
 
     cursor:pointer;
 
 
-    font-size:18px;
-
-
-    font-weight:bold;
-
 
     transition:.3s;
 
@@ -793,10 +782,20 @@ button {
 
 
 
-button:hover {
+.game:hover .game-button {
 
 
-    transform:scale(1.1);
+    background:#e31d39;
+
+
+    color:white;
+
+
+
+    box-shadow:
+
+
+    0 0 30px white;
 
 
 }
@@ -808,8 +807,9 @@ button:hover {
 
 
 
-
-/* GAME PAGES */
+/* ==========================
+        GAME PAGES
+========================== */
 
 
 .game-container {
@@ -821,10 +821,11 @@ button:hover {
     max-width:750px;
 
 
+
     margin:50px auto;
 
 
-    padding:45px;
+    padding:50px;
 
 
 
@@ -858,12 +859,10 @@ button:hover {
     box-shadow:
 
 
-    0 0 60px rgba(168,85,247,.5);
+    0 0 70px rgba(227,29,57,.7);
 
 
 }
-
-
 
 
 
@@ -891,9 +890,6 @@ button:hover {
     gap:25px;
 
 
-    margin:40px 0;
-
-
 }
 
 
@@ -909,7 +905,15 @@ button:hover {
     height:120px;
 
 
+    background:#111;
+
+
     border-radius:25px;
+
+
+    border:
+
+    3px solid #e31d39;
 
 
 
@@ -927,20 +931,10 @@ button:hover {
 
 
 
-    background:#111;
-
-
-
-    border:
-
-    3px solid #c084fc;
-
-
-
     box-shadow:
 
 
-    0 0 35px #a855f7;
+    0 0 35px #e31d39;
 
 
 }
@@ -952,17 +946,16 @@ button:hover {
 
 
 
-
-/* INPUT */
+/* INPUTS */
 
 
 input {
 
 
-    width:300px;
-
-
     padding:18px;
+
+
+    width:300px;
 
 
     border-radius:20px;
@@ -974,7 +967,10 @@ input {
     color:white;
 
 
-    border:2px solid #a855f7;
+    border:
+
+    2px solid #e31d39;
+
 
 
     text-align:center;
@@ -992,37 +988,28 @@ input {
 
 
 
-/* RESULT */
+/* BUTTONS */
 
 
-#result {
+button {
 
 
-    margin-top:30px;
+    cursor:pointer;
 
 
-    font-size:30px;
+    border:none;
 
 
-}
+    border-radius:25px;
 
 
+    padding:15px 40px;
 
 
-.win {
+    font-weight:bold;
 
 
-    color:#4ade80;
-
-
-}
-
-
-
-.lose {
-
-
-    color:#ef4444;
+    transition:.3s;
 
 
 }
@@ -1031,40 +1018,32 @@ input {
 
 
 
+button:hover {
 
 
-/* MOBILE */
+    transform:scale(1.1);
+
+
+    box-shadow:
+
+    0 0 30px #e31d39;
+
+
+}
+
+
+
+
 
 
 @media(max-width:700px){
 
 
-
 .title {
-
 
     font-size:45px;
 
 }
-
-
-
-.container {
-
-
-    padding:20px;
-
-}
-
-
-
-.game {
-
-
-    height:200px;
-
-}
-
 
 
 }
