@@ -2,27 +2,40 @@ let fishing = false;
 
 
 
+
 const fishTypes = [
 
 
     {
+
         name:"🐟 Common Fish",
+
         reward:100,
+
         chance:60
+
     },
 
 
     {
+
         name:"🐠 Rare Fish",
+
         reward:300,
+
         chance:30
+
     },
 
 
     {
+
         name:"🐋 Legendary Fish",
+
         reward:1000,
+
         chance:10
+
     }
 
 
@@ -33,11 +46,16 @@ const fishTypes = [
 
 
 
+
+
+
 function fish(){
 
 
 
-    if(fishing) return;
+    if(fishing)
+    return;
+
 
 
 
@@ -46,18 +64,27 @@ function fish(){
 
 
 
-    const fishElement =
+
+
+    let fishElement =
     document.getElementById("fish");
 
 
 
-    const result =
+    let text =
     document.getElementById("fishResult");
 
 
 
-    result.innerHTML =
-    "🎣 Fishing...";
+
+
+
+
+    text.innerHTML =
+    "🎣 Waiting for a bite...";
+
+
+
 
 
 
@@ -67,7 +94,11 @@ function fish(){
 
 
 
-    fishElement.classList.add("swimming");
+    fishElement.classList.add(
+        "swimming"
+    );
+
+
 
 
 
@@ -78,7 +109,16 @@ function fish(){
 
 
 
-        fishElement.classList.remove("swimming");
+
+
+
+        fishElement.classList.remove(
+            "swimming"
+        );
+
+
+
+
 
 
 
@@ -87,11 +127,15 @@ function fish(){
 
 
 
+
+
         let total=0;
 
 
+        let caught=null;
 
-        let caught;
+
+
 
 
 
@@ -115,6 +159,7 @@ function fish(){
             }
 
 
+
         }
 
 
@@ -123,13 +168,18 @@ function fish(){
 
 
 
-        addCoins(caught.reward);
+        addCoins(
+            caught.reward
+        );
 
 
 
 
 
-        result.innerHTML =
+
+
+        text.innerHTML =
+
 
         "🎉 Caught " +
 
@@ -145,13 +195,17 @@ function fish(){
 
 
 
+
+
         LuckySounds.win();
 
 
 
 
 
+
         fishing=false;
+
 
 
 
