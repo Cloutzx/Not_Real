@@ -1,5 +1,5 @@
 /* ==========================
-   Lucky Lounge CSS
+   Lucky Lounge Style
 ========================== */
 
 
@@ -9,8 +9,7 @@
 
 
 
-html,
-body {
+html, body {
 
     width: 100%;
 
@@ -21,8 +20,6 @@ body {
     padding: 0;
 
 }
-
-
 
 
 
@@ -46,10 +43,7 @@ body {
 
 
 
-/* ==========================
-   Main Container
-========================== */
-
+/* Main Game Box */
 
 .game-container {
 
@@ -59,7 +53,7 @@ body {
 
     min-height: 100vh;
 
-    margin: 0 auto;
+    margin: auto;
 
     padding: 40px 20px;
 
@@ -79,17 +73,11 @@ body {
 
 
 
-
-/* ==========================
-   Titles
-========================== */
-
+/* Title */
 
 .game-title {
 
     font-size: 42px;
-
-    margin-bottom: 20px;
 
 }
 
@@ -97,11 +85,7 @@ body {
 
 
 
-
-/* ==========================
-   Coins
-========================== */
-
+/* Coins */
 
 .game-balance {
 
@@ -117,37 +101,41 @@ body {
 
 
 /* ==========================
-   Slots
+        SLOTS FIX
 ========================== */
 
 
 .slots {
 
-    width: 100%;
-
     display: flex !important;
 
-    flex-direction: row;
+    flex-direction: row !important;
+
+    flex-wrap: nowrap !important;
 
     justify-content: center !important;
 
     align-items: center !important;
 
-    gap: 20px;
+    gap: 20px !important;
 
-    margin: 30px auto;
+    width: 100% !important;
+
+    margin: 30px auto !important;
 
 }
 
 
 
-
-
-.slot {
+.slots .slot {
 
     width: 100px;
 
     height: 100px;
+
+    flex: 0 0 auto !important;
+
+    
 
     background: #222;
 
@@ -156,11 +144,13 @@ body {
     border-radius: 15px;
 
 
+
     display: flex !important;
 
     justify-content: center !important;
 
     align-items: center !important;
+
 
 
     font-size: 50px;
@@ -172,11 +162,7 @@ body {
 
 
 
-
-/* ==========================
-   Inputs
-========================== */
-
+/* Inputs */
 
 input {
 
@@ -184,9 +170,9 @@ input {
 
     height: 45px;
 
-    padding: 10px;
-
     margin: 15px auto;
+
+    padding: 10px;
 
     display: block;
 
@@ -205,11 +191,7 @@ input {
 
 
 
-
-/* ==========================
-   Buttons
-========================== */
-
+/* Buttons */
 
 button {
 
@@ -231,8 +213,6 @@ button {
 
 
 
-
-
 button:hover {
 
     transform: scale(1.05);
@@ -244,14 +224,13 @@ button:hover {
 
 
 
-/* ==========================
-   Cards
-========================== */
-
+/* Cards */
 
 .cards {
 
     display: flex;
+
+    flex-direction: row;
 
     justify-content: center;
 
@@ -260,8 +239,6 @@ button:hover {
     gap: 15px;
 
 }
-
-
 
 
 
@@ -281,22 +258,9 @@ button:hover {
 
     align-items: center;
 
-    font-size: 25px;
-
     border-radius: 10px;
 
-}
-
-
-
-
-
-
-.card.back {
-
-    background: #333;
-
-    color: white;
+    font-size: 25px;
 
 }
 
@@ -305,14 +269,13 @@ button:hover {
 
 
 
-/* ==========================
-   Cups
-========================== */
-
+/* Cups */
 
 .cups {
 
     display: flex;
+
+    flex-direction: row;
 
     justify-content: center;
 
@@ -326,29 +289,13 @@ button:hover {
 
 
 
-.cup {
 
-    font-size: 50px;
-
-}
-
-
-
-
-
-
-
-/* ==========================
-   Coin Flip
-========================== */
-
+/* Coin */
 
 .coin {
 
     font-size: 80px;
 
-    margin: 30px auto;
-
 }
 
 
@@ -356,18 +303,15 @@ button:hover {
 
 
 
-/* ==========================
-   Results
-========================== */
-
+/* Results */
 
 #result {
 
-    margin-top: 25px;
+    text-align: center;
 
     font-size: 25px;
 
-    text-align: center;
+    margin-top: 20px;
 
 }
 
@@ -392,10 +336,7 @@ button:hover {
 
 
 
-/* ==========================
-   Back Button
-========================== */
-
+/* Back */
 
 .back {
 
