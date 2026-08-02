@@ -4,9 +4,10 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fishing | Lucky Lounge</title>
+<title>Lucky Lounge Fishing</title>
 
 <link rel="stylesheet" href="../style.css">
 
@@ -16,38 +17,76 @@
 <body>
 
 
+
+<div class="game-page">
+
+
 <div class="game-container">
 
 
+
 <h1 class="game-title">
+
 🎣 Fishing
+
 </h1>
 
 
-<div class="game-balance">
-
-💰 Coins:
-<span id="coins">0</span>
-
-</div>
 
 
 
-<p>
-Cast your line and catch fish!
-</p>
 
+<div class="money">
 
+🪙 Coins:
 
-<div class="fish-area">
+<span id="coins">
 
-🐟🌊
+0
+
+</span>
 
 </div>
 
 
 
-<button onclick="fish()">
+
+
+
+
+
+
+<div class="pond">
+
+
+<div id="fish" class="fish">
+
+🐟
+
+</div>
+
+
+<div class="wave">
+
+🌊
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<button
+
+class="game-action"
+
+onclick="fish()">
 
 🎣 Cast Line
 
@@ -55,26 +94,95 @@ Cast your line and catch fish!
 
 
 
-<h2 id="result">
+
+
+
+
+<h2 id="fishResult">
+
+Cast your line!
 
 </h2>
 
 
 
-<a class="back" href="../index.html">
 
-← Back to Lobby
 
-</a>
+
+
+<div class="catch-info">
+
+
+<h3>
+
+Possible Catches
+
+</h3>
+
+
+<p>
+
+🐟 Common Fish - 100 Coins
+
+</p>
+
+
+<p>
+
+🐠 Rare Fish - 300 Coins
+
+</p>
+
+
+<p>
+
+🐋 Legendary Fish - 1000 Coins
+
+</p>
 
 
 </div>
 
 
 
+
+
+
+
+
+<button
+
+class="game-action"
+
+onclick="window.location.href='../index.html'">
+
+← Back
+
+</button>
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
 <script src="../js/currency.js"></script>
-<script src="../js/sounds.js"></script>
+
 <script src="../js/fishing.js"></script>
+
+<script src="../js/sounds.js"></script>
+
 
 
 </body>
