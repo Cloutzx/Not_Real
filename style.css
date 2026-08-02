@@ -1,57 +1,34 @@
-/* ==================================
-        LUCKY LOUNGE UI
-        Premium Casino Theme
-================================== */
+/* =================================
+        LUCKY LOUNGE
+        PREMIUM UI
+================================= */
 
 
 * {
-    box-sizing: border-box;
+    box-sizing:border-box;
 }
 
 
-
-html,
 body {
-
-    width:100%;
-
-    min-height:100%;
 
     margin:0;
 
-    padding:0;
-
-}
-
-
-
-body {
+    min-height:100vh;
 
     background:
-
-    radial-gradient(
-        circle at top,
-        #4c1d95,
-        #090014 50%,
+    linear-gradient(
+        135deg,
+        #050816,
+        #17002f,
         #020617
     );
 
-
     color:white;
 
-
     font-family:
-
     "Segoe UI",
     Arial,
     sans-serif;
-
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
 
 
     overflow-x:hidden;
@@ -62,8 +39,8 @@ body {
 
 
 
+/* BACKGROUND EFFECT */
 
-/* Background Glow */
 
 body::before {
 
@@ -74,38 +51,38 @@ body::before {
     position:fixed;
 
 
-    width:700px;
+    width:800px;
 
-    height:700px;
-
-
-    top:-250px;
-
-    left:-250px;
+    height:800px;
 
 
     background:
 
     radial-gradient(
         circle,
-        rgba(168,85,247,.5),
+        #9333ea,
         transparent 65%
     );
 
 
-    filter:blur(60px);
+    filter:blur(100px);
+
+
+    top:-300px;
+
+    left:-300px;
 
 
     animation:
 
-    moveGlow 8s infinite alternate;
+    glowMove 10s infinite alternate;
 
 
 }
 
 
 
-@keyframes moveGlow {
+@keyframes glowMove {
 
 
     from {
@@ -117,9 +94,39 @@ body::before {
 
     to {
 
-        transform:translate(300px,200px);
+        transform:translate(500px,400px);
 
     }
+
+}
+
+
+
+
+
+
+
+
+/* MAIN AREA */
+
+
+.container {
+
+
+    width:95%;
+
+
+    max-width:1100px;
+
+
+    margin:auto;
+
+
+    padding:40px;
+
+
+    position:relative;
+
 
 
 }
@@ -130,26 +137,94 @@ body::before {
 
 
 
-/* Main Panel */
+/* TOP BAR */
 
 
-.game-container {
+.topbar {
 
 
-    position:relative;
+    display:flex;
 
 
-    width:95%;
+    justify-content:space-between;
 
 
-    max-width:800px;
+    align-items:center;
 
 
-    padding:50px;
+    gap:20px;
 
 
-    margin:40px auto;
+    margin-bottom:40px;
 
+
+}
+
+
+
+.currency {
+
+
+    background:
+
+    rgba(255,255,255,.12);
+
+
+
+    backdrop-filter:blur(20px);
+
+
+
+    padding:20px 30px;
+
+
+    border-radius:25px;
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.2);
+
+
+
+    font-size:25px;
+
+
+
+    box-shadow:
+
+    0 0 30px rgba(168,85,247,.5);
+
+
+}
+
+
+
+
+
+.currency span {
+
+
+    color:#facc15;
+
+
+    font-weight:bold;
+
+
+}
+
+
+
+
+
+
+
+
+/* DAILY REWARD */
+
+
+.daily {
 
 
     background:
@@ -157,39 +232,28 @@ body::before {
 
     linear-gradient(
 
-        145deg,
+        135deg,
 
-        rgba(255,255,255,.18),
+        #ec4899,
 
-        rgba(255,255,255,.05)
+        #8b5cf6
 
     );
 
 
 
-    backdrop-filter:
-
-    blur(25px);
+    padding:25px;
 
 
 
-    border-radius:35px;
-
-
-
-    border:
-
-    1px solid rgba(255,255,255,.25);
+    border-radius:30px;
 
 
 
     box-shadow:
 
 
-    0 0 60px rgba(168,85,247,.45),
-
-
-    inset 0 0 30px rgba(255,255,255,.05);
+    0 0 40px rgba(236,72,153,.7);
 
 
 
@@ -199,8 +263,44 @@ body::before {
 
     animation:
 
-    fadeIn .7s ease;
+    float 4s infinite;
 
+
+
+}
+
+
+
+@keyframes float {
+
+
+    50%{
+
+        transform:translateY(-10px);
+
+    }
+
+}
+
+
+
+
+
+.daily h2 {
+
+
+    margin:0;
+
+    font-size:30px;
+
+}
+
+
+
+.daily button {
+
+
+    margin-top:15px;
 
 
 }
@@ -209,44 +309,23 @@ body::before {
 
 
 
-@keyframes fadeIn {
-
-
-    from {
-
-        opacity:0;
-
-        transform:translateY(40px);
-
-    }
-
-
-    to {
-
-        opacity:1;
-
-    }
-
-
-}
 
 
 
 
+/* TITLE */
 
 
+.title {
 
 
-/* Title */
+    text-align:center;
 
 
-.game-title {
+    font-size:70px;
 
 
-    font-size:60px;
-
-
-    margin:0 0 25px;
+    font-weight:900;
 
 
 
@@ -277,56 +356,7 @@ body::before {
     text-shadow:
 
 
-    0 0 30px rgba(168,85,247,.8);
-
-
-
-}
-
-
-
-
-
-
-
-
-/* Coins */
-
-
-.game-balance {
-
-
-    background:
-
-
-    rgba(0,0,0,.45);
-
-
-
-    padding:20px;
-
-
-    border-radius:20px;
-
-
-    font-size:26px;
-
-
-
-    border:
-
-    1px solid rgba(255,255,255,.2);
-
-
-
-    box-shadow:
-
-
-    0 0 25px rgba(0,0,0,.5);
-
-
-
-    margin-bottom:35px;
+    0 0 40px #a855f7;
 
 
 }
@@ -338,34 +368,25 @@ body::before {
 
 
 
-/* ==============================
-        SLOTS
-============================== */
+
+/* GAME GRID */
 
 
-.slots {
+.games {
 
 
-    width:100%;
+    display:grid;
 
 
-    display:flex !important;
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(250px,1fr));
 
 
-    flex-direction:row !important;
+    gap:30px;
 
 
-    justify-content:center !important;
-
-
-    align-items:center !important;
-
-
-    gap:25px;
-
-
-    margin:40px 0;
-
+    margin-top:50px;
 
 
 }
@@ -373,13 +394,29 @@ body::before {
 
 
 
-.slot {
 
 
-    width:120px;
 
 
-    height:120px;
+/* GAME CARDS */
+
+
+.game {
+
+
+    position:relative;
+
+
+
+    height:220px;
+
+
+
+    padding:30px;
+
+
+
+    border-radius:35px;
 
 
 
@@ -390,115 +427,36 @@ body::before {
 
         145deg,
 
-        #27272a,
+        rgba(255,255,255,.15),
 
-        #09090b
+        rgba(255,255,255,.05)
 
     );
 
 
 
-    border-radius:25px;
-
-
-
     border:
 
-    3px solid #c084fc;
+    1px solid rgba(255,255,255,.25);
 
 
 
-    display:flex !important;
+    backdrop-filter:blur(20px);
 
 
-    justify-content:center !important;
 
+    display:flex;
 
-    align-items:center !important;
 
+    flex-direction:column;
 
 
-    font-size:65px;
 
+    justify-content:center;
 
 
-    box-shadow:
 
-
-    0 0 30px #a855f7,
-
-    inset 0 0 25px black;
-
-
-
-    transition:.3s;
-
-
-
-}
-
-
-
-.slot:hover {
-
-
-    transform:
-
-    translateY(-15px)
-    scale(1.08);
-
-
-
-    box-shadow:
-
-
-    0 0 60px #ec4899;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* Inputs */
-
-
-input {
-
-
-    width:320px;
-
-
-    height:55px;
-
-
-
-    background:
-
-    rgba(0,0,0,.6);
-
-
-
-    color:white;
-
-
-
-    border:
-
-    2px solid #a855f7;
-
-
-
-    border-radius:20px;
-
-
-
-    font-size:20px;
+    align-items:center;
 
 
 
@@ -506,15 +464,11 @@ input {
 
 
 
-    outline:none;
+    overflow:hidden;
 
 
 
-    margin:20px auto;
-
-
-
-    display:block;
+    transition:.4s;
 
 
 
@@ -522,13 +476,97 @@ input {
 
 
 
-input:focus {
+
+
+
+
+.game::before {
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    width:200px;
+
+
+    height:200px;
+
+
+
+    background:
+
+
+    radial-gradient(
+
+        circle,
+
+        #a855f7,
+
+        transparent
+
+    );
+
+
+
+    opacity:.3;
+
+
+}
+
+
+
+
+
+
+
+.game:hover {
+
+
+    transform:
+
+
+    translateY(-15px)
+
+    scale(1.05);
+
 
 
     box-shadow:
 
 
-    0 0 30px #a855f7;
+    0 0 60px #a855f7;
+
+
+}
+
+
+
+
+
+
+.game h2 {
+
+
+    position:relative;
+
+
+    font-size:32px;
+
+
+}
+
+
+
+.game p {
+
+
+    position:relative;
+
+
+    opacity:.8;
 
 
 }
@@ -540,27 +578,22 @@ input:focus {
 
 
 
-/* Buttons */
+
+/* BUTTONS */
 
 
 button {
 
 
+    border:none;
+
+
     padding:
 
-    18px 45px;
-
-
-
-    margin:10px;
-
+    15px 35px;
 
 
     border-radius:25px;
-
-
-
-    border:none;
 
 
 
@@ -572,8 +605,7 @@ button {
 
 
 
-    font-size:20px;
-
+    font-size:18px;
 
 
     font-weight:bold;
@@ -587,7 +619,7 @@ button {
 
         135deg,
 
-        #9333ea,
+        #7c3aed,
 
         #ec4899
 
@@ -598,12 +630,11 @@ button {
     box-shadow:
 
 
-    0 0 30px rgba(236,72,153,.7);
+    0 0 25px #ec4899;
 
 
 
     transition:.3s;
-
 
 
 }
@@ -615,28 +646,14 @@ button:hover {
 
     transform:
 
-    scale(1.12);
+    scale(1.15);
 
 
 
     box-shadow:
 
 
-    0 0 60px #ec4899;
-
-
-}
-
-
-
-
-
-button:active {
-
-
-    transform:
-
-    scale(.95);
+    0 0 50px #ec4899;
 
 
 }
@@ -648,194 +665,24 @@ button:active {
 
 
 
-/* Cards */
+/* MOBILE */
 
 
-.cards {
+@media(max-width:600px){
 
 
-    display:flex;
+.title{
 
-
-    justify-content:center;
-
-
-    align-items:center;
-
-
-    gap:20px;
-
-
+    font-size:45px;
 
 }
 
 
+.topbar{
 
-.card {
-
-
-    width:85px;
-
-
-    height:120px;
-
-
-
-    background:white;
-
-
-
-    color:black;
-
-
-
-    border-radius:15px;
-
-
-
-    display:flex;
-
-
-
-    justify-content:center;
-
-
-
-    align-items:center;
-
-
-
-    font-size:30px;
-
-
-
-    box-shadow:
-
-
-    0 0 25px white;
-
+    flex-direction:column;
 
 }
-
-
-
-
-.card.back {
-
-
-    background:#18181b;
-
-
-    color:white;
-
-
-}
-
-
-
-
-
-
-
-/* Results */
-
-
-#result {
-
-
-    margin-top:30px;
-
-
-    font-size:32px;
-
-
-    font-weight:bold;
-
-
-
-}
-
-
-
-
-.win {
-
-
-    color:#4ade80;
-
-
-    text-shadow:
-
-
-    0 0 25px #22c55e;
-
-
-}
-
-
-
-
-
-.lose {
-
-
-    color:#ef4444;
-
-
-    text-shadow:
-
-
-    0 0 25px #dc2626;
-
-
-}
-
-
-
-
-
-
-
-
-/* Back Button */
-
-
-.back {
-
-
-    display:inline-block;
-
-
-    margin-top:35px;
-
-
-    color:white;
-
-
-    font-size:20px;
-
-
-    text-decoration:none;
-
-
-    opacity:.8;
-
-
-
-}
-
-
-
-.back:hover {
-
-
-    opacity:1;
-
-
-    text-shadow:
-
-
-    0 0 20px white;
 
 
 }
