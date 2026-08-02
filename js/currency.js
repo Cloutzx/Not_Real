@@ -3,13 +3,16 @@
 // ==========================
 
 
-// Load saved coins
-let coins = Number(localStorage.getItem("coins")) || 1000;
+
+let coins =
+Number(localStorage.getItem("coins")) || 1000;
 
 
 
-// Update every coin display
+
+
 function updateCoins(){
+
 
     localStorage.setItem(
         "coins",
@@ -17,89 +20,129 @@ function updateCoins(){
     );
 
 
-    let displays = document.querySelectorAll("#coins");
+
+    let displays =
+    document.querySelectorAll("#coins");
+
 
 
     displays.forEach(display => {
 
+
         display.innerText =
         coins.toLocaleString();
 
+
     });
+
 
 }
 
 
 
-// Add coins
+
+
+
 function addCoins(amount){
+
 
     coins += amount;
 
+
     updateCoins();
+
 
 }
 
 
 
-// Remove coins
+
+
+
+
 function removeCoins(amount){
+
 
 
     if(amount > coins){
 
+
         return false;
 
+
     }
+
 
 
     coins -= amount;
 
 
+
     updateCoins();
+
 
 
     return true;
 
+
 }
 
 
 
-// Check if player has enough coins
+
+
+
+
 function hasCoins(amount){
+
 
     return coins >= amount;
 
+
 }
 
 
 
-// Daily Reward System
+
+
+
+
+// ==========================
+// Daily Reward
+// ==========================
+
 
 function claimDailyReward(){
 
 
-    let lastReward =
+
+    let lastClaim =
     Number(
         localStorage.getItem("dailyReward")
     ) || 0;
 
 
 
-    let now = Date.now();
+
+    let currentTime =
+    Date.now();
+
 
 
 
     let cooldown =
-    86400000; // 24 hours
+    24 * 60 * 60 * 1000;
 
 
 
-    if(now - lastReward < cooldown){
+
+
+    if(currentTime - lastClaim < cooldown){
+
 
 
         let remaining =
-        cooldown - (now - lastReward);
+        cooldown - (currentTime - lastClaim);
 
 
 
@@ -113,17 +156,25 @@ function claimDailyReward(){
         alert(
             "🎁 Come back in "
             + hours
-            + " hour(s)"
+            + " hours"
         );
 
 
+
         return false;
+
 
     }
 
 
 
-    let reward = 1000;
+
+
+
+    let reward =
+    1000;
+
+
 
 
 
@@ -131,14 +182,27 @@ function claimDailyReward(){
 
 
 
+
     localStorage.setItem(
         "dailyReward",
-        now
+        currentTime
     );
 
 
 
+
     updateCoins();
+
+
+
+
+
+    if(typeof playSound === "function"){
+
+        playSound("reward");
+
+    }
+
 
 
 
@@ -152,15 +216,27 @@ function claimDailyReward(){
 
     return true;
 
+
 }
 
 
 
-// Reset account (for testing)
+
+
+
+
+
+// ==========================
+// Reset Account
+// ==========================
+
+
 function resetCoins(){
 
 
+
     coins = 1000;
+
 
 
     localStorage.setItem(
@@ -169,7 +245,9 @@ function resetCoins(){
     );
 
 
+
     updateCoins();
+
 
 
 }
