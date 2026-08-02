@@ -9,27 +9,100 @@ let fishing = false;
 
 const fishList = [
 
+    // Common
     {
-        name:"🐟 Small Fish",
-        reward:100
+        name: "🐟 Small Fish",
+        chance: 35,
+        reward: 100
     },
 
     {
-        name:"🐠 Tropical Fish",
-        reward:300
+        name: "🐠 Tropical Fish",
+        chance: 25,
+        reward: 300
     },
 
+
+    // Uncommon
     {
-        name:"🦈 Shark",
-        reward:2000
+        name: "🐡 Puffer Fish",
+        chance: 15,
+        reward: 500
     },
 
+
+    // Rare
     {
-        name:"💎 Golden Fish",
-        reward:10000
+        name: "🦈 Shark",
+        chance: 8,
+        reward: 2000
+    },
+
+
+    {
+        name: "🐋 Whale",
+        chance: 3,
+        reward: 10000
+    },
+
+
+    // Legendary
+    {
+        name: "✨ Golden Fish",
+        chance: 1,
+        reward: 50000
+    },
+
+
+    // Bad catches
+    {
+        name: "🗑️ Trash",
+        chance: 10,
+        reward: -500
+    },
+
+
+    {
+        name: "💀 Old Boot",
+        chance: 3,
+        reward: -1000
     }
 
 ];
+
+
+
+
+
+function getFish(){
+
+
+    let random =
+    Math.random() * 100;
+
+
+    let total = 0;
+
+
+    for(let fish of fishList){
+
+
+        total += fish.chance;
+
+
+        if(random <= total){
+
+            return fish;
+
+        }
+
+    }
+
+
+    return fishList[0];
+
+}
+
 
 
 
@@ -69,17 +142,14 @@ function fish(){
 
 
 
+
+
     setTimeout(()=>{
 
 
 
         let caught =
-        fishList[
-            Math.floor(
-                Math.random() *
-                fishList.length
-            )
-        ];
+        getFish();
 
 
 
@@ -87,24 +157,66 @@ function fish(){
 
 
 
+        if(coins < 0){
+
+            coins = 0;
+
+        }
+
+
+
         updateCoins();
 
 
 
-        result.innerText =
-        "🎉 You caught "
-        + caught.name
-        + " +"
-        + caught.reward.toLocaleString()
-        + " coins!";
 
 
 
-        if(typeof playSound === "function"){
+        if(caught.reward > 0){
 
-            playSound("reward");
+
+            result.innerText =
+            "🎉 You caught "
+            + caught.name
+            + " +"
+            + caught.reward.toLocaleString()
+            + " coins!";
+
+
+
+            if(typeof playSound === "function"){
+
+                playSound("reward");
+
+            }
+
 
         }
+
+
+
+        else{
+
+
+            result.innerText =
+            "💀 You found "
+            + caught.name
+            + " "
+            + caught.reward.toLocaleString()
+            + " coins";
+
+
+
+            if(typeof playSound === "function"){
+
+                playSound("lose");
+
+            }
+
+
+        }
+
+
 
 
 
@@ -112,7 +224,7 @@ function fish(){
 
 
 
-    },2000);
+    },3000);
 
 
 
