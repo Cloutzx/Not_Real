@@ -1,6 +1,35 @@
-// =================================
-// Lucky Lounge Fishing
-// =================================
+let fishing = false;
+
+
+
+const fishTypes = [
+
+
+    {
+        name:"🐟 Common Fish",
+        reward:100,
+        chance:60
+    },
+
+
+    {
+        name:"🐠 Rare Fish",
+        reward:300,
+        chance:30
+    },
+
+
+    {
+        name:"🐋 Legendary Fish",
+        reward:1000,
+        chance:10
+    }
+
+
+];
+
+
+
 
 
 
@@ -8,35 +37,38 @@ function fish(){
 
 
 
-    let result =
-    document.getElementById(
-    "fishResult"
-    );
-
-
-    let fish =
-    document.getElementById(
-    "fish"
-    );
+    if(fishing) return;
 
 
 
-    fish.classList.remove(
-    "swimming"
-    );
+    fishing=true;
 
 
-    void fish.offsetWidth;
 
 
-    fish.classList.add(
-    "swimming"
-    );
+    const fishElement =
+    document.getElementById("fish");
+
+
+
+    const result =
+    document.getElementById("fishResult");
 
 
 
     result.innerHTML =
-    "🎣 Waiting for a bite...";
+    "🎣 Fishing...";
+
+
+
+    LuckySounds.fish();
+
+
+
+
+
+    fishElement.classList.add("swimming");
+
 
 
 
@@ -45,47 +77,42 @@ function fish(){
     setTimeout(()=>{
 
 
-        let chance =
-        Math.random();
+
+        fishElement.classList.remove("swimming");
 
 
 
-        let reward;
+        let roll =
+        Math.random()*100;
 
 
 
-        if(chance < .1){
+        let total=0;
 
 
-            reward = 1000;
+
+        let caught;
 
 
-            result.innerHTML =
-            "🐋 Legendary Fish! +1000 Coins";
+
+        for(let fish of fishTypes){
 
 
-        }
 
-        else if(chance < .35){
-
-
-            reward = 300;
+            total += fish.chance;
 
 
-            result.innerHTML =
-            "🐠 Rare Fish! +300 Coins";
+
+            if(roll <= total){
 
 
-        }
-
-        else{
+                caught = fish;
 
 
-            reward = 100;
+                break;
 
 
-            result.innerHTML =
-            "🐟 Fish caught! +100 Coins";
+            }
 
 
         }
@@ -94,14 +121,43 @@ function fish(){
 
 
 
-        coins += reward;
 
 
-        updateCoins();
+        addCoins(caught.reward);
+
+
+
+
+
+        result.innerHTML =
+
+        "🎉 Caught " +
+
+        caught.name +
+
+        " +" +
+
+        caught.reward +
+
+        " Coins";
+
+
+
+
+
+        LuckySounds.win();
+
+
+
+
+
+        fishing=false;
+
 
 
 
     },3000);
+
 
 
 }
