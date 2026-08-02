@@ -10,39 +10,55 @@ const soundPath = "/sounds/";
 const Sounds = {
 
 
-    click: new Audio(soundPath + "click.mp3"),
+    click:
+    new Audio(soundPath + "click.mp3"),
 
 
-    slotSpin: new Audio(soundPath + "slot-spin.mp3"),
+    slotSpin:
+    new Audio(soundPath + "slot-spin.mp3"),
 
 
-    slotStop: new Audio(soundPath + "slot-stop.mp3"),
+    slotStop:
+    new Audio(soundPath + "slot-stop.mp3"),
 
 
-    cardDeal: new Audio(soundPath + "card-deal.mp3"),
+    cardDeal:
+    new Audio(soundPath + "card-deal.mp3"),
 
 
-    cardFlip: new Audio(soundPath + "card-flip.mp3"),
+    cardFlip:
+    new Audio(soundPath + "card-flip.mp3"),
 
 
-    coinFlip: new Audio(soundPath + "coin-flip.mp3"),
+    coinFlip:
+    new Audio(soundPath + "coin-flip.mp3"),
 
 
-    fish: new Audio(soundPath + "fish.mp3"),
+    fish:
+    new Audio(soundPath + "fish.mp3"),
 
 
-    jackpot: new Audio(soundPath + "jackpot.mp3"),
+    jackpot:
+    new Audio(soundPath + "jackpot.mp3"),
 
 
-    reward: new Audio(soundPath + "reward.mp3"),
+    reward:
+    new Audio(soundPath + "reward.mp3"),
 
 
-    win: new Audio(soundPath + "win.mp3"),
+    win:
+    new Audio(soundPath + "win.mp3"),
 
 
-    lose: new Audio(soundPath + "lose.mp3")
+    lose:
+    new Audio(soundPath + "lose.mp3")
+
+
 
 };
+
+
+
 
 
 
@@ -56,20 +72,28 @@ Object.values(Sounds).forEach(sound=>{
 
 
 
-function playSound(sound){
+
+function playSound(name){
 
 
-    if(!Sounds[sound]) return;
+    if(!Sounds[name]) return;
 
 
-    Sounds[sound].currentTime = 0;
+
+    Sounds[name].currentTime = 0;
 
 
-    Sounds[sound].play().catch(error=>{
 
-        console.log("Audio blocked:", error);
+    Sounds[name].play().catch(()=>{
+
+
+        console.log(
+        "Audio waiting for user interaction"
+        );
+
 
     });
+
 
 
 }
@@ -78,7 +102,10 @@ function playSound(sound){
 
 
 
+
+
 window.LuckySounds = {
+
 
 
     click(){
@@ -88,11 +115,13 @@ window.LuckySounds = {
     },
 
 
+
     slotSpin(){
 
         playSound("slotSpin");
 
     },
+
 
 
     slotStop(){
@@ -102,11 +131,13 @@ window.LuckySounds = {
     },
 
 
+
     cardDeal(){
 
         playSound("cardDeal");
 
     },
+
 
 
     cardFlip(){
@@ -116,11 +147,13 @@ window.LuckySounds = {
     },
 
 
+
     coinFlip(){
 
         playSound("coinFlip");
 
     },
+
 
 
     fish(){
@@ -130,11 +163,13 @@ window.LuckySounds = {
     },
 
 
+
     jackpot(){
 
         playSound("jackpot");
 
     },
+
 
 
     reward(){
@@ -144,11 +179,13 @@ window.LuckySounds = {
     },
 
 
+
     win(){
 
         playSound("win");
 
     },
+
 
 
     lose(){
@@ -166,15 +203,21 @@ window.LuckySounds = {
 
 
 
-// Button click sounds
+// Button click sound
 
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
 
 
-    document.querySelectorAll("button").forEach(button=>{
+    document
+    .querySelectorAll("button")
+    .forEach(button=>{
 
 
-        button.addEventListener("click",()=>{
+        button.addEventListener(
+        "click",
+        ()=>{
 
 
             LuckySounds.click();
