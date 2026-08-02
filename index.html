@@ -7,20 +7,16 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <title>
 Lucky Lounge
 </title>
 
-
 <link rel="stylesheet" href="style.css">
-
 
 </head>
 
 
 <body>
-
 
 
 <div class="menu">
@@ -37,7 +33,6 @@ Lucky Lounge
             🎲 LUCKY LOUNGE
 
         </div>
-
 
 
 
@@ -59,8 +54,6 @@ Lucky Lounge
 
 
 
-
-
     <!-- DAILY REWARD -->
 
 
@@ -75,8 +68,7 @@ Lucky Lounge
 
 
 
-        <button
-        onclick="claimDailyReward()">
+        <button onclick="claimDailyReward()">
 
             CLAIM
 
@@ -84,7 +76,6 @@ Lucky Lounge
 
 
     </div>
-
 
 
 
@@ -115,8 +106,6 @@ Lucky Lounge
 
 
 
-
-
         <button
         class="game-btn"
         onclick="openGame('games/slots.html')">
@@ -133,7 +122,6 @@ Lucky Lounge
 
 
         </button>
-
 
 
 
@@ -186,6 +174,7 @@ Lucky Lounge
 
 
 
+
         <button
         class="game-btn"
         onclick="openGame('games/coinflip.html')">
@@ -209,6 +198,7 @@ Lucky Lounge
 
 
 
+
         <button
         class="game-btn"
         onclick="openGame('games/fishing.html')">
@@ -225,6 +215,7 @@ Lucky Lounge
 
 
         </button>
+
 
 
 
@@ -268,17 +259,13 @@ Lucky Lounge
 
 
 
-
 <!-- SCRIPTS -->
-
-
-<script src="js/currency.js"></script>
 
 <script src="js/sounds.js"></script>
 
+<script src="js/currency.js"></script>
+
 <script src="js/rewards.js"></script>
-
-
 
 
 
@@ -288,14 +275,7 @@ Lucky Lounge
 function openGame(page){
 
 
-    if(window.LuckySounds){
-
-
-        LuckySounds.click();
-
-
-    }
-
+    playSound("click");
 
 
     setTimeout(()=>{
@@ -304,17 +284,13 @@ function openGame(page){
         window.location.href = page;
 
 
-    },200);
-
+    },150);
 
 
 }
 
 
-
 </script>
-
-
 
 
 
