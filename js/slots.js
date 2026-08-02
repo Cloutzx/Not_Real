@@ -6,9 +6,26 @@
 let spinning = false;
 
 
+const symbols = [
+
+    "🍒",
+    "🍋",
+    "🍀",
+    "⭐",
+    "💎",
+    "7️⃣"
+
+];
+
+
+
+
 
 function spin(){
 
+
+
+    // Stop double spinning
 
     if(spinning){
 
@@ -18,29 +35,53 @@ function spin(){
 
 
 
-    let bet = Number(
-        document.getElementById("bet").value
+
+    let betInput =
+    document.getElementById("bet");
+
+
+
+    let bet =
+    Number(
+    betInput.value
     );
+
+
 
 
 
     if(!bet || bet <= 0){
 
-        alert("Enter a bet amount!");
+
+        alert(
+        "Enter a bet amount!"
+        );
+
 
         return;
 
     }
+
+
+
 
 
 
     if(bet > coins){
 
-        alert("Not enough coins!");
+
+        alert(
+        "Not enough coins!"
+        );
+
 
         return;
 
+
     }
+
+
+
 
 
 
@@ -48,59 +89,97 @@ function spin(){
 
 
 
+
+
+    let spinButton =
+    document.querySelector(
+    ".game-action"
+    );
+
+
+
+    if(spinButton){
+
+        spinButton.disabled = true;
+
+        spinButton.innerHTML =
+        "🎰 Spinning...";
+
+    }
+
+
+
+
+
+
     coins -= bet;
+
 
     updateCoins();
 
 
 
 
+
+
+    let slot1 =
+    document.getElementById(
+    "slot1"
+    );
+
+
+    let slot2 =
+    document.getElementById(
+    "slot2"
+    );
+
+
+    let slot3 =
+    document.getElementById(
+    "slot3"
+    );
+
+
+
+
     let slots = [
 
-        document.getElementById("slot1"),
-
-        document.getElementById("slot2"),
-
-        document.getElementById("slot3")
+        slot1,
+        slot2,
+        slot3
 
     ];
 
 
-
-    let symbols = [
-
-        "🍒",
-
-        "🍋",
-
-        "🍀",
-
-        "💎",
-
-        "⭐",
-
-        "7️⃣"
-
-    ];
 
 
 
 
 
     let result =
-    document.getElementById("result");
+    document.getElementById(
+    "result"
+    );
+
 
 
 
     result.innerHTML =
-    "🎰 Spinning...";
+    "🎰 Rolling...";
+
+
+
 
 
 
 
     slots.forEach(slot=>{
 
-        slot.classList.add("spin");
+
+        slot.classList.add(
+        "spin"
+        );
+
 
     });
 
@@ -108,22 +187,28 @@ function spin(){
 
 
 
-    let spinTime = 3000;
 
 
 
-    let animation = setInterval(()=>{
+
+    let rollAnimation =
+    setInterval(()=>{
+
 
 
         slots.forEach(slot=>{
 
 
             slot.innerHTML =
+
             symbols[
             Math.floor(
-            Math.random()*symbols.length
+            Math.random()
+            *
+            symbols.length
             )
             ];
+
 
 
         });
@@ -138,38 +223,63 @@ function spin(){
 
 
 
+
+
     setTimeout(()=>{
 
 
-        clearInterval(animation);
+
+        clearInterval(
+        rollAnimation
+        );
+
+
 
 
 
         let final = [];
 
 
+
+
+
         slots.forEach(slot=>{
 
 
             let symbol =
+
             symbols[
             Math.floor(
-            Math.random()*symbols.length
+            Math.random()
+            *
+            symbols.length
             )
             ];
 
 
-            slot.innerHTML = symbol;
+
+            slot.innerHTML =
+            symbol;
 
 
-            final.push(symbol);
+
+            final.push(
+            symbol
+            );
 
 
 
-            slot.classList.remove("spin");
+            slot.classList.remove(
+            "spin"
+            );
 
 
         });
+
+
+
+
+
 
 
 
@@ -180,81 +290,156 @@ function spin(){
 
 
 
+
+
+
+
+
+        // JACKPOT
+
         if(
-        final[0] === final[1] &&
+
+        final[0] === final[1]
+
+        &&
+
         final[1] === final[2]
+
         ){
 
 
-            if(final[0] === "7️⃣"){
+
+            switch(final[0]){
 
 
-                reward = bet * 25;
+                case "7️⃣":
 
 
-                result.innerHTML =
-                "🔥 JACKPOT 7s! +" + reward + " coins";
+                    reward =
+                    bet * 25;
+
+
+                    result.innerHTML =
+                    "🔥 JACKPOT 7s! +" 
+                    + reward 
+                    + " coins";
+
+
+                    break;
+
+
+
+
+
+                case "💎":
+
+
+                    reward =
+                    bet * 15;
+
+
+                    result.innerHTML =
+                    "💎 DIAMOND JACKPOT! +"
+                    + reward
+                    + " coins";
+
+
+                    break;
+
+
+
+
+
+
+                default:
+
+
+                    reward =
+                    bet * 10;
+
+
+                    result.innerHTML =
+                    "🎉 THREE MATCH! +"
+                    + reward
+                    + " coins";
+
+
+                    break;
+
 
 
             }
 
-            else if(final[0] === "💎"){
-
-
-                reward = bet * 10;
-
-
-                result.innerHTML =
-                "💎 Diamond Win! +" + reward + " coins";
-
-
-            }
-
-            else{
-
-
-                reward = bet * 5;
-
-
-                result.innerHTML =
-                "🎉 Big Win! +" + reward + " coins";
-
-
-            }
 
 
         }
 
 
+
+
+
+
+
+        // TWO MATCH
+
+
         else if(
 
-        final[0] === final[1] ||
+        final[0] === final[1]
 
-        final[1] === final[2] ||
+        ||
+
+        final[1] === final[2]
+
+        ||
 
         final[0] === final[2]
 
         ){
 
 
-            reward = bet * 2;
+
+            reward =
+            bet * 2;
+
 
 
             result.innerHTML =
-            "✨ Small Win! +" + reward + " coins";
+
+            "✨ Two Match! +"
+
+            + reward
+
+            + " coins";
+
 
 
         }
+
+
+
+
+
+
+
+        // LOSS
 
 
         else{
 
 
+
             result.innerHTML =
-            "❌ No Match";
+
+            "❌ No match";
+
 
 
         }
+
+
+
+
 
 
 
@@ -263,7 +448,14 @@ function spin(){
         coins += reward;
 
 
+
         updateCoins();
+
+
+
+
+
+
 
 
 
@@ -271,7 +463,31 @@ function spin(){
 
 
 
-    },spinTime);
+
+
+
+        if(spinButton){
+
+
+            spinButton.disabled = false;
+
+
+            spinButton.innerHTML =
+
+            "🎰 Spin";
+
+
+        }
+
+
+
+
+
+
+
+    },3000);
+
+
 
 
 
