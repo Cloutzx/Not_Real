@@ -37,6 +37,10 @@ const Sounds = {
         "../assets/sounds/card-flip.mp3"
     ),
 
+    cardDeal: new Audio(
+        "../assets/sounds/card-deal.mp3"
+    ),
+
     reward: new Audio(
         "../assets/sounds/reward.mp3"
     )
@@ -45,7 +49,7 @@ const Sounds = {
 
 
 
-// Volume settings
+// Volume
 
 Object.values(Sounds).forEach(sound => {
 
@@ -55,23 +59,21 @@ Object.values(Sounds).forEach(sound => {
 
 
 
-
 // Play sound function
 
-function playSound(soundName){
+function playSound(name){
 
-    let sound = Sounds[soundName];
+    let sound = Sounds[name];
 
 
     if(sound){
 
         sound.currentTime = 0;
 
-        sound.play()
-        .catch(() => {
+        sound.play().catch(() => {
 
             console.log(
-            "Sound blocked until user interaction"
+                "Sound requires user interaction"
             );
 
         });
