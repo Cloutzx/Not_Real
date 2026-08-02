@@ -1,23 +1,50 @@
 /* =========================================================
-   LUCKY LOUNGE CURRENCY SYSTEM
+   LUCKY LOUNGE CURRENCY
 ========================================================= */
 
 
-let coins = Number(localStorage.getItem("coins"));
+let coins;
 
 
-// First time player
 
-if (isNaN(coins)) {
+function loadCoins(){
 
-    coins = 1000;
 
-    localStorage.setItem(
-        "coins",
-        coins
-    );
+    let saved =
+    localStorage.getItem("coins");
+
+
+
+    if(saved === null){
+
+
+        coins = 1000;
+
+
+        localStorage.setItem(
+            "coins",
+            coins
+        );
+
+
+    }
+    else{
+
+
+        coins = Number(saved);
+
+
+    }
+
+
 
 }
+
+
+
+loadCoins();
+
+
 
 
 
@@ -26,14 +53,12 @@ if (isNaN(coins)) {
 function updateCoins(){
 
 
-    let displays =
-    document.querySelectorAll("#coins");
+    document
+    .querySelectorAll("#coins")
+    .forEach(element=>{
 
 
-    displays.forEach(display=>{
-
-
-        display.textContent =
+        element.textContent =
         coins.toLocaleString();
 
 
@@ -46,11 +71,17 @@ function updateCoins(){
 
 
 
+
+
 function getCoins(){
+
 
     return coins;
 
+
 }
+
+
 
 
 
@@ -71,14 +102,19 @@ function addCoins(amount){
 
 
 
+
+
 function removeCoins(amount){
 
 
     if(coins < amount){
 
+
         return false;
 
+
     }
+
 
 
     coins -= amount;
@@ -87,10 +123,13 @@ function removeCoins(amount){
     saveCoins();
 
 
+
     return true;
 
 
 }
+
+
 
 
 
@@ -109,6 +148,7 @@ function saveCoins(){
 
 
 }
+
 
 
 
