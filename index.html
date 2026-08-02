@@ -40,30 +40,14 @@ Lucky Lounge
 
 
 
-        <div class="header-actions">
 
+        <div class="coins">
 
-            <button 
-            class="sound-btn"
-            onclick="toggleMute()"
-            id="soundButton">
+            🪙
 
-                🔊
-
-            </button>
-
-
-
-            <div class="coins">
-
-                🪙
-
-                <span id="coins">
-                    0
-                </span>
-
-            </div>
-
+            <span id="coins">
+                0
+            </span>
 
         </div>
 
@@ -128,6 +112,8 @@ Lucky Lounge
 
 
     <div class="buttons">
+
+
 
 
 
@@ -248,7 +234,7 @@ Lucky Lounge
 
         <button
         class="game-btn"
-        onclick="openGame('rewards.html')">
+        onclick="openGame('games/rewards.html')">
 
 
             <span>
@@ -281,11 +267,18 @@ Lucky Lounge
 
 
 
+
+
+<!-- SCRIPTS -->
+
+
 <script src="js/currency.js"></script>
 
 <script src="js/sounds.js"></script>
 
 <script src="js/rewards.js"></script>
+
+
 
 
 
@@ -297,7 +290,9 @@ function openGame(page){
 
     if(window.LuckySounds){
 
+
         LuckySounds.click();
+
 
     }
 
@@ -312,33 +307,14 @@ function openGame(page){
     },200);
 
 
-}
-
-
-
-
-
-function toggleMute(){
-
-
-    if(window.LuckySounds){
-
-
-        let muted = LuckySounds.toggleMute();
-
-
-
-        document.getElementById("soundButton").innerHTML =
-        muted ? "🔇" : "🔊";
-
-
-    }
-
 
 }
+
 
 
 </script>
+
+
 
 
 
