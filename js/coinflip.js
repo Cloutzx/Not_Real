@@ -1,47 +1,45 @@
-// ==========================
-// Lucky Lounge Coin Flip
-// ==========================
-
-
 let flipping = false;
-
 
 
 
 function flipCoin(choice){
 
 
-    if(flipping){
+    if(flipping) return;
+
+
+
+    const bet =
+    Number(document.getElementById("bet").value);
+
+
+
+    if(!bet || bet <= 0){
+
+
+        document.getElementById("result").innerHTML =
+        "Enter a bet amount!";
+
 
         return;
+
 
     }
 
 
 
-    let bet = Number(
-        document.getElementById("bet").value
-    );
+    if(bet > getCoins()){
 
 
+        document.getElementById("result").innerHTML =
+        "Not enough coins!";
 
-    if(bet <= 0){
-
-        alert("Enter a valid bet amount");
 
         return;
 
-    }
-
-
-
-    if(bet > coins){
-
-        alert("Not enough coins");
-
-        return;
 
     }
+
 
 
 
@@ -49,46 +47,26 @@ function flipCoin(choice){
 
 
 
-    coins -= bet;
-
-    updateCoins();
+    removeCoins(bet);
 
 
 
-    let coin =
+    const coin =
     document.getElementById("coin");
 
 
-    let result =
-    document.getElementById("result");
+
+    LuckySounds.coinflip();
 
 
 
-    if(typeof playSound === "function"){
-
-        playSound("coinFlip");
-
-    }
+    coin.classList.add("flip");
 
 
 
-    coin.style.animation = "none";
+    document.getElementById("result").innerHTML =
+    "Flipping...";
 
-
-    setTimeout(()=>{
-
-        coin.style.animation =
-        "coinSpin 1s";
-
-    },10);
-
-
-
-    result.innerText =
-    "🪙 Flipping...";
-
-
-    result.className = "";
 
 
 
@@ -97,60 +75,55 @@ function flipCoin(choice){
 
 
 
-        let outcome;
-
-
-
-        if(Math.random() < 0.5){
-
-            outcome = "Heads";
-
-        }
-
-        else{
-
-            outcome = "Tails";
-
-        }
+        let result =
+        Math.random() < 0.5
+        ? "Heads"
+        : "Tails";
 
 
 
 
-        if(outcome === choice){
+
+        coin.classList.remove("flip");
 
 
-            let winnings =
+
+        if(result === choice){
+
+
+
+            let reward =
             bet * 2;
 
 
 
-            coins += winnings;
+            addCoins(reward);
 
 
 
-            updateCoins();
+            document.getElementById("result").innerHTML =
+
+            "🎉 " + result + "! +" + reward + " Coins";
 
 
 
-            result.innerText =
-            "🎉 "
-            + outcome
-            + "! You won "
-            + winnings.toLocaleString()
-            + " coins";
+            LuckySounds.win();
 
 
 
-            result.className =
-            "win";
+        }
+
+        else {
 
 
 
-            if(typeof playSound === "function"){
+            document.getElementById("result").innerHTML =
 
-                playSound("win");
+            "❌ " + result + "! You lost";
 
-            }
+
+
+            LuckySounds.lose();
 
 
 
@@ -158,41 +131,12 @@ function flipCoin(choice){
 
 
 
-        else{
+
+        flipping=false;
 
 
 
-            result.innerText =
-            "❌ "
-            + outcome
-            + "! You lost "
-            + bet.toLocaleString()
-            + " coins";
-
-
-
-            result.className =
-            "lose";
-
-
-
-            if(typeof playSound === "function"){
-
-                playSound("lose");
-
-            }
-
-
-        }
-
-
-
-
-        flipping = false;
-
-
-
-    },1000);
+    },2000);
 
 
 
