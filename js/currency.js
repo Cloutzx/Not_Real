@@ -7,22 +7,14 @@ let coins = 0;
 
 
 
-/*
-    LOAD COINS
-
-    Only gives 1000 coins if the player
-    has never had a save before.
-
-    0 coins is a valid value.
-*/
-
-
 function loadCoins(){
 
 
     let savedCoins = localStorage.getItem("coins");
 
 
+
+    // First time player only
 
     if(savedCoins === null){
 
@@ -43,8 +35,6 @@ function loadCoins(){
         coins = Number(savedCoins);
 
 
-
-        // Safety check if save is corrupted
 
         if(isNaN(coins)){
 
@@ -78,20 +68,13 @@ loadCoins();
 
 
 
-/*
-    UPDATE ALL COIN TEXT
-*/
-
 
 function updateCoins(){
 
 
-    let displays =
-    document.querySelectorAll("#coins");
-
-
-
-    displays.forEach(display=>{
+    document
+    .querySelectorAll("#coins")
+    .forEach(display=>{
 
 
         display.textContent =
@@ -110,11 +93,6 @@ function updateCoins(){
 
 
 
-/*
-    GET CURRENT COINS
-*/
-
-
 function getCoins(){
 
 
@@ -128,11 +106,6 @@ function getCoins(){
 
 
 
-
-
-/*
-    ADD COINS
-*/
 
 
 function addCoins(amount){
@@ -159,11 +132,6 @@ function addCoins(amount){
 
 
 
-
-
-/*
-    REMOVE COINS
-*/
 
 
 function removeCoins(amount){
@@ -206,11 +174,6 @@ function removeCoins(amount){
 
 
 
-/*
-    SAVE
-*/
-
-
 function saveCoins(){
 
 
@@ -233,11 +196,6 @@ function saveCoins(){
 
 
 
-/*
-    RESET (FOR TESTING ONLY)
-*/
-
-
 function resetCoins(){
 
 
@@ -256,15 +214,31 @@ function resetCoins(){
 
 
 
-/*
-    LOAD UI
-*/
-
+// Update when page opens
 
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
 
+
+    loadCoins();
+
+    updateCoins();
+
+
+});
+
+
+
+
+// Update when returning to page
+
+window.addEventListener(
+"pageshow",
+()=>{
+
+
+    loadCoins();
 
     updateCoins();
 
