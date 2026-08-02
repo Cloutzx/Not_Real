@@ -1,59 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lucky Lounge</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="casino">
+    <header class="header">
+        <h1>🎰 Lucky Lounge</h1>
 
-    <img class="logo" src="assets/images/logo.png" alt="Logo">
-
-    <div class="balance">
-        💰 Coins: <span id="coins">1000</span>
-    </div>
-
-    <button onclick="dailyReward()">
-        Daily Reward
-    </button>
-
-    <div class="games">
-
-        <div class="game">
-            <img src="assets/images/slot.png">
-            <h2>Slots</h2>
-            <button onclick="playSlots()">Play</button>
+        <div class="balance">
+            💰 Coins:
+            <span id="coins">1000</span>
         </div>
 
+        <button id="dailyReward">
+            🎁 Daily Reward
+        </button>
+    </header>
 
-        <div class="game">
-            <img src="assets/images/cards.png">
-            <h2>Blackjack</h2>
-            <button onclick="playBlackjack()">Play</button>
+    <main>
+
+        <div class="games">
+
+            <a class="game" href="games/slots.html">
+                <div class="emoji">🎰</div>
+                <h2>Slots</h2>
+                <p>Spin for huge multipliers.</p>
+            </a>
+
+            <a class="game" href="games/blackjack.html">
+                <div class="emoji">🃏</div>
+                <h2>Blackjack</h2>
+                <p>Beat the dealer.</p>
+            </a>
+
+            <a class="game" href="games/coinflip.html">
+                <div class="emoji">🪙</div>
+                <h2>Coin Flip</h2>
+                <p>Choose Heads or Tails.</p>
+            </a>
+
+            <a class="game" href="games/cups.html">
+                <div class="emoji">🥤</div>
+                <h2>Cups</h2>
+                <p>Find the winning cup.</p>
+            </a>
+
+            <a class="game" href="games/fishing.html">
+                <div class="emoji">🐟</div>
+                <h2>Fishing</h2>
+                <p>Catch rare fish for coins.</p>
+            </a>
+
         </div>
 
+    </main>
 
-        <div class="game">
-            <img src="assets/images/fish.png">
-            <h2>Fishing</h2>
-            <button onclick="fish()">Fish</button>
-        </div>
+    <script>
+        let coins = Number(localStorage.getItem("coins")) || 1000;
 
+        const coinText = document.getElementById("coins");
+        coinText.textContent = coins;
 
-        <div class="game">
-            <img src="assets/images/cup.png">
-            <h2>Cups</h2>
-            <button onclick="cups()">Play</button>
-        </div>
+        const rewardButton = document.getElementById("dailyReward");
 
-    </div>
+        rewardButton.onclick = function () {
 
-</div>
+            const now = Date.now();
+            const last = Number(localStorage.getItem("dailyReward")) || 0;
 
+            if (now - last < 86400000) {
 
-<script src="script.js"></script>
+                const hours = Math.ceil((86400000 - (now - last)) / 3600000);
+                alert("Come back in " + hours + " hour(s).");
+                return;
+
+            }
+
+            coins += 1000;
+
+            localStorage.setItem("coins", coins);
+            localStorage.setItem("dailyReward", now);
+
+            coinText.textContent = coins;
+
+            alert("🎉 You claimed 1,000 coins!");
+        };
+    </script>
 
 </body>
 </html>
