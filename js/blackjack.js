@@ -13,26 +13,20 @@ let gameRunning = false;
 
 let playerTurn = false;
 
-
-
-
+let currentBet = 0;
 
 
 
 
 const suits = [
-
     "♠️",
     "♥️",
     "♦️",
     "♣️"
-
 ];
 
 
-
 const ranks = [
-
     "A",
     "2",
     "3",
@@ -46,12 +40,7 @@ const ranks = [
     "J",
     "Q",
     "K"
-
 ];
-
-
-
-
 
 
 
@@ -72,9 +61,9 @@ function createDeck(){
 
             newDeck.push({
 
-                suit:suit,
+                rank:rank,
 
-                rank:rank
+                suit:suit
 
             });
 
@@ -86,18 +75,11 @@ function createDeck(){
 
 
 
-
-
     return newDeck.sort(
-        ()=>Math.random()-0.5
+        ()=>Math.random() - 0.5
     );
 
-
 }
-
-
-
-
 
 
 
@@ -106,28 +88,28 @@ function createDeck(){
 function startGame(){
 
 
+
     if(gameRunning)
     return;
 
 
 
-
-    let bet = Number(
-        document.getElementById("bet").value
-    );
+    let betInput =
+    document.getElementById("bet");
 
 
 
+    currentBet =
+    Number(betInput.value);
 
-    if(!bet || bet <= 0){
 
+
+    if(!currentBet || currentBet <= 0){
 
         result.innerHTML =
         "Enter a bet!";
 
-
         return;
-
 
     }
 
@@ -135,16 +117,13 @@ function startGame(){
 
 
 
-
-    if(bet > getCoins()){
+    if(currentBet > getCoins()){
 
 
         result.innerHTML =
         "Not enough coins!";
 
-
         return;
-
 
     }
 
@@ -152,9 +131,7 @@ function startGame(){
 
 
 
-
-    removeCoins(bet);
-
+    removeCoins(currentBet);
 
 
 
@@ -168,24 +145,22 @@ function startGame(){
 
 
 
-
-    playerCards.push(deck.pop());
-
-    playerCards.push(deck.pop());
-
-
-
-    dealerCards.push(deck.pop());
-
-    dealerCards.push(deck.pop());
-
-
-
-
     gameRunning = true;
 
     playerTurn = true;
 
+
+
+
+    playerCards.push(deck.pop());
+
+    playerCards.push(deck.pop());
+
+
+
+    dealerCards.push(deck.pop());
+
+    dealerCards.push(deck.pop());
 
 
 
@@ -198,7 +173,7 @@ function startGame(){
 
 
     result.innerHTML =
-    "Your turn";
+    "Your Turn";
 
 
 
@@ -211,8 +186,8 @@ function startGame(){
 
 
 
-
 function hit(){
+
 
 
     if(!gameRunning || !playerTurn)
@@ -220,11 +195,9 @@ function hit(){
 
 
 
-
     playerCards.push(
         deck.pop()
     );
-
 
 
 
@@ -237,6 +210,7 @@ function hit(){
 
 
 
+
     if(getScore(playerCards) > 21){
 
 
@@ -244,9 +218,7 @@ function hit(){
         "💥 Bust!";
 
 
-
         LuckySounds.lose();
-
 
 
         endGame();
@@ -264,24 +236,22 @@ function hit(){
 
 
 
-
 function stand(){
 
 
-    if(!gameRunning || !playerTurn)
+
+    if(!gameRunning)
     return;
 
 
 
-    playerTurn = false;
-
+    playerTurn=false;
 
 
     dealerTurn();
 
 
 }
-
 
 
 
@@ -311,11 +281,7 @@ function dealerTurn(){
 
 
 
-
-
-
     updateCards();
-
 
 
 
@@ -331,34 +297,22 @@ function dealerTurn(){
 
 
 
-
-
-
     if(
         dealerScore > 21 ||
         playerScore > dealerScore
     ){
 
 
-
-        let bet =
-        Number(
-            document.getElementById("bet").value
-        );
+        let winnings =
+        currentBet * 2;
 
 
-
-        let reward =
-        bet * 2;
-
-
-
-        addCoins(reward);
+        addCoins(winnings);
 
 
 
         result.innerHTML =
-        "🎉 You Win! +" + reward;
+        "🎉 You Win! +" + winnings;
 
 
 
@@ -368,20 +322,13 @@ function dealerTurn(){
 
     }
 
+
     else if(
         playerScore === dealerScore
     ){
 
 
-
-        let bet =
-        Number(
-            document.getElementById("bet").value
-        );
-
-
-
-        addCoins(bet);
+        addCoins(currentBet);
 
 
 
@@ -392,8 +339,8 @@ function dealerTurn(){
 
     }
 
-    else{
 
+    else{
 
 
         result.innerHTML =
@@ -405,8 +352,6 @@ function dealerTurn(){
 
 
     }
-
-
 
 
 
@@ -423,13 +368,14 @@ function dealerTurn(){
 
 
 
-
 function endGame(){
 
 
-    gameRunning = false;
+    gameRunning=false;
 
-    playerTurn = false;
+    playerTurn=false;
+
+    currentBet=0;
 
 
 }
@@ -443,6 +389,7 @@ function endGame(){
 
 
 function getScore(cards){
+
 
 
     let score = 0;
@@ -466,7 +413,8 @@ function getScore(cards){
 
         }
 
-        else if(card.rank === "A"){
+
+        else if(card.rank==="A"){
 
 
             score += 11;
@@ -475,6 +423,7 @@ function getScore(cards){
 
 
         }
+
 
         else{
 
@@ -491,7 +440,6 @@ function getScore(cards){
 
 
 
-
     while(score > 21 && aces > 0){
 
 
@@ -501,6 +449,7 @@ function getScore(cards){
 
 
     }
+
 
 
 
@@ -528,7 +477,6 @@ function updateCards(){
     );
 
 
-
     let dealer =
     document.getElementById(
         "dealerCards"
@@ -536,13 +484,9 @@ function updateCards(){
 
 
 
+    player.innerHTML="";
 
-
-    player.innerHTML = "";
-
-    dealer.innerHTML = "";
-
-
+    dealer.innerHTML="";
 
 
 
@@ -568,26 +512,23 @@ function updateCards(){
 
 
 
-
-
     dealerCards.forEach((card,index)=>{
 
 
-        if(index === 1 && gameRunning){
+        if(index===1 && gameRunning){
 
 
             dealer.innerHTML += `
 
             <div class="card back">
-
             ❔
-
             </div>
 
             `;
 
 
         }
+
 
         else{
 
@@ -606,7 +547,6 @@ function updateCards(){
         }
 
 
-
     });
 
 
@@ -622,12 +562,9 @@ function updateCards(){
 
 
 
-
-
     document.getElementById(
         "dealerScore"
     ).innerHTML =
-
 
     gameRunning
     ?
