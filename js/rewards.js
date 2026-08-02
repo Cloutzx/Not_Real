@@ -1,15 +1,4 @@
-/* =========================================================
-   LUCKY LOUNGE DAILY REWARDS
-========================================================= */
-
-
-const DAILY_AMOUNT = 500;
-
-
-
-const DAILY_TIME = 24 * 60 * 60 * 1000;
-
-
+const rewardTime = 24 * 60 * 60 * 1000;
 
 
 
@@ -20,13 +9,17 @@ function claimDailyReward(){
 
     let lastClaim =
     localStorage.getItem(
-        "dailyReward"
+    "dailyReward"
     );
+
+
 
 
 
     let now =
     Date.now();
+
+
 
 
 
@@ -42,39 +35,32 @@ function claimDailyReward(){
 
 
 
-
-        if(difference < DAILY_TIME){
-
-
-
-            let remaining =
-            DAILY_TIME - difference;
+        if(difference < rewardTime){
 
 
 
             let hours =
-            Math.floor(
-            remaining /
+            Math.ceil(
+            (rewardTime-difference)
+            /
             (1000*60*60)
             );
 
 
 
-            document.getElementById("result")
-            ?.remove();
+
+            document.getElementById(
+            "result"
+            ).innerHTML =
 
 
-
-            alert(
-            "Come back in " +
+            "⏳ Come back in " +
             hours +
-            " hours!"
-            );
+            " hours";
 
 
 
             return;
-
 
 
         }
@@ -89,18 +75,44 @@ function claimDailyReward(){
 
 
 
-    addCoins(DAILY_AMOUNT);
+    addCoins(500);
+
 
 
 
 
     localStorage.setItem(
-
         "dailyReward",
-
         now
-
     );
+
+
+
+
+
+
+
+    let button =
+    document.getElementById(
+    "rewardButton"
+    );
+
+
+
+
+    if(button){
+
+
+        button.innerHTML =
+        "CLAIMED";
+
+
+        button.disabled=true;
+
+
+    }
+
+
 
 
 
@@ -112,33 +124,20 @@ function claimDailyReward(){
 
 
 
-    const button =
-    document.getElementById(
-        "rewardButton"
-    );
 
 
-
-    if(button){
-
-
-        button.innerHTML =
-        "CLAIMED ✓";
+    if(document.getElementById("result")){
 
 
-        button.disabled=true;
+        document.getElementById(
+        "result"
+        ).innerHTML =
 
+
+        "🎁 +500 Coins Claimed!";
 
 
     }
-
-
-
-
-
-    alert(
-    "🎁 You received +500 Coins!"
-    );
 
 
 
