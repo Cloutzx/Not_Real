@@ -9,7 +9,7 @@
 
 <title>Lucky Lounge Rewards</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../style.css">
 
 </head>
 
@@ -17,158 +17,94 @@
 <body>
 
 
+
 <div class="game-page">
 
 
-    <div class="game-container rewards-page">
+<div class="game-container rewards-container">
 
 
 
-        <h1 class="game-title">
+<h1 class="game-title">
 
-            🎁 Rewards
+🎁 Rewards
 
-        </h1>
+</h1>
 
 
 
 
-        <div class="reward-card">
 
 
-            <div class="reward-icon">
+<div class="money">
 
-                🎁
+🪙 Coins:
 
-            </div>
+<span id="coins">
 
+0
 
+</span>
 
-            <h2>
+</div>
 
-                Daily Reward
 
-            </h2>
 
 
 
-            <p>
 
-                Claim free coins every 24 hours!
 
-            </p>
 
+<div class="reward-card">
 
 
-            <div class="reward-amount">
 
-                🪙 +500 Coins
+<div class="reward-icon">
 
-            </div>
+🎁
 
+</div>
 
 
-            <button 
-            class="game-action"
-            onclick="claimDailyReward()">
 
-                CLAIM REWARD
+<h2>
 
-            </button>
+Daily Reward
 
+</h2>
 
 
-        </div>
 
+<p>
 
+Claim free coins every 24 hours!
 
+</p>
 
 
 
+<div class="reward-amount">
 
-        <div class="reward-card locked">
+🪙 +500 Coins
 
+</div>
 
-            <div class="reward-icon">
 
-                🔒
 
-            </div>
 
 
+<button
 
-            <h2>
+id="rewardButton"
 
-                Weekly Reward
+class="game-action"
 
-            </h2>
+onclick="claimDailyReward()">
 
+CLAIM REWARD
 
+</button>
 
-            <p>
-
-                Coming Soon...
-
-            </p>
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-        <div class="reward-card locked">
-
-
-            <div class="reward-icon">
-
-                ⭐
-
-            </div>
-
-
-
-            <h2>
-
-                VIP Rewards
-
-            </h2>
-
-
-
-            <p>
-
-                Exclusive rewards for VIP players
-
-            </p>
-
-
-
-        </div>
-
-
-
-
-
-
-        <button 
-        class="game-action"
-        onclick="window.location.href='index.html'">
-
-            ← BACK TO MENU
-
-        </button>
-
-
-
-
-
-    </div>
 
 
 </div>
@@ -179,11 +115,132 @@
 
 
 
-<script src="js/currency.js"></script>
 
-<script src="js/rewards.js"></script>
 
-<script src="js/sounds.js"></script>
+<div class="reward-card">
+
+
+
+<div class="reward-icon">
+
+🔥
+
+</div>
+
+
+
+<h2>
+
+Login Streak
+
+</h2>
+
+
+
+<p>
+
+Build your streak for bigger rewards!
+
+</p>
+
+
+
+<div class="reward-amount">
+
+Coming Soon
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="reward-card locked">
+
+
+
+<div class="reward-icon">
+
+💎
+
+</div>
+
+
+
+<h2>
+
+VIP Rewards
+
+</h2>
+
+
+
+<p>
+
+Exclusive rewards for VIP players
+
+</p>
+
+
+
+<div class="reward-amount">
+
+Locked
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<button
+
+class="game-action"
+
+onclick="window.location.href='../index.html'">
+
+← Back To Menu
+
+</button>
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<script src="../js/currency.js"></script>
+
+<script src="../js/rewards.js"></script>
+
+<script src="../js/sounds.js"></script>
 
 
 
