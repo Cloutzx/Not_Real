@@ -1,15 +1,53 @@
-// ==========================
-// Lucky Lounge Blackjack
-// ==========================
+/* =========================================================
+   LUCKY LOUNGE BLACKJACK
+========================================================= */
 
-
-let deck = [];
 
 let playerCards = [];
 
 let dealerCards = [];
 
-let gameStarted = false;
+let gameRunning = false;
+
+let playerTurn = false;
+
+
+
+
+
+
+
+const suits = [
+
+"♠️",
+"♥️",
+"♦️",
+"♣️"
+
+];
+
+
+
+const ranks = [
+
+"A",
+"2",
+"3",
+"4",
+"5",
+"6",
+"7",
+"8",
+"9",
+"10",
+"J",
+"Q",
+"K"
+
+];
+
+
+
 
 
 
@@ -17,55 +55,37 @@ let gameStarted = false;
 
 function createDeck(){
 
-    deck = [];
 
-    let suits = [
-        "♠",
-        "♥",
-        "♦",
-        "♣"
-    ];
-
-
-    let values = [
-        {name:"A", value:11},
-        {name:"2", value:2},
-        {name:"3", value:3},
-        {name:"4", value:4},
-        {name:"5", value:5},
-        {name:"6", value:6},
-        {name:"7", value:7},
-        {name:"8", value:8},
-        {name:"9", value:9},
-        {name:"10", value:10},
-        {name:"J", value:10},
-        {name:"Q", value:10},
-        {name:"K", value:10}
-    ];
+    let deck=[];
 
 
 
     for(let suit of suits){
 
-        for(let card of values){
+
+        for(let rank of ranks){
+
 
             deck.push({
 
-                name: card.name,
+                rank:rank,
 
-                value: card.value,
-
-                suit: suit
+                suit:suit
 
             });
 
+
         }
 
+
     }
 
 
 
-    deck.sort(() => Math.random() - 0.5);
+    return deck.sort(
+    ()=>Math.random()-0.5
+    );
+
 
 }
 
@@ -73,18 +93,367 @@ function createDeck(){
 
 
 
-function drawCard(){
+let deck=[];
 
-    if(typeof playSound === "function"){
 
-        playSound("cardFlip");
+
+
+
+
+
+
+function startGame(){
+
+
+
+    if(gameRunning)
+    return;
+
+
+
+
+    let bet =
+    Number(
+    document.getElementById("bet").value
+    );
+
+
+
+
+
+    if(!bet || bet<=0){
+
+
+        result.innerHTML =
+        "Enter a bet!";
+
+
+        return;
+
 
     }
 
 
-    return deck.pop();
+
+
+
+
+    if(bet > getCoins()){
+
+
+        result.innerHTML =
+        "Not enough coins!";
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+
+    removeCoins(bet);
+
+
+
+
+
+    deck=createDeck();
+
+
+
+    playerCards=[];
+
+    dealerCards=[];
+
+
+
+    gameRunning=true;
+
+    playerTurn=true;
+
+
+
+
+
+    playerCards.push(deck.pop());
+
+    playerCards.push(deck.pop());
+
+
+
+    dealerCards.push(deck.pop());
+
+    dealerCards.push(deck.pop());
+
+
+
+
+    LuckySounds.cardDeal();
+
+
+
+    updateCards();
+
+
+
+
+    result.innerHTML =
+    "Your turn";
+
+
 
 }
+
+
+
+
+
+
+
+
+
+
+function hit(){
+
+
+
+    if(!gameRunning || !playerTurn)
+    return;
+
+
+
+
+
+    playerCards.push(
+        deck.pop()
+    );
+
+
+
+
+
+    LuckySounds.cardDeal();
+
+
+
+
+
+    updateCards();
+
+
+
+
+
+
+    if(getScore(playerCards)>21){
+
+
+
+        result.innerHTML =
+        "💥 Bust!";
+
+
+
+        LuckySounds.lose();
+
+
+
+        endGame(false);
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+function stand(){
+
+
+
+    if(!gameRunning || !playerTurn)
+    return;
+
+
+
+
+    playerTurn=false;
+
+
+
+    dealerTurn();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+function dealerTurn(){
+
+
+
+    while(
+    getScore(dealerCards)<17
+    ){
+
+
+        dealerCards.push(
+            deck.pop()
+        );
+
+
+        LuckySounds.cardFlip();
+
+
+
+    }
+
+
+
+
+
+    updateCards();
+
+
+
+
+    let playerScore =
+    getScore(playerCards);
+
+
+
+    let dealerScore =
+    getScore(dealerCards);
+
+
+
+
+
+
+
+    if(
+    dealerScore>21 ||
+    playerScore>dealerScore
+    ){
+
+
+
+        result.innerHTML =
+        "🎉 You Win!";
+
+
+
+        addCoins(
+        Number(
+        bet.value
+        )*2
+        );
+
+
+
+        LuckySounds.win();
+
+
+
+    }
+
+
+
+    else if(
+    playerScore===dealerScore
+    ){
+
+
+        result.innerHTML =
+        "🤝 Draw";
+
+
+
+        addCoins(
+        Number(
+        bet.value
+        )
+        );
+
+
+
+    }
+
+
+
+    else{
+
+
+        result.innerHTML =
+        "❌ Dealer Wins";
+
+
+        LuckySounds.lose();
+
+
+    }
+
+
+
+
+
+
+
+    endGame();
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+function endGame(){
+
+
+
+    gameRunning=false;
+
+    playerTurn=false;
+
+
+
+}
+
+
+
+
+
 
 
 
@@ -93,37 +462,72 @@ function drawCard(){
 function getScore(cards){
 
 
-    let score = 0;
 
-    let aces = 0;
+    let score=0;
 
-
-
-    for(let card of cards){
-
-        score += card.value;
+    let aces=0;
 
 
-        if(card.name === "A"){
 
-            aces++;
+    cards.forEach(card=>{
+
+
+        if(
+        ["J","Q","K"]
+        .includes(card.rank)
+        ){
+
+
+            score+=10;
+
 
         }
 
-    }
+
+        else if(card.rank==="A"){
+
+
+            score+=11;
+
+            aces++;
+
+
+        }
+
+
+        else{
+
+
+            score+=Number(card.rank);
+
+
+        }
 
 
 
-    while(score > 21 && aces > 0){
+    });
 
-        score -= 10;
+
+
+
+
+
+    while(score>21 && aces>0){
+
+
+        score-=10;
 
         aces--;
 
+
     }
 
 
+
+
+
     return score;
+
 
 }
 
@@ -131,33 +535,47 @@ function getScore(cards){
 
 
 
-function displayCards(){
+
+
+
+
+function updateCards(){
+
 
 
     let player =
-    document.getElementById("playerCards");
+    document.getElementById(
+    "playerCards"
+    );
+
 
 
     let dealer =
-    document.getElementById("dealerCards");
+    document.getElementById(
+    "dealerCards"
+    );
 
 
 
-    player.innerHTML = "";
+    player.innerHTML="";
 
-    dealer.innerHTML = "";
-
-
+    dealer.innerHTML="";
 
 
-    playerCards.forEach(card => {
 
 
-        player.innerHTML += `
+
+
+
+    playerCards.forEach(card=>{
+
+
+        player.innerHTML +=
+        `
 
         <div class="card">
 
-        ${card.name}${card.suit}
+        ${card.rank}${card.suit}
 
         </div>
 
@@ -169,17 +587,21 @@ function displayCards(){
 
 
 
+
+
+
     dealerCards.forEach((card,index)=>{
 
 
-        if(index === 0 && gameStarted){
+        if(index===1 && gameRunning){
 
 
-            dealer.innerHTML += `
+            dealer.innerHTML +=
+            `
 
             <div class="card back">
 
-            ?
+            ❔
 
             </div>
 
@@ -191,11 +613,12 @@ function displayCards(){
         else{
 
 
-            dealer.innerHTML += `
+            dealer.innerHTML +=
+            `
 
             <div class="card">
 
-            ${card.name}${card.suit}
+            ${card.rank}${card.suit}
 
             </div>
 
@@ -209,357 +632,28 @@ function displayCards(){
 
 
 
-    document.getElementById("playerScore")
-    .innerText =
-    getScore(playerCards);
 
 
-}
 
-
-
-
-
-function startGame(){
-
-
-    if(gameStarted){
-
-        return;
-
-    }
-
-
-
-    let bet =
-    Number(
-        document.getElementById("bet").value
-    );
-
-
-
-    if(bet <= 0){
-
-        alert("Enter a bet");
-
-        return;
-
-    }
-
-
-
-    if(bet > coins){
-
-        alert("Not enough coins");
-
-        return;
-
-    }
-
-
-
-    coins -= bet;
-
-
-    updateCoins();
-
-
-
-    if(typeof playSound === "function"){
-
-        playSound("cardDeal");
-
-    }
-
-
-
-    createDeck();
-
-
-
-    playerCards = [];
-
-    dealerCards = [];
-
-
-
-    playerCards.push(drawCard());
-
-    playerCards.push(drawCard());
-
-
-
-    dealerCards.push(drawCard());
-
-    dealerCards.push(drawCard());
-
-
-
-    window.currentBet = bet;
-
-
-
-    gameStarted = true;
-
-
-
-    displayCards();
-
-
-
-    document.getElementById("dealerScore")
-    .innerText = "?";
-
-
-
-    document.getElementById("result")
-    .innerText = "";
-
-
-
-    // Instant blackjack
-
-    if(getScore(playerCards) === 21){
-
-        blackjackWin();
-
-    }
-
-
-}
-
-
-
-
-
-function hit(){
-
-
-    if(!gameStarted){
-
-        return;
-
-    }
-
-
-
-    playerCards.push(drawCard());
-
-
-
-    displayCards();
-
-
-
-    let score =
+    document.getElementById(
+    "playerScore"
+    ).innerHTML =
     getScore(playerCards);
 
 
 
-    if(score > 21){
 
 
-        if(typeof playSound === "function"){
+    document.getElementById(
+    "dealerScore"
+    ).innerHTML =
 
-            playSound("lose");
-
-        }
-
-
-        endGame(
-            "💥 Bust! Dealer wins"
-        );
-
-
-    }
-
-
-}
-
-
-
-
-
-
-
-function stand(){
-
-
-    if(!gameStarted){
-
-        return;
-
-    }
-
-
-
-    while(
-        getScore(dealerCards) < 17
-    ){
-
-        dealerCards.push(drawCard());
-
-    }
-
-
-
-    let playerScore =
-    getScore(playerCards);
-
-
-    let dealerScore =
+    gameRunning
+    ?
+    "?"
+    :
     getScore(dealerCards);
 
-
-
-    gameStarted = false;
-
-
-
-    displayCards();
-
-
-
-    document.getElementById("dealerScore")
-    .innerText =
-    dealerScore;
-
-
-
-
-    if(
-        dealerScore > 21 ||
-        playerScore > dealerScore
-    ){
-
-
-        if(typeof playSound === "function"){
-
-            playSound("win");
-
-        }
-
-
-
-        coins +=
-        window.currentBet * 2;
-
-
-
-        endGame(
-            "🎉 You win x2!"
-        );
-
-
-    }
-
-
-
-    else if(playerScore === dealerScore){
-
-
-        if(typeof playSound === "function"){
-
-            playSound("click");
-
-        }
-
-
-
-        coins +=
-        window.currentBet;
-
-
-
-        endGame(
-            "🤝 Push - Bet returned"
-        );
-
-
-    }
-
-
-
-    else{
-
-
-        if(typeof playSound === "function"){
-
-            playSound("lose");
-
-        }
-
-
-
-        endGame(
-            "❌ Dealer wins"
-        );
-
-
-    }
-
-
-
-    updateCoins();
-
-
-}
-
-
-
-
-
-
-function blackjackWin(){
-
-
-    gameStarted = false;
-
-
-
-    let reward =
-    window.currentBet * 2.5;
-
-
-
-    coins += reward;
-
-
-
-    updateCoins();
-
-
-
-    if(typeof playSound === "function"){
-
-        playSound("jackpot");
-
-    }
-
-
-
-    endGame(
-        "🃏 BLACKJACK! x2.5"
-    );
-
-
-}
-
-
-
-
-
-
-
-function endGame(message){
-
-
-    document.getElementById("result")
-    .innerText =
-    message;
-
-
-    gameStarted = false;
 
 
 }
