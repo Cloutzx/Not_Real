@@ -1,105 +1,83 @@
 /* =====================================
         LUCKY LOUNGE
-        DARK PURPLE UI
-        #1E1F21 THEME
+        PREMIUM DARK MENU
+        #1E1F21 + PURPLE/PINK
 ===================================== */
 
 
 * {
-
-box-sizing:border-box;
-
+    box-sizing:border-box;
 }
 
 
 body {
 
-margin:0;
+    margin:0;
 
-min-height:100vh;
+    min-height:100vh;
 
+    background:#1E1F21;
 
-background:
+    color:white;
 
-#1E1F21;
+    font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
 
-
-font-family:
-
-"Segoe UI",
-Arial,
-sans-serif;
-
-
-color:white;
-
+    overflow-x:hidden;
 
 }
 
 
 
+/* BACKGROUND GLOW */
 
 body::before {
 
+    content:"";
 
-content:"";
+    position:fixed;
 
+    width:800px;
 
-position:fixed;
+    height:800px;
 
+    background:
 
-width:700px;
+    radial-gradient(
+        circle,
+        rgba(168,85,247,.35),
+        transparent 65%
+    );
 
-height:700px;
+    filter:blur(120px);
 
+    top:-300px;
 
+    left:-250px;
 
-background:
-
-radial-gradient(
-
-circle,
-
-rgba(168,85,247,.35),
-
-transparent 65%
-
-);
-
-
-
-filter:blur(120px);
-
-
-
-top:-250px;
-
-left:-200px;
-
-
-
-z-index:-1;
-
+    z-index:-1;
 
 }
 
 
+
+
+
+
+/* MAIN MENU */
 
 
 .menu {
 
+    width:1100px;
 
-width:1100px;
+    max-width:95%;
 
+    margin:auto;
 
-max-width:95%;
-
-
-margin:auto;
-
-
-padding:35px;
-
+    padding:35px;
 
 }
 
@@ -115,45 +93,32 @@ padding:35px;
 
 .top {
 
+    display:flex;
 
-display:flex;
+    justify-content:space-between;
 
-
-align-items:center;
-
-
-justify-content:space-between;
+    align-items:center;
 
 
-
-background:
-
-#252629;
+    padding:25px 35px;
 
 
-
-padding:25px 35px;
-
+    background:#252629;
 
 
-border-radius:25px;
+    border-radius:30px;
 
 
+    border:
 
-border:
-
-1px solid rgba(255,255,255,.08);
-
+    1px solid rgba(255,255,255,.08);
 
 
-box-shadow:
+    box-shadow:
 
-
-0 15px 40px rgba(0,0,0,.5);
-
+    0 15px 40px rgba(0,0,0,.5);
 
 }
-
 
 
 
@@ -161,47 +126,44 @@ box-shadow:
 .logo {
 
 
-font-size:55px;
+    font-size:55px;
 
 
-font-weight:1000;
+    font-weight:1000;
 
 
-
-letter-spacing:3px;
-
-
-
-background:
-
-
-linear-gradient(
-
-90deg,
-
-#c084fc,
-
-#ec4899
-
-);
+    letter-spacing:3px;
 
 
 
--webkit-background-clip:text;
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        #f472b6,
+
+        #a855f7,
+
+        #ec4899
+
+    );
 
 
-color:transparent;
+    -webkit-background-clip:text;
 
 
+    color:transparent;
 
-text-shadow:
+
+    text-shadow:
 
 
-0 0 35px #a855f7;
+    0 0 40px #a855f7;
 
 
 }
-
 
 
 
@@ -214,49 +176,40 @@ text-shadow:
 .coins {
 
 
-background:
+    background:#18191b;
 
 
-#18191b;
+    padding:15px 35px;
 
 
-
-padding:15px 35px;
-
+    border-radius:25px;
 
 
-border-radius:25px;
+    border:
+
+    2px solid #a855f7;
 
 
-
-border:
-
-2px solid #a855f7;
+    font-size:28px;
 
 
-
-font-size:28px;
+    font-weight:900;
 
 
 
-font-weight:900;
+    box-shadow:
 
 
-
-box-shadow:
-
-
-0 0 25px rgba(168,85,247,.6);
+    0 0 30px rgba(168,85,247,.7);
 
 
 }
-
 
 
 .coins span {
 
 
-color:#facc15;
+    color:#facc15;
 
 
 }
@@ -267,106 +220,109 @@ color:#facc15;
 
 
 
-
-/* DAILY */
+/* DAILY REWARD */
 
 
 .daily {
 
 
-margin-top:30px;
+    margin-top:30px;
+
+
+    height:100px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:space-between;
+
+
+    padding:0 35px;
 
 
 
-height:100px;
+    border-radius:30px;
 
 
 
-display:flex;
+    background:
 
 
-align-items:center;
+    linear-gradient(
 
+        135deg,
 
-justify-content:space-between;
+        #7c3aed,
 
+        #ec4899
 
-
-padding:0 35px;
-
-
-
-background:
-
-
-linear-gradient(
-
-135deg,
-
-#7c3aed,
-
-#ec4899
-
-);
+    );
 
 
 
-border-radius:25px;
+    font-size:32px;
+
+
+    font-weight:1000;
 
 
 
-font-size:30px;
+    box-shadow:
 
 
-font-weight:900;
-
-
-
-box-shadow:
-
-
-0 0 40px rgba(168,85,247,.7);
+    0 0 50px rgba(236,72,153,.6);
 
 
 }
-
-
-
 
 
 
 .daily button {
 
 
-background:white;
+    background:white;
 
 
-
-color:#7c3aed;
-
+    color:#a855f7;
 
 
-border:none;
+    border:none;
 
 
-
-padding:15px 40px;
-
+    padding:15px 45px;
 
 
-border-radius:25px;
+    border-radius:30px;
 
 
-
-font-size:18px;
-
+    font-size:18px;
 
 
-font-weight:bold;
+    font-weight:bold;
 
 
+    cursor:pointer;
 
-cursor:pointer;
+
+    transition:.3s;
+
+
+}
+
+
+.daily button:hover {
+
+
+    transform:scale(1.1);
+
+
+    box-shadow:
+
+    0 0 30px white;
 
 
 }
@@ -383,30 +339,25 @@ cursor:pointer;
 h1 {
 
 
-text-align:center;
+    text-align:center;
 
 
-
-font-size:70px;
-
+    font-size:70px;
 
 
-font-weight:1000;
+    font-weight:1000;
 
 
-
-margin:60px 0 40px;
-
+    letter-spacing:6px;
 
 
-letter-spacing:6px;
+    margin:60px 0 40px;
 
 
+    text-shadow:
 
-text-shadow:
 
-
-0 0 35px #a855f7;
+    0 0 40px #a855f7;
 
 
 }
@@ -417,23 +368,22 @@ text-shadow:
 
 
 
-/* BUTTON GRID */
+/* GAME GRID */
 
 
 .buttons {
 
 
-display:grid;
+    display:grid;
 
 
-grid-template-columns:
+    grid-template-columns:
 
 
-repeat(3,1fr);
+    repeat(3,1fr);
 
 
-
-gap:25px;
+    gap:30px;
 
 
 }
@@ -444,73 +394,87 @@ gap:25px;
 
 
 
-
-/* GAME BUTTON */
+/* GAME TILES */
 
 
 .game-btn {
 
 
-height:160px;
+    height:240px;
+
+
+    border-radius:35px;
 
 
 
-border-radius:30px;
+    background:
+
+
+    linear-gradient(
+
+        145deg,
+
+        #252629,
+
+        #151517
+
+    );
 
 
 
-background:
+    border:
 
-
-#252629;
-
-
-
-border:
-
-2px solid rgba(168,85,247,.35);
+    2px solid rgba(168,85,247,.35);
 
 
 
-color:white;
+    color:white;
 
 
 
-font-size:32px;
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    justify-content:center;
+
+
+    align-items:center;
 
 
 
-font-weight:1000;
+    gap:12px;
 
 
 
-display:flex;
-
-
-align-items:center;
-
-
-justify-content:center;
+    cursor:pointer;
 
 
 
-gap:20px;
+    font-size:32px;
+
+
+    font-weight:1000;
 
 
 
-cursor:pointer;
+    position:relative;
+
+
+    overflow:hidden;
 
 
 
-transition:.35s;
+    transition:.35s;
 
 
 
-position:relative;
+    box-shadow:
 
 
-
-overflow:hidden;
+    0 20px 40px rgba(0,0,0,.5);
 
 
 }
@@ -519,73 +483,133 @@ overflow:hidden;
 
 
 
-.game-btn span {
 
 
-font-size:65px;
+
+/* GLOW */
+
+
+.game-btn::after {
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    width:250px;
+
+
+    height:250px;
+
+
+
+    background:
+
+
+    radial-gradient(
+
+        circle,
+
+        rgba(168,85,247,.45),
+
+        transparent 70%
+
+    );
+
+
+
+    top:-120px;
+
+
+
+    opacity:.6;
 
 
 }
 
 
 
+
+
+
+
+/* SHINE */
 
 
 .game-btn::before {
 
 
-content:"";
+    content:"";
 
 
-position:absolute;
+    position:absolute;
 
 
-width:200%;
+    width:150%;
 
 
-height:100%;
-
-
-
-background:
-
-
-linear-gradient(
-
-120deg,
-
-transparent,
-
-rgba(255,255,255,.2),
-
-transparent
-
-);
+    height:100%;
 
 
 
-transform:
+    background:
 
-translateX(-100%);
+
+    linear-gradient(
+
+        120deg,
+
+        transparent,
+
+        rgba(255,255,255,.25),
+
+        transparent
+
+    );
+
+
+
+    transform:
+
+    translateX(-100%);
 
 
 }
+
 
 
 
 .game-btn:hover::before {
 
 
-transform:
+    animation:
 
-translateX(100%);
-
-
-
-transition:.6s;
+    shine .7s;
 
 
 }
+
+
+
+
+@keyframes shine {
+
+
+    100% {
+
+
+        transform:
+
+        translateX(100%);
+
+    }
+
+
+}
+
+
 
 
 
@@ -594,27 +618,26 @@ transition:.6s;
 .game-btn:hover {
 
 
-transform:
+    transform:
 
 
-translateY(-10px)
+    translateY(-15px)
 
-scale(1.05);
-
-
-
-border-color:#c084fc;
+    scale(1.06);
 
 
 
-box-shadow:
+    border-color:#ec4899;
 
 
-0 0 50px rgba(168,85,247,.8);
+
+    box-shadow:
+
+
+    0 0 70px rgba(236,72,153,.8);
 
 
 }
-
 
 
 
@@ -623,9 +646,9 @@ box-shadow:
 .game-btn:active {
 
 
-transform:
+    transform:
 
-scale(.95);
+    scale(.95);
 
 
 }
@@ -636,25 +659,77 @@ scale(.95);
 
 
 
-/* UNIQUE COLORS */
+
+.game-btn span {
+
+
+    font-size:90px;
+
+
+    z-index:2;
+
+
+
+    filter:
+
+
+    drop-shadow(
+
+    0 0 20px #c084fc
+
+    );
+
+
+
+    animation:
+
+
+    floatIcon 3s infinite;
+
+
+}
+
+
+
+
+
+@keyframes floatIcon {
+
+
+    50% {
+
+        transform:
+
+        translateY(-10px);
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+/* HOVER COLORS */
 
 
 .slots:hover {
 
+    background:
 
-background:
+    linear-gradient(
 
+    135deg,
 
-linear-gradient(
+    #7c3aed,
 
-135deg,
+    #ec4899
 
-#7c3aed,
-
-#ec4899
-
-);
-
+    );
 
 }
 
@@ -664,21 +739,21 @@ linear-gradient(
 .blackjack:hover {
 
 
-background:
+    background:
 
+    linear-gradient(
 
-linear-gradient(
+    135deg,
 
-135deg,
+    #111827,
 
-#111,
+    #a855f7
 
-#a855f7
-
-);
+    );
 
 
 }
+
 
 
 
@@ -686,18 +761,18 @@ linear-gradient(
 .cups:hover {
 
 
-background:
+    background:
 
 
-linear-gradient(
+    linear-gradient(
 
-135deg,
+    135deg,
 
-#2563eb,
+    #2563eb,
 
-#a855f7
+    #a855f7
 
-);
+    );
 
 
 }
@@ -705,21 +780,22 @@ linear-gradient(
 
 
 
+
 .flip:hover {
 
 
-background:
+    background:
 
 
-linear-gradient(
+    linear-gradient(
 
-135deg,
+    135deg,
 
-#22c55e,
+    #22c55e,
 
-#a855f7
+    #a855f7
 
-);
+    );
 
 
 }
@@ -731,23 +807,21 @@ linear-gradient(
 .fish:hover {
 
 
-background:
+    background:
 
 
-linear-gradient(
+    linear-gradient(
 
-135deg,
+    135deg,
 
-#06b6d4,
+    #0891b2,
 
-#a855f7
+    #a855f7
 
-);
+    );
 
 
 }
-
-
 
 
 
@@ -756,18 +830,18 @@ linear-gradient(
 .rewards:hover {
 
 
-background:
+    background:
 
 
-linear-gradient(
+    linear-gradient(
 
-135deg,
+    135deg,
 
-#facc15,
+    #facc15,
 
-#ec4899
+    #ec4899
 
-);
+    );
 
 
 }
@@ -776,44 +850,49 @@ linear-gradient(
 
 
 
+
+
+/* MOBILE */
 
 
 @media(max-width:900px){
 
 
-.buttons{
+.buttons {
 
+    grid-template-columns:
 
-grid-template-columns:1fr 1fr;
-
-
-}
-
+    repeat(2,1fr);
 
 }
 
 
+}
 
 
 
 @media(max-width:600px){
 
 
-.buttons{
+.buttons {
 
-
-grid-template-columns:1fr;
-
+    grid-template-columns:1fr;
 
 }
 
 
 
-.logo{
+.logo {
+
+    font-size:35px;
+
+}
 
 
-font-size:35px;
 
+h1 {
+
+    font-size:45px;
 
 }
 
