@@ -7,12 +7,16 @@ let flipping = false;
 
 
 
+
 function flipCoin(choice){
 
 
     if(flipping){
+
         return;
+
     }
+
 
 
     let bet = Number(
@@ -33,7 +37,7 @@ function flipCoin(choice){
 
     if(bet > coins){
 
-        alert("You don't have enough coins");
+        alert("Not enough coins");
 
         return;
 
@@ -45,21 +49,31 @@ function flipCoin(choice){
 
 
 
-    // Remove bet
-
     coins -= bet;
 
     updateCoins();
 
 
 
-    let coin = document.getElementById("coin");
+    let coin =
+    document.getElementById("coin");
 
-    let result = document.getElementById("result");
+
+    let result =
+    document.getElementById("result");
+
+
+
+    if(typeof playSound === "function"){
+
+        playSound("coinFlip");
+
+    }
 
 
 
     coin.style.animation = "none";
+
 
     setTimeout(()=>{
 
@@ -72,6 +86,10 @@ function flipCoin(choice){
 
     result.innerText =
     "🪙 Flipping...";
+
+
+    result.className = "";
+
 
 
 
@@ -98,50 +116,76 @@ function flipCoin(choice){
 
 
 
-        if(choice === outcome){
+        if(outcome === choice){
 
 
-            let winnings = bet * 2;
+            let winnings =
+            bet * 2;
+
 
 
             coins += winnings;
 
 
+
+            updateCoins();
+
+
+
             result.innerText =
-            "🎉 " +
-            outcome +
-            " - You won x2! +" +
-            winnings +
-            " coins";
+            "🎉 "
+            + outcome
+            + "! You won "
+            + winnings.toLocaleString()
+            + " coins";
+
 
 
             result.className =
             "win";
 
 
+
+            if(typeof playSound === "function"){
+
+                playSound("win");
+
+            }
+
+
+
         }
+
 
 
         else{
 
 
+
             result.innerText =
-            "❌ " +
-            outcome +
-            " - You lost " +
-            bet +
-            " coins";
+            "❌ "
+            + outcome
+            + "! You lost "
+            + bet.toLocaleString()
+            + " coins";
+
 
 
             result.className =
             "lose";
 
 
+
+            if(typeof playSound === "function"){
+
+                playSound("lose");
+
+            }
+
+
         }
 
 
-
-        updateCoins();
 
 
         flipping = false;
@@ -149,6 +193,7 @@ function flipCoin(choice){
 
 
     },1000);
+
 
 
 }
