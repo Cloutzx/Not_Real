@@ -3,12 +3,13 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
 
-    <title>Coin Flip | Lucky Lounge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../style.css">
+<title>Lucky Lounge Coin Flip</title>
+
+<link rel="stylesheet" href="../style.css">
 
 </head>
 
@@ -16,92 +17,35 @@
 <body>
 
 
+
+<div class="game-page">
+
+
 <div class="game-container">
 
 
-    <h1 class="game-title">
-        🪙 Coin Flip
-    </h1>
 
+<h1 class="game-title">
 
+🪙 Coin Flip
 
-
-    <div class="game-balance">
-
-        💰 Coins:
-        <span id="coins">
-            0
-        </span>
-
-    </div>
+</h1>
 
 
 
 
 
-    <div class="coin" id="coin">
+<div class="money">
 
-        🪙
+🪙 Coins:
 
-    </div>
+<span id="coins">
 
+0
 
+</span>
 
-
-
-    <p>
-        Choose Heads or Tails
-    </p>
-
-
-
-
-
-    <input
-
-        id="bet"
-
-        type="number"
-
-        placeholder="Enter bet amount"
-
-        min="1"
-
-    >
-
-
-
-
-
-    <br><br>
-
-
-
-
-
-    <button onclick="flipCoin('Heads')">
-
-        🟡 Heads
-
-    </button>
-
-
-
-    <button onclick="flipCoin('Tails')">
-
-        ⚫ Tails
-
-    </button>
-
-
-
-
-
-
-
-    <h2 id="result">
-
-    </h2>
+</div>
 
 
 
@@ -110,11 +54,18 @@
 
 
 
-    <a class="back" href="../index.html">
+<div class="bet-box">
 
-        ← Back to Lobby
 
-    </a>
+<input
+
+id="bet"
+
+type="number"
+
+placeholder="Enter Bet Amount"
+
+min="1">
 
 
 </div>
@@ -125,11 +76,115 @@
 
 
 
+
+
+<div class="coin-area">
+
+
+<div id="coin" class="coin">
+
+
+🪙
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="choice">
+
+
+<button
+
+class="game-action"
+
+onclick="flipCoin('Heads')">
+
+Heads
+
+
+</button>
+
+
+
+
+<button
+
+class="game-action"
+
+onclick="flipCoin('Tails')">
+
+Tails
+
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<h2 id="result">
+
+
+Choose Heads or Tails
+
+
+</h2>
+
+
+
+
+
+
+
+<button
+
+class="game-action"
+
+onclick="window.location.href='../index.html'">
+
+
+← Back
+
+
+</button>
+
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
 <script src="../js/currency.js"></script>
 
-<script src="../js/sounds.js"></script>
-
 <script src="../js/coinflip.js"></script>
+
+<script src="../js/sounds.js"></script>
 
 
 
