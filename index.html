@@ -1,11 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Lucky Lounge</title>
 
@@ -17,13 +13,12 @@
 <body>
 
 
-<div class="lobby">
-
+<div class="menu">
 
 
     <!-- HEADER -->
 
-    <div class="header">
+    <div class="top">
 
 
         <div class="logo">
@@ -33,25 +28,14 @@
         </div>
 
 
+        <div class="coins">
 
-        <div class="currency-box">
-
-
-            <span class="coin-icon">
-                🪙
-            </span>
-
-
-            <span id="coins">
-                0
-            </span>
-
+            🪙 <span id="coins">0</span>
 
         </div>
 
 
     </div>
-
 
 
 
@@ -59,38 +43,13 @@
 
     <!-- DAILY -->
 
+    <div class="daily">
 
-    <div class="daily-card">
-
-
-        <div class="daily-icon">
-
-            🎁
-
-        </div>
-
-
-        <div>
-
-            <h2>
-                Daily Reward
-            </h2>
-
-
-            <p>
-                Come back every day for bonus coins!
-            </p>
-
-
-        </div>
-
+        🎁 Daily Reward
 
         <button onclick="claimDailyReward()">
-
             CLAIM
-
         </button>
-
 
     </div>
 
@@ -100,140 +59,94 @@
 
 
 
-    <!-- TITLE -->
-
-
-    <h1 class="main-title">
-
-        CHOOSE A GAME
-
+    <h1>
+        GAMES
     </h1>
 
 
 
 
 
-    <!-- GAMES -->
+    <!-- GAME BUTTONS -->
 
 
-    <div class="game-menu">
+    <div class="buttons">
 
 
-
-        <div class="game-card slots"
+        <button class="game-btn slots"
         onclick="location.href='games/slots.html'">
 
-            <div class="game-image">
+            <span>
                 🎰
-            </div>
+            </span>
 
-            <h2>
-                SLOTS
-            </h2>
+            Slots
 
-            <button>
-                PLAY NOW
-            </button>
-
-        </div>
+        </button>
 
 
 
 
 
-
-        <div class="game-card blackjack"
+        <button class="game-btn blackjack"
         onclick="location.href='games/blackjack.html'">
 
-            <div class="game-image">
+            <span>
                 🃏
-            </div>
+            </span>
 
-            <h2>
-                BLACKJACK
-            </h2>
+            Blackjack
 
-            <button>
-                PLAY NOW
-            </button>
-
-        </div>
+        </button>
 
 
 
 
 
-
-
-        <div class="game-card cups"
+        <button class="game-btn cups"
         onclick="location.href='games/cups.html'">
 
-            <div class="game-image">
+            <span>
                 🥤
-            </div>
+            </span>
 
-            <h2>
-                LUCKY CUPS
-            </h2>
+            Lucky Cups
 
-            <button>
-                PLAY NOW
-            </button>
-
-        </div>
+        </button>
 
 
 
 
 
-
-
-        <div class="game-card coin"
+        <button class="game-btn flip"
         onclick="location.href='games/coinflip.html'">
 
-            <div class="game-image">
+            <span>
                 🪙
-            </div>
+            </span>
 
-            <h2>
-                COIN FLIP
-            </h2>
+            Coin Flip
 
-            <button>
-                PLAY NOW
-            </button>
-
-        </div>
+        </button>
 
 
 
 
 
-
-
-        <div class="game-card fishing"
+        <button class="game-btn fish"
         onclick="location.href='games/fishing.html'">
 
-            <div class="game-image">
+            <span>
                 🎣
-            </div>
+            </span>
 
-            <h2>
-                FISHING
-            </h2>
+            Fishing
 
-            <button>
-                PLAY NOW
-            </button>
-
-        </div>
-
+        </button>
 
 
 
     </div>
-
-
 
 
 
@@ -241,10 +154,7 @@
 
 
 
-
 <script src="js/currency.js"></script>
-
-<script src="js/sounds.js"></script>
 
 
 </body>
