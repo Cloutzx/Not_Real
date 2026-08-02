@@ -28,40 +28,18 @@
     <div class="game-balance">
 
         💰 Coins:
-        <span id="coins">0</span>
-
-    </div>
-
-
-
-
-    <h2>
-        Your Cards
-    </h2>
-
-
-    <div class="cards" id="playerCards">
-
-        <div class="card back">
-            ?
-        </div>
-
-    </div>
-
-
-
-    <h2>
-        Your Score:
-        <span id="playerScore">
+        <span id="coins">
             0
         </span>
-    </h2>
+
+    </div>
+
 
 
 
 
     <h2>
-        Dealer Cards
+        Dealer
     </h2>
 
 
@@ -75,32 +53,72 @@
 
 
 
-    <h2>
+    <h3>
         Dealer Score:
         <span id="dealerScore">
             ?
         </span>
+    </h3>
+
+
+
+
+
+
+
+    <h2>
+        You
     </h2>
+
+
+    <div class="cards" id="playerCards">
+
+        <div class="card back">
+            ?
+        </div>
+
+    </div>
+
+
+
+    <h3>
+        Your Score:
+        <span id="playerScore">
+            0
+        </span>
+    </h3>
+
+
+
 
 
 
 
     <input
+
         id="bet"
+
         type="number"
+
         placeholder="Enter bet amount"
+
         min="1"
+
     >
 
 
 
-    <br>
+
+
+    <br><br>
+
+
 
 
 
     <button onclick="startGame()">
 
-        🃏 Start Game
+        🃏 Deal
 
     </button>
 
@@ -124,9 +142,14 @@
 
 
 
+
+
     <h2 id="result">
 
     </h2>
+
+
+
 
 
 
@@ -143,9 +166,14 @@
 
 
 
+
+
 <script src="../js/currency.js"></script>
 
+<script src="../js/sounds.js"></script>
+
 <script src="../js/blackjack.js"></script>
+
 
 
 </body>
