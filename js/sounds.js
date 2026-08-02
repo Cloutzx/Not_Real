@@ -3,7 +3,7 @@
 ========================================================= */
 
 
-const MASTER_VOLUME = 0.10;
+const MASTER_VOLUME = 0.08;
 
 
 
@@ -26,27 +26,60 @@ function getSoundPath(file){
 const sounds = {
 
 
-    click: new Audio(getSoundPath("click.mp3")),
+    click: new Audio(
+        getSoundPath("click.mp3")
+    ),
 
-    cardDeal: new Audio(getSoundPath("card-deal.mp3")),
 
-    cardFlip: new Audio(getSoundPath("card-flip.mp3")),
+    cardDeal: new Audio(
+        getSoundPath("card-deal.mp3")
+    ),
 
-    coinFlip: new Audio(getSoundPath("coin-flip.mp3")),
 
-    fish: new Audio(getSoundPath("fish.mp3")),
+    cardFlip: new Audio(
+        getSoundPath("card-flip.mp3")
+    ),
 
-    jackpot: new Audio(getSoundPath("jackpot.mp3")),
 
-    lose: new Audio(getSoundPath("lose.mp3")),
+    coinFlip: new Audio(
+        getSoundPath("coin-flip.mp3")
+    ),
 
-    reward: new Audio(getSoundPath("reward.mp3")),
 
-    slotSpin: new Audio(getSoundPath("slot-spin.mp3")),
+    fish: new Audio(
+        getSoundPath("fish.mp3")
+    ),
 
-    slotStop: new Audio(getSoundPath("slot-stop.mp3")),
 
-    win: new Audio(getSoundPath("win.mp3"))
+    jackpot: new Audio(
+        getSoundPath("jackpot.mp3")
+    ),
+
+
+    lose: new Audio(
+        getSoundPath("lose.mp3")
+    ),
+
+
+    reward: new Audio(
+        getSoundPath("reward.mp3")
+    ),
+
+
+    slotSpin: new Audio(
+        getSoundPath("slot-spin.mp3")
+    ),
+
+
+    slotStop: new Audio(
+        getSoundPath("slot-stop.mp3")
+    ),
+
+
+    win: new Audio(
+        getSoundPath("win.mp3")
+    )
+
 
 };
 
@@ -55,6 +88,8 @@ const sounds = {
 
 
 
+
+// Set volume for every sound
 
 Object.values(sounds).forEach(sound=>{
 
@@ -72,16 +107,22 @@ Object.values(sounds).forEach(sound=>{
 function playSound(name){
 
 
-    if(!sounds[name]) return;
+    let sound = sounds[name];
+
+
+    if(!sound)
+    return;
 
 
 
-    sounds[name].pause();
-
-    sounds[name].currentTime = 0;
+    sound.pause();
 
 
-    sounds[name].play()
+    sound.currentTime = 0;
+
+
+
+    sound.play()
     .catch(()=>{});
 
 
@@ -93,12 +134,107 @@ function playSound(name){
 
 
 
-// ONLY add click sounds after page loads
-
-window.addEventListener("load",()=>{
 
 
-    document.querySelectorAll("button")
+const LuckySounds = {
+
+
+    click(){
+
+        playSound("click");
+
+    },
+
+
+    cardDeal(){
+
+        playSound("cardDeal");
+
+    },
+
+
+    cardFlip(){
+
+        playSound("cardFlip");
+
+    },
+
+
+    coinFlip(){
+
+        playSound("coinFlip");
+
+    },
+
+
+    fish(){
+
+        playSound("fish");
+
+    },
+
+
+    jackpot(){
+
+        playSound("jackpot");
+
+    },
+
+
+    lose(){
+
+        playSound("lose");
+
+    },
+
+
+    reward(){
+
+        playSound("reward");
+
+    },
+
+
+    slotSpin(){
+
+        playSound("slotSpin");
+
+    },
+
+
+    slotStop(){
+
+        playSound("slotStop");
+
+    },
+
+
+    win(){
+
+        playSound("win");
+
+    }
+
+
+};
+
+
+
+
+
+
+
+
+
+// Button click sounds
+
+window.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+    document
+    .querySelectorAll("button")
     .forEach(button=>{
 
 
@@ -107,12 +243,10 @@ window.addEventListener("load",()=>{
         ()=>{
 
 
-            playSound("click");
+            LuckySounds.click();
 
 
-        },
-        false
-        );
+        });
 
 
     });
