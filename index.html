@@ -1,1 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lucky Lounge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
+<body>
+
+<div class="casino">
+
+    <img class="logo" src="assets/images/logo.png" alt="Logo">
+
+    <div class="balance">
+        💰 Coins: <span id="coins">1000</span>
+    </div>
+
+    <button onclick="dailyReward()">
+        Daily Reward
+    </button>
+
+    <div class="games">
+
+        <div class="game">
+            <img src="assets/images/slot.png">
+            <h2>Slots</h2>
+            <button onclick="playSlots()">Play</button>
+        </div>
+
+
+        <div class="game">
+            <img src="assets/images/cards.png">
+            <h2>Blackjack</h2>
+            <button onclick="playBlackjack()">Play</button>
+        </div>
+
+
+        <div class="game">
+            <img src="assets/images/fish.png">
+            <h2>Fishing</h2>
+            <button onclick="fish()">Fish</button>
+        </div>
+
+
+        <div class="game">
+            <img src="assets/images/cup.png">
+            <h2>Cups</h2>
+            <button onclick="cups()">Play</button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
