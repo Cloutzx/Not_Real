@@ -3,37 +3,24 @@
 ========================================================= */
 
 
-const DEFAULT_COINS = 1000;
+
+let coins =
+Number(
+localStorage.getItem("coins")
+)
+|| 1000;
 
 
 
-// Get coins
-
-function getCoins(){
 
 
-    let coins = localStorage.getItem("coins");
+function saveCoins(){
 
 
-
-    if(coins === null){
-
-
-        localStorage.setItem(
-            "coins",
-            DEFAULT_COINS
-        );
-
-
-        return DEFAULT_COINS;
-
-
-    }
-
-
-
-    return Number(coins);
-
+    localStorage.setItem(
+        "coins",
+        coins
+    );
 
 
 }
@@ -44,12 +31,21 @@ function getCoins(){
 
 
 
-// Add coins
+function getCoins(){
+
+
+    return coins;
+
+
+}
+
+
+
+
+
+
 
 function addCoins(amount){
-
-
-    let coins = getCoins();
 
 
 
@@ -57,11 +53,12 @@ function addCoins(amount){
 
 
 
-    localStorage.setItem(
-        "coins",
-        coins
-    );
+    if(coins < 0)
+    coins = 0;
 
+
+
+    saveCoins();
 
 
     updateCoins();
@@ -76,12 +73,7 @@ function addCoins(amount){
 
 
 
-// Remove coins
-
 function removeCoins(amount){
-
-
-    let coins = getCoins();
 
 
 
@@ -89,23 +81,15 @@ function removeCoins(amount){
 
 
 
-    if(coins < 0){
-
-        coins = 0;
-
-    }
+    if(coins < 0)
+    coins = 0;
 
 
 
-    localStorage.setItem(
-        "coins",
-        coins
-    );
-
+    saveCoins();
 
 
     updateCoins();
-
 
 
 }
@@ -116,21 +100,18 @@ function removeCoins(amount){
 
 
 
-// Update all coin displays
 
 function updateCoins(){
 
 
-    const displays =
-    document.querySelectorAll("#coins");
+
+    document
+    .querySelectorAll("#coins")
+    .forEach(element=>{
 
 
-
-    displays.forEach(display=>{
-
-
-        display.innerHTML =
-        getCoins().toLocaleString();
+        element.innerHTML =
+        coins.toLocaleString();
 
 
 
@@ -146,7 +127,33 @@ function updateCoins(){
 
 
 
-// Load coins when page opens
+
+
+function setCoins(amount){
+
+
+
+    coins =
+    Number(amount)
+    || 0;
+
+
+
+    saveCoins();
+
+
+    updateCoins();
+
+
+}
+
+
+
+
+
+
+
+
 
 document.addEventListener(
 "DOMContentLoaded",
