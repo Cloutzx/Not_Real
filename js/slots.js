@@ -21,8 +21,8 @@ let spinning = false;
 
 
 
-function spinSlots(){
 
+function spinSlots(){
 
 
     if(spinning){
@@ -33,21 +33,19 @@ function spinSlots(){
 
 
 
-    let bet =
-    Number(
+    let bet = Number(
         document.getElementById("bet").value
     );
 
 
 
-    if(bet <= 0){
+    if(!bet || bet <= 0){
 
         alert("Enter a valid bet");
 
         return;
 
     }
-
 
 
 
@@ -67,9 +65,7 @@ function spinSlots(){
 
 
 
-
     coins -= bet;
-
 
     updateCoins();
 
@@ -82,6 +78,7 @@ function spinSlots(){
         playSound("slotSpin");
 
     }
+
 
 
 
@@ -123,22 +120,20 @@ function spinSlots(){
 
 
     let animation =
-    setInterval(()=>{
+    setInterval(function(){
 
 
 
         slot1.innerText =
-        randomSymbol();
-
+        getRandomSymbol();
 
 
         slot2.innerText =
-        randomSymbol();
-
+        getRandomSymbol();
 
 
         slot3.innerText =
-        randomSymbol();
+        getRandomSymbol();
 
 
 
@@ -148,12 +143,11 @@ function spinSlots(){
 
 
 
-        if(spins >= 20){
+        if(spins >= 25){
 
 
 
             clearInterval(animation);
-
 
 
 
@@ -165,8 +159,7 @@ function spinSlots(){
 
 
 
-
-            finishSpin(
+            checkResult(
 
                 bet,
 
@@ -197,7 +190,7 @@ function spinSlots(){
 
 
 
-function randomSymbol(){
+function getRandomSymbol(){
 
 
     return slotSymbols[
@@ -217,11 +210,13 @@ function randomSymbol(){
 
 
 
-function finishSpin(
+function checkResult(
+
     bet,
     first,
     second,
     third
+
 ){
 
 
@@ -234,6 +229,9 @@ function finishSpin(
 
 
 
+
+    // 777 Jackpot
+
     if(
 
         first === "7️⃣" &&
@@ -245,10 +243,8 @@ function finishSpin(
 
         multiplier = 100;
 
-
         message =
-        "💎 JACKPOT 777 x100";
-
+        "🔥 JACKPOT 777 x100";
 
 
         if(typeof playSound === "function"){
@@ -262,6 +258,8 @@ function finishSpin(
 
 
 
+
+    // Diamond jackpot
 
     else if(
 
@@ -274,10 +272,8 @@ function finishSpin(
 
         multiplier = 50;
 
-
         message =
         "💎 Diamond Jackpot x50";
-
 
 
         if(typeof playSound === "function"){
@@ -292,6 +288,9 @@ function finishSpin(
 
 
 
+
+    // Triple match
+
     else if(
 
         first === second &&
@@ -302,9 +301,8 @@ function finishSpin(
 
         multiplier = 10;
 
-
         message =
-        "🔥 Triple Match x10";
+        "⭐ Triple Match x10";
 
 
     }
@@ -312,6 +310,8 @@ function finishSpin(
 
 
 
+
+    // Two matching
 
     else if(
 
@@ -324,9 +324,8 @@ function finishSpin(
 
         multiplier = 3;
 
-
         message =
-        "⭐ Double Match x3";
+        "✨ Double Match x3";
 
 
     }
@@ -343,6 +342,7 @@ function finishSpin(
 
 
     }
+
 
 
 
@@ -374,13 +374,14 @@ function finishSpin(
 
 
 
+
     if(multiplier > 0){
 
 
 
         result.innerText =
         message
-        + " +"
+        + "\n+"
         + winnings.toLocaleString()
         + " coins";
 
@@ -399,8 +400,6 @@ function finishSpin(
 
 
     }
-
-
 
     else{
 
@@ -424,6 +423,7 @@ function finishSpin(
 
 
     }
+
 
 
 
