@@ -3,12 +3,13 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
 
-    <title>Cups | Lucky Lounge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../style.css">
+<title>Lucky Lounge Cups</title>
+
+<link rel="stylesheet" href="../style.css">
 
 </head>
 
@@ -16,128 +17,161 @@
 <body>
 
 
+
+<div class="game-page">
+
+
 <div class="game-container">
 
 
-    <h1 class="game-title">
-        🥤 Cup Game
-    </h1>
 
+<h1 class="game-title">
 
+🥤 Lucky Cups
 
+</h1>
 
-    <div class="game-balance">
 
-        💰 Coins:
-        <span id="coins">
-            0
-        </span>
 
-    </div>
 
 
 
+<div class="money">
 
+🪙 Coins:
 
-    <p>
-        Pick the cup hiding the prize!
-    </p>
+<span id="coins">
 
+0
 
+</span>
 
+</div>
 
 
-    <input
 
-        id="bet"
 
-        type="number"
 
-        placeholder="Enter bet amount"
 
-        min="1"
 
-    >
+<div class="bet-box">
 
 
+<input
 
+id="bet"
 
+type="number"
 
-    <br><br>
+placeholder="Enter Bet Amount"
 
+min="1">
 
 
+</div>
 
 
-    <div class="cups">
 
 
-        <button class="cup" onclick="pickCup(1)">
 
-            🥤
 
-        </button>
 
 
 
-        <button class="cup" onclick="pickCup(2)">
+<h2>
 
-            🥤
+Pick a Cup
 
-        </button>
+</h2>
 
 
 
-        <button class="cup" onclick="pickCup(3)">
 
-            🥤
 
-        </button>
 
+<div class="cups">
 
-    </div>
 
 
+<button
 
+class="cup"
 
+onclick="chooseCup(1)">
 
+🥤
 
+</button>
 
-    <h2 id="result">
 
-    </h2>
 
 
 
+<button
 
+class="cup"
 
+onclick="chooseCup(2)">
 
+🥤
 
-    <button onclick="resetGame()">
+</button>
 
-        🔄 New Round
 
-    </button>
 
 
 
 
+<button
 
+class="cup"
 
+onclick="chooseCup(3)">
 
-    <br><br>
+🥤
 
+</button>
 
 
 
+</div>
 
 
 
-    <a class="back" href="../index.html">
 
-        ← Back to Lobby
 
-    </a>
+
+
+
+<h2 id="result">
+
+Find the hidden ball!
+
+</h2>
+
+
+
+
+
+
+
+<button
+
+class="game-action"
+
+onclick="window.location.href='../index.html'">
+
+← Back
+
+</button>
+
+
+
+
+
+
+
+</div>
 
 
 </div>
@@ -150,9 +184,9 @@
 
 <script src="../js/currency.js"></script>
 
-<script src="../js/sounds.js"></script>
-
 <script src="../js/cups.js"></script>
+
+<script src="../js/sounds.js"></script>
 
 
 
