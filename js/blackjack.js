@@ -7,6 +7,8 @@ let playerCards = [];
 
 let dealerCards = [];
 
+let deck = [];
+
 let gameRunning = false;
 
 let playerTurn = false;
@@ -17,12 +19,13 @@ let playerTurn = false;
 
 
 
+
 const suits = [
 
-"♠️",
-"♥️",
-"♦️",
-"♣️"
+    "♠️",
+    "♥️",
+    "♦️",
+    "♣️"
 
 ];
 
@@ -30,21 +33,22 @@ const suits = [
 
 const ranks = [
 
-"A",
-"2",
-"3",
-"4",
-"5",
-"6",
-"7",
-"8",
-"9",
-"10",
-"J",
-"Q",
-"K"
+    "A",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "J",
+    "Q",
+    "K"
 
 ];
+
 
 
 
@@ -56,44 +60,41 @@ const ranks = [
 function createDeck(){
 
 
-    let deck=[];
+    let newDeck = [];
 
 
 
-    for(let suit of suits){
+    suits.forEach(suit=>{
 
 
-        for(let rank of ranks){
+        ranks.forEach(rank=>{
 
 
-            deck.push({
+            newDeck.push({
 
-                rank:rank,
+                suit:suit,
 
-                suit:suit
+                rank:rank
 
             });
 
 
-        }
+        });
 
 
-    }
+    });
 
 
 
-    return deck.sort(
-    ()=>Math.random()-0.5
+
+
+    return newDeck.sort(
+        ()=>Math.random()-0.5
     );
 
 
 }
 
-
-
-
-
-let deck=[];
 
 
 
@@ -105,23 +106,20 @@ let deck=[];
 function startGame(){
 
 
-
     if(gameRunning)
     return;
 
 
 
 
-    let bet =
-    Number(
-    document.getElementById("bet").value
+    let bet = Number(
+        document.getElementById("bet").value
     );
 
 
 
 
-
-    if(!bet || bet<=0){
+    if(!bet || bet <= 0){
 
 
         result.innerHTML =
@@ -155,27 +153,18 @@ function startGame(){
 
 
 
-
     removeCoins(bet);
 
 
 
 
-
-    deck=createDeck();
-
-
-
-    playerCards=[];
-
-    dealerCards=[];
+    deck = createDeck();
 
 
 
-    gameRunning=true;
+    playerCards = [];
 
-    playerTurn=true;
-
+    dealerCards = [];
 
 
 
@@ -189,6 +178,13 @@ function startGame(){
     dealerCards.push(deck.pop());
 
     dealerCards.push(deck.pop());
+
+
+
+
+    gameRunning = true;
+
+    playerTurn = true;
 
 
 
@@ -198,7 +194,6 @@ function startGame(){
 
 
     updateCards();
-
 
 
 
@@ -217,14 +212,11 @@ function startGame(){
 
 
 
-
 function hit(){
-
 
 
     if(!gameRunning || !playerTurn)
     return;
-
 
 
 
@@ -236,10 +228,7 @@ function hit(){
 
 
 
-
     LuckySounds.cardDeal();
-
-
 
 
 
@@ -248,10 +237,7 @@ function hit(){
 
 
 
-
-
-    if(getScore(playerCards)>21){
-
+    if(getScore(playerCards) > 21){
 
 
         result.innerHTML =
@@ -263,8 +249,7 @@ function hit(){
 
 
 
-        endGame(false);
-
+        endGame();
 
 
     }
@@ -280,9 +265,7 @@ function hit(){
 
 
 
-
 function stand(){
-
 
 
     if(!gameRunning || !playerTurn)
@@ -290,17 +273,14 @@ function stand(){
 
 
 
-
-    playerTurn=false;
+    playerTurn = false;
 
 
 
     dealerTurn();
 
 
-
 }
-
 
 
 
@@ -315,7 +295,7 @@ function dealerTurn(){
 
 
     while(
-    getScore(dealerCards)<17
+        getScore(dealerCards) < 17
     ){
 
 
@@ -327,8 +307,8 @@ function dealerTurn(){
         LuckySounds.cardFlip();
 
 
-
     }
+
 
 
 
@@ -353,23 +333,32 @@ function dealerTurn(){
 
 
 
+
     if(
-    dealerScore>21 ||
-    playerScore>dealerScore
+        dealerScore > 21 ||
+        playerScore > dealerScore
     ){
 
 
 
-        result.innerHTML =
-        "🎉 You Win!";
-
-
-
-        addCoins(
+        let bet =
         Number(
-        bet.value
-        )*2
+            document.getElementById("bet").value
         );
+
+
+
+        let reward =
+        bet * 2;
+
+
+
+        addCoins(reward);
+
+
+
+        result.innerHTML =
+        "🎉 You Win! +" + reward;
 
 
 
@@ -379,11 +368,21 @@ function dealerTurn(){
 
     }
 
-
-
     else if(
-    playerScore===dealerScore
+        playerScore === dealerScore
     ){
+
+
+
+        let bet =
+        Number(
+            document.getElementById("bet").value
+        );
+
+
+
+        addCoins(bet);
+
 
 
         result.innerHTML =
@@ -391,23 +390,15 @@ function dealerTurn(){
 
 
 
-        addCoins(
-        Number(
-        bet.value
-        )
-        );
-
-
-
     }
-
-
 
     else{
 
 
+
         result.innerHTML =
         "❌ Dealer Wins";
+
 
 
         LuckySounds.lose();
@@ -419,16 +410,11 @@ function dealerTurn(){
 
 
 
-
-
     endGame();
 
 
 
-
-
 }
-
 
 
 
@@ -441,11 +427,9 @@ function dealerTurn(){
 function endGame(){
 
 
+    gameRunning = false;
 
-    gameRunning=false;
-
-    playerTurn=false;
-
+    playerTurn = false;
 
 
 }
@@ -458,14 +442,13 @@ function endGame(){
 
 
 
-
 function getScore(cards){
 
 
+    let score = 0;
 
-    let score=0;
+    let aces = 0;
 
-    let aces=0;
 
 
 
@@ -473,36 +456,33 @@ function getScore(cards){
 
 
         if(
-        ["J","Q","K"]
-        .includes(card.rank)
+            ["J","Q","K"]
+            .includes(card.rank)
         ){
 
 
-            score+=10;
+            score += 10;
 
 
         }
 
+        else if(card.rank === "A"){
 
-        else if(card.rank==="A"){
 
-
-            score+=11;
+            score += 11;
 
             aces++;
 
 
         }
 
-
         else{
 
 
-            score+=Number(card.rank);
+            score += Number(card.rank);
 
 
         }
-
 
 
     });
@@ -512,16 +492,15 @@ function getScore(cards){
 
 
 
-    while(score>21 && aces>0){
+    while(score > 21 && aces > 0){
 
 
-        score-=10;
+        score -= 10;
 
         aces--;
 
 
     }
-
 
 
 
@@ -545,21 +524,23 @@ function updateCards(){
 
     let player =
     document.getElementById(
-    "playerCards"
+        "playerCards"
     );
 
 
 
     let dealer =
     document.getElementById(
-    "dealerCards"
+        "dealerCards"
     );
 
 
 
-    player.innerHTML="";
 
-    dealer.innerHTML="";
+
+    player.innerHTML = "";
+
+    dealer.innerHTML = "";
 
 
 
@@ -570,8 +551,7 @@ function updateCards(){
     playerCards.forEach(card=>{
 
 
-        player.innerHTML +=
-        `
+        player.innerHTML += `
 
         <div class="card">
 
@@ -593,11 +573,10 @@ function updateCards(){
     dealerCards.forEach((card,index)=>{
 
 
-        if(index===1 && gameRunning){
+        if(index === 1 && gameRunning){
 
 
-            dealer.innerHTML +=
-            `
+            dealer.innerHTML += `
 
             <div class="card back">
 
@@ -613,8 +592,7 @@ function updateCards(){
         else{
 
 
-            dealer.innerHTML +=
-            `
+            dealer.innerHTML += `
 
             <div class="card">
 
@@ -628,6 +606,7 @@ function updateCards(){
         }
 
 
+
     });
 
 
@@ -636,7 +615,7 @@ function updateCards(){
 
 
     document.getElementById(
-    "playerScore"
+        "playerScore"
     ).innerHTML =
     getScore(playerCards);
 
@@ -644,9 +623,11 @@ function updateCards(){
 
 
 
+
     document.getElementById(
-    "dealerScore"
+        "dealerScore"
     ).innerHTML =
+
 
     gameRunning
     ?
