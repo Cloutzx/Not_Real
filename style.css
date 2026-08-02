@@ -1,1 +1,61 @@
+body {
+    margin: 0;
+    background: #080808;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
 
+
+.casino {
+    padding: 40px;
+}
+
+
+.logo {
+    width: 250px;
+}
+
+
+.balance {
+    font-size: 28px;
+    margin: 20px;
+}
+
+
+button {
+    background: #8b5cf6;
+    border: none;
+    padding: 12px 25px;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
+button:hover {
+    opacity: .8;
+}
+
+
+.games {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-top: 40px;
+}
+
+
+.game {
+    background: #151515;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+
+.game img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
