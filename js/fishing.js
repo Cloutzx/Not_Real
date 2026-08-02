@@ -1,105 +1,65 @@
+/* =========================================================
+   LUCKY LOUNGE FISHING
+========================================================= */
+
+
 let fishing = false;
-
-
-
-
-const fishTypes = [
-
-
-    {
-
-        name:"🐟 Common Fish",
-
-        reward:100,
-
-        chance:60
-
-    },
-
-
-    {
-
-        name:"🐠 Rare Fish",
-
-        reward:300,
-
-        chance:30
-
-    },
-
-
-    {
-
-        name:"🐋 Legendary Fish",
-
-        reward:1000,
-
-        chance:10
-
-    }
-
-
-];
-
-
-
-
-
-
 
 
 
 function fish(){
 
 
-
-    if(fishing)
-    return;
+    if(fishing) return;
 
 
 
-
-    fishing=true;
-
+    fishing = true;
 
 
 
+    let button =
+    document.querySelector(".game-action");
 
 
-    let fishElement =
+
+    if(button){
+
+        button.disabled = true;
+
+        button.innerHTML =
+        "🎣 Fishing...";
+
+    }
+
+
+
+
+
+    let fishEmoji =
     document.getElementById("fish");
 
 
 
-    let text =
-    document.getElementById("fishResult");
+    if(fishEmoji){
+
+        fishEmoji.style.animation =
+        "fishMove 1s infinite";
+
+    }
 
 
 
 
 
-
-
-    text.innerHTML =
-    "🎣 Waiting for a bite...";
+    playSound("fish");
 
 
 
 
 
-
-    LuckySounds.fish();
-
-
-
-
-
-    fishElement.classList.add(
-        "swimming"
-    );
-
-
-
+    document.getElementById("fishResult").innerHTML =
+    "🌊 Waiting for a bite...";
 
 
 
@@ -109,55 +69,84 @@ function fish(){
 
 
 
+        let catches = [
 
 
-
-        fishElement.classList.remove(
-            "swimming"
-        );
-
-
-
+            {
+                name:"Common Fish",
+                emoji:"🐟",
+                reward:100
+            },
 
 
+            {
+                name:"Rare Fish",
+                emoji:"🐠",
+                reward:300
+            },
 
 
-        let roll =
-        Math.random()*100;
-
-
-
-
-
-        let total=0;
-
-
-        let caught=null;
-
-
-
-
-
-
-        for(let fish of fishTypes){
-
-
-
-            total += fish.chance;
-
-
-
-            if(roll <= total){
-
-
-                caught = fish;
-
-
-                break;
-
-
+            {
+                name:"Legendary Fish",
+                emoji:"🐋",
+                reward:1000
             }
 
+
+        ];
+
+
+
+
+
+        let caught =
+        catches[
+            Math.floor(
+                Math.random()*catches.length
+            )
+        ];
+
+
+
+
+
+
+
+        document.getElementById("fishResult").innerHTML =
+
+        `${caught.emoji} You caught ${caught.name}!<br>
+        🪙 +${caught.reward} Coins`;
+
+
+
+
+
+
+        addCoins(caught.reward);
+
+
+
+        // force UI update
+
+        updateCoins();
+
+
+
+
+
+
+
+        if(caught.reward >= 1000){
+
+
+            playSound("jackpot");
+
+
+        }
+        else{
+
+
+            playSound("win");
 
 
         }
@@ -168,49 +157,30 @@ function fish(){
 
 
 
-        addCoins(
-            caught.reward
-        );
+        if(button){
+
+
+            button.disabled = false;
+
+
+            button.innerHTML =
+            "🎣 Cast Line";
+
+
+        }
 
 
 
 
 
 
-
-        text.innerHTML =
-
-
-        "🎉 Caught " +
-
-        caught.name +
-
-        " +" +
-
-        caught.reward +
-
-        " Coins";
-
-
-
-
-
-
-
-        LuckySounds.win();
-
-
-
-
-
-
-        fishing=false;
-
-
+        fishing = false;
 
 
 
     },3000);
+
+
 
 
 
