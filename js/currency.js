@@ -3,6 +3,7 @@
 // ==========================
 
 
+// Load saved coins
 
 let coins = Number(
     localStorage.getItem("coins")
@@ -11,6 +12,7 @@ let coins = Number(
 
 
 
+// Update all coin displays
 
 function updateCoins(){
 
@@ -22,15 +24,17 @@ function updateCoins(){
 
 
 
-    let displays =
+    let coinDisplays =
     document.querySelectorAll("#coins");
 
 
 
-    displays.forEach(display => {
+    coinDisplays.forEach(display => {
+
 
         display.innerText =
         coins.toLocaleString();
+
 
     });
 
@@ -41,7 +45,7 @@ function updateCoins(){
 
 
 
-
+// Add coins
 
 function addCoins(amount){
 
@@ -59,6 +63,7 @@ function addCoins(amount){
 
 
 
+// Remove coins
 
 function removeCoins(amount){
 
@@ -77,7 +82,6 @@ function removeCoins(amount){
     updateCoins();
 
 
-
     return true;
 
 
@@ -88,6 +92,7 @@ function removeCoins(amount){
 
 
 
+// Check coins
 
 function hasCoins(amount){
 
@@ -102,13 +107,13 @@ function hasCoins(amount){
 
 
 
-
 // ==========================
 // Daily Reward
 // ==========================
 
 
 function claimDailyReward(){
+
 
 
     let lastClaim =
@@ -118,7 +123,8 @@ function claimDailyReward(){
 
 
 
-    let now = Date.now();
+    let now =
+    Date.now();
 
 
 
@@ -127,7 +133,10 @@ function claimDailyReward(){
 
 
 
+
+
     if(now - lastClaim < cooldown){
+
 
 
         let remaining =
@@ -150,7 +159,7 @@ function claimDailyReward(){
 
 
 
-        return;
+        return false;
 
 
     }
@@ -187,12 +196,15 @@ function claimDailyReward(){
 
 
 
-
     alert(
         "🎉 You received "
         + reward.toLocaleString()
         + " coins!"
     );
+
+
+
+    return true;
 
 
 }
@@ -214,7 +226,6 @@ function resetCoins(){
     coins = 1000;
 
 
-
     updateCoins();
 
 
@@ -225,10 +236,36 @@ function resetCoins(){
 
 
 
+// ==========================
+// Load Coins On Every Page
+// ==========================
 
-// ==========================
-// Load Coins On Page Open
-// ==========================
+
+function loadCoins(){
+
+
+    let savedCoins =
+    localStorage.getItem("coins");
+
+
+
+    if(savedCoins !== null){
+
+
+        coins =
+        Number(savedCoins);
+
+
+    }
+
+
+
+    updateCoins();
+
+
+}
+
+
 
 
 document.addEventListener(
@@ -236,7 +273,7 @@ document.addEventListener(
 function(){
 
 
-    updateCoins();
+    loadCoins();
 
 
 });
