@@ -1,6 +1,7 @@
-/* ==========================
-   Lucky Lounge Premium UI
-========================== */
+/* ==================================
+        LUCKY LOUNGE UI
+        Premium Casino Theme
+================================== */
 
 
 * {
@@ -8,21 +9,43 @@
 }
 
 
+
+html,
 body {
 
-    margin: 0;
+    width:100%;
 
-    min-height: 100vh;
+    min-height:100%;
+
+    margin:0;
+
+    padding:0;
+
+}
+
+
+
+body {
 
     background:
-    radial-gradient(circle at top, #302b63, #111);
+
+    radial-gradient(
+        circle at top,
+        #4c1d95,
+        #090014 50%,
+        #020617
+    );
+
 
     color:white;
 
+
     font-family:
+
     "Segoe UI",
     Arial,
     sans-serif;
+
 
     display:flex;
 
@@ -30,50 +53,74 @@ body {
 
     align-items:center;
 
+
     overflow-x:hidden;
 
 }
 
 
 
-/* Animated background */
+
+
+
+/* Background Glow */
 
 body::before {
 
+
     content:"";
+
 
     position:fixed;
 
-    width:500px;
 
-    height:500px;
+    width:700px;
+
+    height:700px;
+
+
+    top:-250px;
+
+    left:-250px;
+
 
     background:
-    radial-gradient(circle,#8a2be2,transparent);
 
-    filter:blur(100px);
+    radial-gradient(
+        circle,
+        rgba(168,85,247,.5),
+        transparent 65%
+    );
+
+
+    filter:blur(60px);
+
 
     animation:
-    float 8s infinite alternate;
+
+    moveGlow 8s infinite alternate;
+
 
 }
 
 
 
-@keyframes float {
+@keyframes moveGlow {
 
-    from{
 
-        transform:translate(-200px,-100px);
+    from {
+
+        transform:translate(0,0);
+
+    }
+
+
+    to {
+
+        transform:translate(300px,200px);
 
     }
 
-
-    to{
-
-        transform:translate(200px,100px);
-
-    }
 
 }
 
@@ -82,72 +129,105 @@ body::before {
 
 
 
-/* Main card */
+
+/* Main Panel */
+
 
 .game-container {
 
 
-    width:90%;
-
-    max-width:700px;
+    position:relative;
 
 
-    padding:40px;
+    width:95%;
+
+
+    max-width:800px;
+
+
+    padding:50px;
+
+
+    margin:40px auto;
+
 
 
     background:
 
-    rgba(255,255,255,0.08);
+
+    linear-gradient(
+
+        145deg,
+
+        rgba(255,255,255,.18),
+
+        rgba(255,255,255,.05)
+
+    );
+
 
 
     backdrop-filter:
 
-    blur(20px);
+    blur(25px);
 
 
-    border-radius:25px;
+
+    border-radius:35px;
+
 
 
     border:
 
-    1px solid rgba(255,255,255,.2);
+    1px solid rgba(255,255,255,.25);
+
 
 
     box-shadow:
 
-    0 0 40px rgba(138,43,226,.4);
+
+    0 0 60px rgba(168,85,247,.45),
+
+
+    inset 0 0 30px rgba(255,255,255,.05);
 
 
 
     text-align:center;
 
 
+
     animation:
 
-    appear .5s ease;
+    fadeIn .7s ease;
+
 
 
 }
 
 
 
-@keyframes appear {
 
-    from{
+
+@keyframes fadeIn {
+
+
+    from {
 
         opacity:0;
 
-        transform:translateY(30px);
+        transform:translateY(40px);
 
     }
 
 
-    to{
+    to {
 
         opacity:1;
 
     }
 
+
 }
 
 
@@ -155,21 +235,55 @@ body::before {
 
 
 
-/* Titles */
+
+
+/* Title */
 
 
 .game-title {
 
 
-    font-size:45px;
+    font-size:60px;
+
+
+    margin:0 0 25px;
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        90deg,
+
+        #f472b6,
+
+        #a855f7,
+
+        #38bdf8
+
+    );
+
+
+
+    -webkit-background-clip:text;
+
+
+    color:transparent;
+
 
 
     text-shadow:
 
-    0 0 20px #9d4edd;
+
+    0 0 30px rgba(168,85,247,.8);
+
 
 
 }
+
+
 
 
 
@@ -182,26 +296,37 @@ body::before {
 .game-balance {
 
 
-    margin:20px;
-
-
-    padding:15px;
-
-
-    border-radius:15px;
-
-
     background:
 
-    rgba(0,0,0,.35);
+
+    rgba(0,0,0,.45);
 
 
-    font-size:24px;
+
+    padding:20px;
+
+
+    border-radius:20px;
+
+
+    font-size:26px;
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.2);
+
 
 
     box-shadow:
 
-    inset 0 0 20px rgba(255,255,255,.1);
+
+    0 0 25px rgba(0,0,0,.5);
+
+
+
+    margin-bottom:35px;
 
 
 }
@@ -211,38 +336,51 @@ body::before {
 
 
 
-/* Slots */
+
+
+/* ==============================
+        SLOTS
+============================== */
 
 
 .slots {
 
 
-    display:flex;
+    width:100%;
 
 
-    justify-content:center;
+    display:flex !important;
 
 
-    align-items:center;
+    flex-direction:row !important;
 
 
-    gap:20px;
+    justify-content:center !important;
 
 
-    margin:35px 0;
+    align-items:center !important;
+
+
+    gap:25px;
+
+
+    margin:40px 0;
+
 
 
 }
+
 
 
 
 .slot {
 
 
-    width:110px;
+    width:120px;
 
 
-    height:110px;
+    height:120px;
+
 
 
     background:
@@ -250,41 +388,51 @@ body::before {
 
     linear-gradient(
 
-    145deg,
+        145deg,
 
-    #333,
+        #27272a,
 
-    #111
+        #09090b
 
     );
 
 
-    border-radius:20px;
+
+    border-radius:25px;
 
 
-    border:2px solid #9d4edd;
+
+    border:
+
+    3px solid #c084fc;
 
 
-    display:flex;
+
+    display:flex !important;
 
 
-    justify-content:center;
+    justify-content:center !important;
 
 
-    align-items:center;
+    align-items:center !important;
 
 
-    font-size:55px;
+
+    font-size:65px;
+
 
 
     box-shadow:
 
 
-    0 0 25px rgba(157,78,221,.7);
+    0 0 30px #a855f7,
+
+    inset 0 0 25px black;
 
 
 
     transition:.3s;
+
 
 
 }
@@ -296,12 +444,20 @@ body::before {
 
     transform:
 
-    translateY(-10px)
+    translateY(-15px)
+    scale(1.08);
 
-    scale(1.05);
+
+
+    box-shadow:
+
+
+    0 0 60px #ec4899;
 
 
 }
+
+
 
 
 
@@ -315,39 +471,68 @@ body::before {
 input {
 
 
-    width:260px;
+    width:320px;
 
 
-    padding:15px;
+    height:55px;
 
 
-    border-radius:15px;
 
+    background:
 
-    border:none;
+    rgba(0,0,0,.6);
 
-
-    outline:none;
-
-
-    text-align:center;
-
-
-    font-size:18px;
-
-
-    background:#222;
 
 
     color:white;
 
 
-    box-shadow:
 
-    0 0 15px rgba(255,255,255,.2);
+    border:
+
+    2px solid #a855f7;
+
+
+
+    border-radius:20px;
+
+
+
+    font-size:20px;
+
+
+
+    text-align:center;
+
+
+
+    outline:none;
+
+
+
+    margin:20px auto;
+
+
+
+    display:block;
+
 
 
 }
+
+
+
+input:focus {
+
+
+    box-shadow:
+
+
+    0 0 30px #a855f7;
+
+
+}
+
 
 
 
@@ -361,28 +546,38 @@ input {
 button {
 
 
+    padding:
+
+    18px 45px;
+
+
+
     margin:10px;
 
 
-    padding:15px 35px;
 
+    border-radius:25px;
 
-    border-radius:15px;
 
 
     border:none;
 
 
+
     cursor:pointer;
 
 
-    font-size:18px;
+
+    color:white;
+
+
+
+    font-size:20px;
+
 
 
     font-weight:bold;
 
-
-    color:white;
 
 
     background:
@@ -390,26 +585,28 @@ button {
 
     linear-gradient(
 
-    135deg,
+        135deg,
 
-    #7b2ff7,
+        #9333ea,
 
-    #f107a3
+        #ec4899
 
     );
+
 
 
     box-shadow:
 
 
-    0 0 20px rgba(241,7,163,.5);
+    0 0 30px rgba(236,72,153,.7);
+
 
 
     transition:.3s;
 
 
-}
 
+}
 
 
 
@@ -418,17 +615,33 @@ button:hover {
 
     transform:
 
-    translateY(-5px)
+    scale(1.12);
 
-    scale(1.05);
 
 
     box-shadow:
 
-    0 0 35px #f107a3;
+
+    0 0 60px #ec4899;
 
 
 }
+
+
+
+
+
+button:active {
+
+
+    transform:
+
+    scale(.95);
+
+
+}
+
+
 
 
 
@@ -447,7 +660,11 @@ button:hover {
     justify-content:center;
 
 
-    gap:15px;
+    align-items:center;
+
+
+    gap:20px;
+
 
 
 }
@@ -457,40 +674,48 @@ button:hover {
 .card {
 
 
-    width:80px;
+    width:85px;
 
 
-    height:110px;
+    height:120px;
+
 
 
     background:white;
 
 
+
     color:black;
+
 
 
     border-radius:15px;
 
 
+
     display:flex;
+
 
 
     justify-content:center;
 
 
+
     align-items:center;
 
 
-    font-size:28px;
+
+    font-size:30px;
+
 
 
     box-shadow:
 
-    0 0 20px white;
+
+    0 0 25px white;
 
 
 }
-
 
 
 
@@ -498,9 +723,11 @@ button:hover {
 .card.back {
 
 
-    background:#222;
+    background:#18181b;
+
 
     color:white;
+
 
 }
 
@@ -508,49 +735,61 @@ button:hover {
 
 
 
-/* Result */
+
+
+/* Results */
 
 
 #result {
 
 
-    margin-top:25px;
+    margin-top:30px;
 
 
-    font-size:28px;
+    font-size:32px;
+
+
+    font-weight:bold;
+
 
 
 }
+
 
 
 
 .win {
 
 
-    color:#00ff88;
+    color:#4ade80;
 
 
     text-shadow:
 
-    0 0 20px lime;
+
+    0 0 25px #22c55e;
 
 
 }
+
+
 
 
 
 .lose {
 
 
-    color:#ff4444;
+    color:#ef4444;
 
 
     text-shadow:
 
-    0 0 20px red;
+
+    0 0 25px #dc2626;
 
 
 }
+
 
 
 
@@ -567,10 +806,13 @@ button:hover {
     display:inline-block;
 
 
-    margin-top:30px;
+    margin-top:35px;
 
 
     color:white;
+
+
+    font-size:20px;
 
 
     text-decoration:none;
@@ -579,13 +821,21 @@ button:hover {
     opacity:.8;
 
 
+
 }
+
 
 
 .back:hover {
 
 
     opacity:1;
+
+
+    text-shadow:
+
+
+    0 0 20px white;
 
 
 }
