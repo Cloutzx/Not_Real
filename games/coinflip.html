@@ -1,1 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Coin Flip | Lucky Lounge</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="game-container">
+
+
+    <h1 class="game-title">
+        🪙 Coin Flip
+    </h1>
+
+
+    <div class="game-balance">
+
+        💰 Coins:
+        <span id="coins">0</span>
+
+    </div>
+
+
+
+    <div class="coin" id="coin">
+
+        🪙
+
+    </div>
+
+
+
+    <p>
+        Pick Heads or Tails
+    </p>
+
+
+
+    <input
+        id="bet"
+        type="number"
+        placeholder="Enter bet amount"
+        min="1"
+    >
+
+
+
+    <br>
+
+
+
+    <button onclick="flipCoin('Heads')">
+
+        🟡 Heads
+
+    </button>
+
+
+    <button onclick="flipCoin('Tails')">
+
+        ⚫ Tails
+
+    </button>
+
+
+
+
+    <h2 id="result">
+
+    </h2>
+
+
+
+
+    <a class="back" href="../index.html">
+
+        ← Back to Lobby
+
+    </a>
+
+
+</div>
+
+
+
+
+<script src="../js/currency.js"></script>
+
+<script src="../js/coinflip.js"></script>
+
+
+</body>
+
+</html>
