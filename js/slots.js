@@ -19,7 +19,10 @@ let spinning = false;
 
 
 
+
+
 function spinSlots(){
+
 
 
     if(spinning){
@@ -30,7 +33,8 @@ function spinSlots(){
 
 
 
-    let bet = Number(
+    let bet =
+    Number(
         document.getElementById("bet").value
     );
 
@@ -46,6 +50,7 @@ function spinSlots(){
 
 
 
+
     if(bet > coins){
 
         alert("Not enough coins");
@@ -56,23 +61,39 @@ function spinSlots(){
 
 
 
+
+
     spinning = true;
 
 
 
-    // Take bet
 
     coins -= bet;
 
+
     updateCoins();
+
+
+
+
+
+    if(typeof playSound === "function"){
+
+        playSound("slotSpin");
+
+    }
+
+
 
 
 
     let slot1 =
     document.getElementById("slot1");
 
+
     let slot2 =
     document.getElementById("slot2");
+
 
     let slot3 =
     document.getElementById("slot3");
@@ -84,14 +105,16 @@ function spinSlots(){
 
 
 
-    slot1.classList.add("spin");
-    slot2.classList.add("spin");
-    slot3.classList.add("spin");
-
 
 
     result.innerText =
     "🎰 Spinning...";
+
+
+
+    result.className = "";
+
+
 
 
 
@@ -103,40 +126,56 @@ function spinSlots(){
     setInterval(()=>{
 
 
+
         slot1.innerText =
         randomSymbol();
+
 
 
         slot2.innerText =
         randomSymbol();
 
 
+
         slot3.innerText =
         randomSymbol();
+
+
 
 
         spins++;
 
 
 
-        if(spins >= 15){
+
+        if(spins >= 20){
+
 
 
             clearInterval(animation);
 
 
 
-            slot1.classList.remove("spin");
-            slot2.classList.remove("spin");
-            slot3.classList.remove("spin");
+
+            if(typeof playSound === "function"){
+
+                playSound("slotStop");
+
+            }
+
 
 
 
             finishSpin(
+
                 bet,
+
                 slot1.innerText,
+
                 slot2.innerText,
+
                 slot3.innerText
+
             );
 
 
@@ -154,7 +193,12 @@ function spinSlots(){
 
 
 
+
+
+
+
 function randomSymbol(){
+
 
     return slotSymbols[
         Math.floor(
@@ -163,7 +207,11 @@ function randomSymbol(){
         )
     ];
 
+
 }
+
+
+
 
 
 
@@ -180,54 +228,80 @@ function finishSpin(
 
     let multiplier = 0;
 
-    let message;
+    let message = "";
 
 
 
-    // Jackpot
+
 
     if(
+
         first === "7️⃣" &&
         second === "7️⃣" &&
         third === "7️⃣"
+
     ){
+
 
         multiplier = 100;
 
+
         message =
-        "💎 JACKPOT x100";
+        "💎 JACKPOT 777 x100";
+
+
+
+        if(typeof playSound === "function"){
+
+            playSound("jackpot");
+
+        }
 
 
     }
 
 
 
-    // Triple diamond
 
     else if(
+
         first === "💎" &&
         second === "💎" &&
         third === "💎"
+
     ){
+
 
         multiplier = 50;
 
+
         message =
-        "💎 Diamond Win x50";
+        "💎 Diamond Jackpot x50";
+
+
+
+        if(typeof playSound === "function"){
+
+            playSound("jackpot");
+
+        }
 
 
     }
 
 
 
-    // Any 3 matching
 
     else if(
+
         first === second &&
         second === third
+
     ){
 
+
         multiplier = 10;
+
 
         message =
         "🔥 Triple Match x10";
@@ -237,15 +311,19 @@ function finishSpin(
 
 
 
-    // Two matching
+
 
     else if(
+
         first === second ||
         second === third ||
         first === third
+
     ){
 
+
         multiplier = 3;
+
 
         message =
         "⭐ Double Match x3";
@@ -255,10 +333,10 @@ function finishSpin(
 
 
 
+
+
     else{
 
-
-        multiplier = 0;
 
         message =
         "❌ No Match";
@@ -269,8 +347,12 @@ function finishSpin(
 
 
 
+
+
     let winnings =
     bet * multiplier;
+
+
 
 
 
@@ -283,40 +365,67 @@ function finishSpin(
 
 
 
+
+
     let result =
     document.getElementById("result");
 
 
 
-    result.innerText =
-    message +
-    " +" +
-    winnings.toLocaleString()
-    +
-    " coins";
+
+
+    if(multiplier > 0){
 
 
 
-    if(multiplier >= 10){
+        result.innerText =
+        message
+        + " +"
+        + winnings.toLocaleString()
+        + " coins";
 
-        result.className =
-        "jackpot";
 
-    }
-
-    else if(multiplier > 0){
 
         result.className =
         "win";
 
+
+
+        if(typeof playSound === "function"){
+
+            playSound("win");
+
+        }
+
+
     }
 
+
+
     else{
+
+
+
+        result.innerText =
+        message;
+
+
 
         result.className =
         "lose";
 
+
+
+        if(typeof playSound === "function"){
+
+            playSound("lose");
+
+        }
+
+
     }
+
+
 
 
 
