@@ -28,70 +28,19 @@ function createDeck(){
 
 
     let values = [
-        {
-            name:"A",
-            value:11
-        },
-
-        {
-            name:"2",
-            value:2
-        },
-
-        {
-            name:"3",
-            value:3
-        },
-
-        {
-            name:"4",
-            value:4
-        },
-
-        {
-            name:"5",
-            value:5
-        },
-
-        {
-            name:"6",
-            value:6
-        },
-
-        {
-            name:"7",
-            value:7
-        },
-
-        {
-            name:"8",
-            value:8
-        },
-
-        {
-            name:"9",
-            value:9
-        },
-
-        {
-            name:"10",
-            value:10
-        },
-
-        {
-            name:"J",
-            value:10
-        },
-
-        {
-            name:"Q",
-            value:10
-        },
-
-        {
-            name:"K",
-            value:10
-        }
+        {name:"A", value:11},
+        {name:"2", value:2},
+        {name:"3", value:3},
+        {name:"4", value:4},
+        {name:"5", value:5},
+        {name:"6", value:6},
+        {name:"7", value:7},
+        {name:"8", value:8},
+        {name:"9", value:9},
+        {name:"10", value:10},
+        {name:"J", value:10},
+        {name:"Q", value:10},
+        {name:"K", value:10}
     ];
 
 
@@ -102,11 +51,11 @@ function createDeck(){
 
             deck.push({
 
-                name:card.name,
+                name: card.name,
 
-                value:card.value,
+                value: card.value,
 
-                suit:suit
+                suit: suit
 
             });
 
@@ -115,7 +64,8 @@ function createDeck(){
     }
 
 
-    deck.sort(()=>Math.random()-0.5);
+
+    deck.sort(() => Math.random() - 0.5);
 
 }
 
@@ -125,11 +75,17 @@ function createDeck(){
 
 function drawCard(){
 
-    playSound("cardFlip");
+    if(typeof playSound === "function"){
+
+        playSound("cardFlip");
+
+    }
+
 
     return deck.pop();
 
 }
+
 
 
 
@@ -140,6 +96,7 @@ function getScore(cards){
     let score = 0;
 
     let aces = 0;
+
 
 
     for(let card of cards){
@@ -192,7 +149,8 @@ function displayCards(){
 
 
 
-    playerCards.forEach(card=>{
+
+    playerCards.forEach(card => {
 
 
         player.innerHTML += `
@@ -210,10 +168,12 @@ function displayCards(){
 
 
 
+
     dealerCards.forEach((card,index)=>{
 
 
         if(index === 0 && gameStarted){
+
 
             dealer.innerHTML += `
 
@@ -224,6 +184,7 @@ function displayCards(){
             </div>
 
             `;
+
 
         }
 
@@ -253,7 +214,6 @@ function displayCards(){
     getScore(playerCards);
 
 
-
 }
 
 
@@ -263,9 +223,17 @@ function displayCards(){
 function startGame(){
 
 
+    if(gameStarted){
+
+        return;
+
+    }
+
+
+
     let bet =
     Number(
-    document.getElementById("bet").value
+        document.getElementById("bet").value
     );
 
 
@@ -297,7 +265,16 @@ function startGame(){
 
 
 
+    if(typeof playSound === "function"){
+
+        playSound("cardDeal");
+
+    }
+
+
+
     createDeck();
+
 
 
     playerCards = [];
@@ -318,11 +295,11 @@ function startGame(){
 
 
 
-    gameStarted = true;
-
-
-
     window.currentBet = bet;
+
+
+
+    gameStarted = true;
 
 
 
@@ -330,9 +307,24 @@ function startGame(){
 
 
 
+    document.getElementById("dealerScore")
+    .innerText = "?";
+
+
+
     document.getElementById("result")
-    .innerText =
-    "";
+    .innerText = "";
+
+
+
+    // Instant blackjack
+
+    if(getScore(playerCards) === 21){
+
+        blackjackWin();
+
+    }
+
 
 }
 
@@ -354,6 +346,7 @@ function hit(){
     playerCards.push(drawCard());
 
 
+
     displayCards();
 
 
@@ -366,13 +359,24 @@ function hit(){
     if(score > 21){
 
 
-        endGame("💥 Bust! Dealer wins");
+        if(typeof playSound === "function"){
+
+            playSound("lose");
+
+        }
+
+
+        endGame(
+            "💥 Bust! Dealer wins"
+        );
 
 
     }
 
 
 }
+
+
 
 
 
@@ -403,9 +407,12 @@ function stand(){
     getScore(playerCards);
 
 
-
     let dealerScore =
     getScore(dealerCards);
+
+
+
+    gameStarted = false;
 
 
 
@@ -419,44 +426,73 @@ function stand(){
 
 
 
+
     if(
         dealerScore > 21 ||
         playerScore > dealerScore
     ){
 
-        endGame(
-        "🎉 You win x2"
-        );
+
+        if(typeof playSound === "function"){
+
+            playSound("win");
+
+        }
+
 
 
         coins +=
         window.currentBet * 2;
 
 
+
+        endGame(
+            "🎉 You win x2!"
+        );
+
+
     }
 
 
-    else if(
-        playerScore === dealerScore
-    ){
 
-        endGame(
-        "🤝 Push - Bet returned"
-        );
+    else if(playerScore === dealerScore){
+
+
+        if(typeof playSound === "function"){
+
+            playSound("click");
+
+        }
+
 
 
         coins +=
         window.currentBet;
 
 
+
+        endGame(
+            "🤝 Push - Bet returned"
+        );
+
+
     }
+
 
 
     else{
 
 
+        if(typeof playSound === "function"){
+
+            playSound("lose");
+
+        }
+
+
+
         endGame(
-        "❌ Dealer wins"
+            "❌ Dealer wins"
         );
 
 
@@ -468,6 +504,48 @@ function stand(){
 
 
 }
+
+
+
+
+
+
+function blackjackWin(){
+
+
+    gameStarted = false;
+
+
+
+    let reward =
+    window.currentBet * 2.5;
+
+
+
+    coins += reward;
+
+
+
+    updateCoins();
+
+
+
+    if(typeof playSound === "function"){
+
+        playSound("jackpot");
+
+    }
+
+
+
+    endGame(
+        "🃏 BLACKJACK! x2.5"
+    );
+
+
+}
+
+
 
 
 
