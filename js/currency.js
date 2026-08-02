@@ -4,8 +4,9 @@
 
 
 
-let coins =
-Number(localStorage.getItem("coins")) || 1000;
+let coins = Number(
+    localStorage.getItem("coins")
+) || 1000;
 
 
 
@@ -28,15 +29,14 @@ function updateCoins(){
 
     displays.forEach(display => {
 
-
         display.innerText =
         coins.toLocaleString();
-
 
     });
 
 
 }
+
 
 
 
@@ -63,19 +63,15 @@ function addCoins(amount){
 function removeCoins(amount){
 
 
-
     if(amount > coins){
 
-
         return false;
-
 
     }
 
 
 
     coins -= amount;
-
 
 
     updateCoins();
@@ -115,7 +111,6 @@ function hasCoins(amount){
 function claimDailyReward(){
 
 
-
     let lastClaim =
     Number(
         localStorage.getItem("dailyReward")
@@ -123,10 +118,7 @@ function claimDailyReward(){
 
 
 
-
-    let currentTime =
-    Date.now();
-
+    let now = Date.now();
 
 
 
@@ -135,14 +127,11 @@ function claimDailyReward(){
 
 
 
-
-
-    if(currentTime - lastClaim < cooldown){
-
+    if(now - lastClaim < cooldown){
 
 
         let remaining =
-        cooldown - (currentTime - lastClaim);
+        cooldown - (now - lastClaim);
 
 
 
@@ -161,7 +150,7 @@ function claimDailyReward(){
 
 
 
-        return false;
+        return;
 
 
     }
@@ -170,11 +159,7 @@ function claimDailyReward(){
 
 
 
-
-    let reward =
-    1000;
-
-
+    let reward = 1000;
 
 
 
@@ -182,17 +167,14 @@ function claimDailyReward(){
 
 
 
-
     localStorage.setItem(
         "dailyReward",
-        currentTime
+        now
     );
 
 
 
-
     updateCoins();
-
 
 
 
@@ -213,10 +195,6 @@ function claimDailyReward(){
     );
 
 
-
-    return true;
-
-
 }
 
 
@@ -225,29 +203,40 @@ function claimDailyReward(){
 
 
 
-
 // ==========================
-// Reset Account
+// Reset Coins
 // ==========================
 
 
 function resetCoins(){
 
 
-
     coins = 1000;
-
-
-
-    localStorage.setItem(
-        "coins",
-        coins
-    );
 
 
 
     updateCoins();
 
 
-
 }
+
+
+
+
+
+
+
+// ==========================
+// Load Coins On Page Open
+// ==========================
+
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+
+    updateCoins();
+
+
+});
