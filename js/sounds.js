@@ -3,33 +3,50 @@
 ========================================================= */
 
 
-const SOUND_VOLUME = 0.25; // Change volume here (0.0 - 1.0)
+const MASTER_VOLUME = 0.10;
+
+
+
+function getSoundPath(file){
+
+    if(window.location.pathname.includes("/games/")){
+
+        return "../assets/sounds/" + file;
+
+    }
+
+    return "assets/sounds/" + file;
+
+}
+
+
 
 
 
 const sounds = {
 
-    click: new Audio("assets/sounds/click.mp3"),
 
-    cardDeal: new Audio("assets/sounds/card-deal.mp3"),
+    click: new Audio(getSoundPath("click.mp3")),
 
-    cardFlip: new Audio("assets/sounds/card-flip.mp3"),
+    cardDeal: new Audio(getSoundPath("card-deal.mp3")),
 
-    coinFlip: new Audio("assets/sounds/coin-flip.mp3"),
+    cardFlip: new Audio(getSoundPath("card-flip.mp3")),
 
-    fish: new Audio("assets/sounds/fish.mp3"),
+    coinFlip: new Audio(getSoundPath("coin-flip.mp3")),
 
-    jackpot: new Audio("assets/sounds/jackpot.mp3"),
+    fish: new Audio(getSoundPath("fish.mp3")),
 
-    lose: new Audio("assets/sounds/lose.mp3"),
+    jackpot: new Audio(getSoundPath("jackpot.mp3")),
 
-    reward: new Audio("assets/sounds/reward.mp3"),
+    lose: new Audio(getSoundPath("lose.mp3")),
 
-    slotSpin: new Audio("assets/sounds/slot-spin.mp3"),
+    reward: new Audio(getSoundPath("reward.mp3")),
 
-    slotStop: new Audio("assets/sounds/slot-stop.mp3"),
+    slotSpin: new Audio(getSoundPath("slot-spin.mp3")),
 
-    win: new Audio("assets/sounds/win.mp3")
+    slotStop: new Audio(getSoundPath("slot-stop.mp3")),
+
+    win: new Audio(getSoundPath("win.mp3"))
 
 };
 
@@ -37,13 +54,11 @@ const sounds = {
 
 
 
-/*
-    Set volume for every sound
-*/
 
-Object.values(sounds).forEach(sound => {
 
-    sound.volume = SOUND_VOLUME;
+Object.values(sounds).forEach(sound=>{
+
+    sound.volume = MASTER_VOLUME;
 
 });
 
@@ -53,39 +68,20 @@ Object.values(sounds).forEach(sound => {
 
 
 
-/*
-    Play Sound Function
-
-    Example:
-    playSound("click");
-    playSound("fish");
-*/
-
 
 function playSound(name){
 
 
-    let sound = sounds[name];
+    if(!sounds[name]) return;
 
 
 
-    if(!sound){
+    sounds[name].pause();
 
-        console.log("Missing sound:", name);
-
-        return;
-
-    }
+    sounds[name].currentTime = 0;
 
 
-
-    sound.pause();
-
-
-    sound.currentTime = 0;
-
-
-    sound.play()
+    sounds[name].play()
     .catch(()=>{});
 
 
@@ -97,18 +93,12 @@ function playSound(name){
 
 
 
+// ONLY add click sounds after page loads
 
-/*
-    Add button click sounds automatically
-*/
-
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
+window.addEventListener("load",()=>{
 
 
-    document
-    .querySelectorAll("button")
+    document.querySelectorAll("button")
     .forEach(button=>{
 
 
@@ -120,7 +110,9 @@ document.addEventListener(
             playSound("click");
 
 
-        });
+        },
+        false
+        );
 
 
     });
