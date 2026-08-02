@@ -7,10 +7,15 @@ let fishing = false;
 
 
 
+
+
 function fish(){
 
 
-    if(fishing) return;
+
+    if(fishing)
+    return;
+
 
 
 
@@ -18,35 +23,57 @@ function fish(){
 
 
 
+
+
+
     let button =
-    document.querySelector(".game-action");
+    document.querySelector(
+        ".game-action"
+    );
+
+
 
 
 
     if(button){
 
+
         button.disabled = true;
+
 
         button.innerHTML =
         "🎣 Fishing...";
 
-    }
-
-
-
-
-
-    let fishEmoji =
-    document.getElementById("fish");
-
-
-
-    if(fishEmoji){
-
-        fishEmoji.style.animation =
-        "fishMove 1s infinite";
 
     }
+
+
+
+
+
+
+
+    let fishObject =
+    document.getElementById(
+        "fish"
+    );
+
+
+
+
+
+
+    if(fishObject){
+
+
+
+        fishObject.classList.add(
+            "swimming"
+        );
+
+
+    }
+
 
 
 
@@ -58,8 +85,17 @@ function fish(){
 
 
 
-    document.getElementById("fishResult").innerHTML =
+
+
+    document.getElementById(
+        "fishResult"
+    ).innerHTML =
+
     "🌊 Waiting for a bite...";
+
+
+
+
 
 
 
@@ -69,41 +105,55 @@ function fish(){
 
 
 
+
+
+
         let catches = [
 
 
+
             {
+
                 name:"Common Fish",
+
                 emoji:"🐟",
-                reward:100
+
+                reward:100,
+
+                chance:60
+
             },
 
 
+
             {
+
                 name:"Rare Fish",
+
                 emoji:"🐠",
-                reward:300
+
+                reward:300,
+
+                chance:30
+
             },
 
 
+
             {
+
                 name:"Legendary Fish",
+
                 emoji:"🐋",
-                reward:1000
+
+                reward:1000,
+
+                chance:10
+
             }
 
 
-        ];
 
-
-
-
-
-        let caught =
-        catches[
-            Math.floor(
-                Math.random()*catches.length
-            )
         ];
 
 
@@ -112,21 +162,81 @@ function fish(){
 
 
 
-        document.getElementById("fishResult").innerHTML =
 
-        `${caught.emoji} You caught ${caught.name}!<br>
-        🪙 +${caught.reward} Coins`;
-
+        let roll =
+        Math.random()*100;
 
 
 
 
 
-        addCoins(caught.reward);
+        let total = 0;
+
+
+        let caught;
 
 
 
-        // force UI update
+
+
+        for(let fish of catches){
+
+
+
+            total += fish.chance;
+
+
+
+            if(roll <= total){
+
+
+
+                caught = fish;
+
+
+                break;
+
+
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+        document.getElementById(
+            "fishResult"
+        ).innerHTML =
+
+
+        `
+
+        ${caught.emoji}
+
+        You caught ${caught.name}!<br>
+
+        🪙 +${caught.reward} Coins
+
+        `;
+
+
+
+
+
+
+
+
+
+        addCoins(
+            caught.reward
+        );
+
+
 
         updateCoins();
 
@@ -136,20 +246,45 @@ function fish(){
 
 
 
-        if(caught.reward >= 1000){
+
+        if(caught.reward === 1000){
 
 
-            playSound("jackpot");
+
+            LuckySounds.jackpot();
+
 
 
         }
+
         else{
 
 
-            playSound("win");
+
+            LuckySounds.win();
+
 
 
         }
+
+
+
+
+
+
+
+
+        if(fishObject){
+
+
+            fishObject.classList.remove(
+                "swimming"
+            );
+
+
+        }
+
+
 
 
 
@@ -160,7 +295,9 @@ function fish(){
         if(button){
 
 
-            button.disabled = false;
+
+            button.disabled=false;
+
 
 
             button.innerHTML =
@@ -174,12 +311,17 @@ function fish(){
 
 
 
-        fishing = false;
+
+        fishing=false;
+
+
+
+
+
 
 
 
     },3000);
-
 
 
 
