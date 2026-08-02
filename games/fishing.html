@@ -2,189 +2,74 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+    <title>Lucky Lounge Fishing</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Lucky Lounge Fishing</title>
-
-<link rel="stylesheet" href="../style.css">
-
+    <link rel="stylesheet" href="../style.css">
 </head>
-
 
 <body>
 
-
-
 <div class="game-page">
 
+    <div class="game-container">
 
-<div class="game-container">
+        <h1 class="game-title">
+            🎣 Fishing
+        </h1>
 
+        <div class="money">
+            🪙 Coins:
+            <span id="coins">0</span>
+        </div>
 
+        <div class="pond">
 
-<h1 class="game-title">
+            <div id="fish" class="fish">
+                🐟
+            </div>
 
-🎣 Fishing
+            <div class="wave">
+                🌊
+            </div>
 
-</h1>
+        </div>
 
+        <button
+            class="game-action"
+            onclick="fish()">
+            🎣 Cast Line
+        </button>
 
+        <h2 id="fishResult">
+            Cast your line!
+        </h2>
 
+        <div class="catch-info">
 
+            <h3>Possible Catches</h3>
 
+            <p>🐟 Common Fish - 100 Coins</p>
+            <p>🐠 Rare Fish - 300 Coins</p>
+            <p>🐋 Legendary Fish - 1000 Coins</p>
 
-<div class="money">
+        </div>
 
-🪙 Coins:
+        <button
+            class="game-action"
+            onclick="window.location.href='../index.html'">
+            ← Back
+        </button>
 
-<span id="coins">
-
-0
-
-</span>
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="pond">
-
-
-<div id="fish" class="fish">
-
-🐟
-
-</div>
-
-
-<div class="wave">
-
-🌊
-
-</div>
-
+    </div>
 
 </div>
-
-
-
-
-
-
-
-
-<button
-
-class="game-action"
-
-onclick="fish()">
-
-🎣 Cast Line
-
-</button>
-
-
-
-
-
-
-
-<h2 id="fishResult">
-
-Cast your line!
-
-</h2>
-
-
-
-
-
-
-
-<div class="catch-info">
-
-
-<h3>
-
-Possible Catches
-
-</h3>
-
-
-<p>
-
-🐟 Common Fish - 100 Coins
-
-</p>
-
-
-<p>
-
-🐠 Rare Fish - 300 Coins
-
-</p>
-
-
-<p>
-
-🐋 Legendary Fish - 1000 Coins
-
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-
-<button
-
-class="game-action"
-
-onclick="window.location.href='../index.html'">
-
-← Back
-
-</button>
-
-
-
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
 
 <script src="../js/currency.js"></script>
-
 <script src="../js/fishing.js"></script>
-
 <script src="../js/sounds.js"></script>
 
-
-
 </body>
-
 </html>
