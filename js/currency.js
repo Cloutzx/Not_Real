@@ -3,12 +3,94 @@
 ========================================================= */
 
 
+let coins = Number(localStorage.getItem("coins"));
 
-let coins =
-Number(
-localStorage.getItem("coins")
-)
-|| 1000;
+
+// First time player
+
+if (isNaN(coins)) {
+
+    coins = 1000;
+
+    localStorage.setItem(
+        "coins",
+        coins
+    );
+
+}
+
+
+
+
+
+function updateCoins(){
+
+
+    let displays =
+    document.querySelectorAll("#coins");
+
+
+    displays.forEach(display=>{
+
+
+        display.textContent =
+        coins.toLocaleString();
+
+
+    });
+
+
+}
+
+
+
+
+
+function getCoins(){
+
+    return coins;
+
+}
+
+
+
+
+
+function addCoins(amount){
+
+
+    coins += amount;
+
+
+    saveCoins();
+
+
+}
+
+
+
+
+
+function removeCoins(amount){
+
+
+    if(coins < amount){
+
+        return false;
+
+    }
+
+
+    coins -= amount;
+
+
+    saveCoins();
+
+
+    return true;
+
+
+}
 
 
 
@@ -23,133 +105,10 @@ function saveCoins(){
     );
 
 
-}
-
-
-
-
-
-
-
-function getCoins(){
-
-
-    return coins;
-
-
-}
-
-
-
-
-
-
-
-function addCoins(amount){
-
-
-
-    coins += amount;
-
-
-
-    if(coins < 0)
-    coins = 0;
-
-
-
-    saveCoins();
-
-
-    updateCoins();
-
-
-
-}
-
-
-
-
-
-
-
-function removeCoins(amount){
-
-
-
-    coins -= amount;
-
-
-
-    if(coins < 0)
-    coins = 0;
-
-
-
-    saveCoins();
-
-
     updateCoins();
 
 
 }
-
-
-
-
-
-
-
-
-function updateCoins(){
-
-
-
-    document
-    .querySelectorAll("#coins")
-    .forEach(element=>{
-
-
-        element.innerHTML =
-        coins.toLocaleString();
-
-
-
-    });
-
-
-
-}
-
-
-
-
-
-
-
-
-
-function setCoins(amount){
-
-
-
-    coins =
-    Number(amount)
-    || 0;
-
-
-
-    saveCoins();
-
-
-    updateCoins();
-
-
-}
-
-
-
-
 
 
 
@@ -161,7 +120,6 @@ document.addEventListener(
 
 
     updateCoins();
-
 
 
 });
