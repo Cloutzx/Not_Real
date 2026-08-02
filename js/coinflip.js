@@ -1,5 +1,9 @@
-let flipping = false;
+/* =========================================================
+   LUCKY LOUNGE COIN FLIP
+========================================================= */
 
+
+let flipping = false;
 
 
 
@@ -15,7 +19,7 @@ function flipCoin(choice){
 
     let bet =
     Number(
-    document.getElementById("bet").value
+        document.getElementById("bet").value
     );
 
 
@@ -43,6 +47,7 @@ function flipCoin(choice){
     if(bet > getCoins()){
 
 
+
         result.innerHTML =
         "Not enough coins!";
 
@@ -58,7 +63,8 @@ function flipCoin(choice){
 
 
 
-    flipping=true;
+    flipping = true;
+
 
 
 
@@ -66,7 +72,8 @@ function flipCoin(choice){
 
 
 
-    LuckySounds.coinFlip();
+
+    updateCoins();
 
 
 
@@ -77,7 +84,29 @@ function flipCoin(choice){
 
 
 
-    coin.classList.add("flip");
+
+
+    if(coin){
+
+
+        coin.classList.remove("flip");
+
+
+        void coin.offsetWidth;
+
+
+        coin.classList.add("flip");
+
+
+    }
+
+
+
+
+
+
+    LuckySounds.coinFlip();
+
 
 
 
@@ -93,6 +122,7 @@ function flipCoin(choice){
 
 
 
+
     setTimeout(()=>{
 
 
@@ -100,16 +130,37 @@ function flipCoin(choice){
 
 
         let outcome =
-        Math.random() < .5
-        ? "Heads"
-        : "Tails";
+        Math.random() < 0.5
+        ?
+        "Heads"
+        :
+        "Tails";
 
 
 
 
 
 
-        coin.classList.remove("flip");
+
+
+
+        if(coin){
+
+
+            coin.classList.remove("flip");
+
+
+            coin.innerHTML =
+            outcome === "Heads"
+            ?
+            "🪙"
+            :
+            "💰";
+
+
+        }
+
+
 
 
 
@@ -126,17 +177,22 @@ function flipCoin(choice){
 
 
 
+
             addCoins(reward);
+
+
+
+            updateCoins();
+
 
 
 
             result.innerHTML =
 
-            "🎉 " +
-            outcome +
-            "! +" +
-            reward +
-            " Coins";
+            `
+            🎉 ${outcome}!<br>
+            🪙 +${reward} Coins
+            `;
 
 
 
@@ -146,23 +202,24 @@ function flipCoin(choice){
 
         }
 
-        else {
+        else{
 
 
 
             result.innerHTML =
 
-            "❌ " +
-            outcome +
-            "! You lost";
+            `
+            ❌ ${outcome}!<br>
+            You lost ${bet} Coins
+            `;
 
 
 
             LuckySounds.lose();
 
 
-        }
 
+        }
 
 
 
@@ -174,7 +231,9 @@ function flipCoin(choice){
 
 
 
+
     },2000);
+
 
 
 
