@@ -1,7 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Lucky Lounge</title>
 
@@ -16,7 +20,7 @@
 <div class="menu">
 
 
-    <!-- HEADER -->
+    <!-- TOP HEADER -->
 
     <div class="top">
 
@@ -28,9 +32,14 @@
         </div>
 
 
+
         <div class="coins">
 
-            🪙 <span id="coins">0</span>
+            🪙
+
+            <span id="coins">
+                0
+            </span>
 
         </div>
 
@@ -41,15 +50,28 @@
 
 
 
-    <!-- DAILY -->
+
+
+    <!-- DAILY REWARD -->
+
 
     <div class="daily">
 
-        🎁 Daily Reward
+
+        <div>
+
+            🎁 Daily Reward
+
+        </div>
+
+
 
         <button onclick="claimDailyReward()">
+
             CLAIM
+
         </button>
+
 
     </div>
 
@@ -59,28 +81,43 @@
 
 
 
+    <!-- MENU TITLE -->
+
+
     <h1>
+
         GAMES
+
     </h1>
 
 
 
 
 
-    <!-- GAME BUTTONS -->
+
+
+
+    <!-- GAME MENU -->
 
 
     <div class="buttons">
 
 
-        <button class="game-btn slots"
+
+
+
+        <button 
+        class="game-btn slots"
         onclick="location.href='games/slots.html'">
+
 
             <span>
                 🎰
             </span>
 
+
             Slots
+
 
         </button>
 
@@ -88,14 +125,21 @@
 
 
 
-        <button class="game-btn blackjack"
+
+
+
+        <button 
+        class="game-btn blackjack"
         onclick="location.href='games/blackjack.html'">
+
 
             <span>
                 🃏
             </span>
 
+
             Blackjack
+
 
         </button>
 
@@ -103,14 +147,21 @@
 
 
 
-        <button class="game-btn cups"
+
+
+
+        <button 
+        class="game-btn cups"
         onclick="location.href='games/cups.html'">
+
 
             <span>
                 🥤
             </span>
 
+
             Lucky Cups
+
 
         </button>
 
@@ -118,14 +169,21 @@
 
 
 
-        <button class="game-btn flip"
+
+
+
+        <button 
+        class="game-btn flip"
         onclick="location.href='games/coinflip.html'">
+
 
             <span>
                 🪙
             </span>
 
+
             Coin Flip
+
 
         </button>
 
@@ -133,20 +191,56 @@
 
 
 
-        <button class="game-btn fish"
+
+
+
+        <button 
+        class="game-btn fish"
         onclick="location.href='games/fishing.html'">
+
 
             <span>
                 🎣
             </span>
 
+
             Fishing
+
 
         </button>
 
 
 
+
+
+
+
+
+        <button 
+        class="game-btn rewards"
+        onclick="location.href='rewards.html'">
+
+
+            <span>
+                🎁
+            </span>
+
+
+            Rewards
+
+
+        </button>
+
+
+
+
+
+
     </div>
+
+
+
+
 
 
 
@@ -154,7 +248,12 @@
 
 
 
+
+
+
 <script src="js/currency.js"></script>
+
+<script src="js/sounds.js"></script>
 
 
 </body>
