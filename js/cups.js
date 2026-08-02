@@ -1,6 +1,9 @@
+/* =========================================================
+   LUCKY LOUNGE CUPS
+========================================================= */
+
+
 let cupLocked = false;
-
-
 
 let winningCup = 0;
 
@@ -17,9 +20,11 @@ function chooseCup(number){
 
 
 
+
+
     let bet =
     Number(
-    document.getElementById("bet").value
+        document.getElementById("bet").value
     );
 
 
@@ -43,7 +48,9 @@ function chooseCup(number){
 
 
 
+
     if(bet > getCoins()){
+
 
 
         result.innerHTML =
@@ -61,7 +68,9 @@ function chooseCup(number){
 
 
 
-    cupLocked=true;
+
+    cupLocked = true;
+
 
 
 
@@ -69,15 +78,13 @@ function chooseCup(number){
 
 
 
+    updateCoins();
+
+
+
 
     LuckySounds.click();
 
-
-
-
-
-    result.innerHTML =
-    "🥤 Mixing cups...";
 
 
 
@@ -90,10 +97,24 @@ function chooseCup(number){
 
 
 
-    cups.forEach(cup=>{
+
+    cups.forEach((cup,index)=>{
 
 
-        cup.disabled=true;
+
+        cup.disabled = true;
+
+
+
+
+        if(index + 1 === number){
+
+
+            cup.classList.add("selected");
+
+
+        }
+
 
 
     });
@@ -104,8 +125,22 @@ function chooseCup(number){
 
 
 
+    result.innerHTML =
+    "🥤 Mixing cups...";
+
+
+
+
+
+
+
+
     winningCup =
-    Math.floor(Math.random()*3)+1;
+    Math.floor(
+        Math.random()*3
+    ) + 1;
+
+
 
 
 
@@ -114,7 +149,6 @@ function chooseCup(number){
 
 
     setTimeout(()=>{
-
 
 
 
@@ -129,18 +163,23 @@ function chooseCup(number){
 
 
 
+
             addCoins(reward);
+
+
+
+            updateCoins();
+
 
 
 
 
             result.innerHTML =
 
-            "🎉 You found the ball! +" +
-
-            reward +
-
-            " Coins";
+            `
+            🎉 Correct Cup!<br>
+            🪙 +${reward} Coins
+            `;
 
 
 
@@ -150,13 +189,17 @@ function chooseCup(number){
 
         }
 
-        else {
+        else{
 
 
 
             result.innerHTML =
 
-            "❌ Wrong cup!";
+            `
+            ❌ Wrong Cup!<br>
+            The ball was under cup ${winningCup}
+            `;
+
 
 
 
@@ -176,7 +219,12 @@ function chooseCup(number){
         cups.forEach(cup=>{
 
 
-            cup.disabled=false;
+            cup.disabled = false;
+
+
+            cup.classList.remove(
+                "selected"
+            );
 
 
         });
@@ -193,8 +241,8 @@ function chooseCup(number){
 
 
 
-    },2000);
 
+    },2000);
 
 
 
