@@ -125,10 +125,11 @@ function createDeck(){
 
 function drawCard(){
 
+    playSound("cardFlip");
+
     return deck.pop();
 
 }
-
 
 
 
