@@ -9,6 +9,8 @@ let cupGameActive = false;
 
 
 
+
+
 function startCupGame(){
 
 
@@ -16,11 +18,20 @@ function startCupGame(){
     Math.floor(Math.random() * 3) + 1;
 
 
+
     cupGameActive = true;
 
 
-    document.getElementById("result").innerText =
+
+    document.getElementById("result")
+    .innerText =
     "🥤 Pick a cup!";
+
+
+
+    document.getElementById("result")
+    .className = "";
+
 
 
     document.querySelectorAll(".cup")
@@ -30,6 +41,7 @@ function startCupGame(){
 
     });
 
+
 }
 
 
@@ -37,6 +49,7 @@ function startCupGame(){
 
 
 function pickCup(number){
+
 
 
     if(!cupGameActive){
@@ -49,7 +62,9 @@ function pickCup(number){
 
 
 
-    let bet = Number(
+
+    let bet =
+    Number(
         document.getElementById("bet").value
     );
 
@@ -65,6 +80,7 @@ function pickCup(number){
 
 
 
+
     if(bet > coins){
 
         alert("Not enough coins");
@@ -75,7 +91,22 @@ function pickCup(number){
 
 
 
+
     coins -= bet;
+
+
+
+    updateCoins();
+
+
+
+    if(typeof playSound === "function"){
+
+        playSound("click");
+
+    }
+
+
 
 
 
@@ -88,11 +119,14 @@ function pickCup(number){
 
 
 
+
     if(number === winningCup){
 
 
 
-        let chance = Math.random();
+        let chance =
+        Math.random();
+
 
 
 
@@ -102,17 +136,20 @@ function pickCup(number){
 
         }
 
+
         else if(chance < 0.25){
 
             multiplier = 5;
 
         }
 
+
         else{
 
             multiplier = 2;
 
         }
+
 
 
 
@@ -125,45 +162,86 @@ function pickCup(number){
 
 
 
+        updateCoins();
+
+
+
+
         result.innerText =
-        "🎉 Correct Cup! x" +
-        multiplier +
-        " +" +
-        winnings +
-        " coins";
+        "🎉 Correct Cup! x"
+        + multiplier
+        + " +"
+        + winnings.toLocaleString()
+        + " coins";
+
 
 
         result.className =
         "win";
 
 
+
+        if(multiplier >= 20){
+
+            if(typeof playSound === "function"){
+
+                playSound("jackpot");
+
+            }
+
+        }
+
+        else{
+
+
+            if(typeof playSound === "function"){
+
+                playSound("win");
+
+            }
+
+        }
+
+
+
     }
+
+
 
     else{
 
 
+
         result.innerText =
-        "❌ Wrong Cup! You lost " +
-        bet +
-        " coins";
+        "❌ Wrong Cup! Lost "
+        + bet.toLocaleString()
+        + " coins";
+
 
 
         result.className =
         "lose";
 
 
+
+        if(typeof playSound === "function"){
+
+            playSound("lose");
+
+        }
+
+
+
     }
 
 
 
-    document
-    .querySelectorAll(".cup")
+
+
+    document.querySelectorAll(".cup")
     [winningCup - 1]
-    .innerText = "💰";
-
-
-
-    updateCoins();
+    .innerText =
+    "💰";
 
 
 
@@ -186,6 +264,5 @@ function resetGame(){
 
 
 
-// Start automatically
 
 startCupGame();
