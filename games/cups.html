@@ -1,1 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cups | Lucky Lounge</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="game-container">
+
+
+    <h1 class="game-title">
+        🥤 Cup Game
+    </h1>
+
+
+    <div class="game-balance">
+
+        💰 Coins:
+        <span id="coins">0</span>
+
+    </div>
+
+
+
+    <p>
+        Pick the cup hiding the prize!
+    </p>
+
+
+
+    <input
+        id="bet"
+        type="number"
+        placeholder="Enter bet amount"
+        min="1"
+    >
+
+
+
+    <div class="cups">
+
+
+        <div class="cup" onclick="pickCup(1)">
+            🥤
+        </div>
+
+
+        <div class="cup" onclick="pickCup(2)">
+            🥤
+        </div>
+
+
+        <div class="cup" onclick="pickCup(3)">
+            🥤
+        </div>
+
+
+    </div>
+
+
+
+    <h2 id="result">
+
+    </h2>
+
+
+
+    <button onclick="resetGame()">
+
+        🔄 New Round
+
+    </button>
+
+
+
+    <br>
+
+
+
+    <a class="back" href="../index.html">
+
+        ← Back to Lobby
+
+    </a>
+
+
+</div>
+
+
+
+
+<script src="../js/currency.js"></script>
+
+<script src="../js/cups.js"></script>
+
+
+</body>
+
+</html>
