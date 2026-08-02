@@ -3,13 +3,52 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slots | Lucky Lounge</title>
 
-    <title>Slots | Lucky Lounge</title>
+<link rel="stylesheet" href="../style.css">
 
-    <link rel="stylesheet" href="../style.css">
+<style>
+
+.slots {
+
+    display: flex !important;
+
+    flex-direction: row !important;
+
+    justify-content: center !important;
+
+    align-items: center !important;
+
+    gap: 20px !important;
+
+}
+
+
+.slot {
+
+    width: 100px;
+
+    height: 100px;
+
+    display: flex !important;
+
+    justify-content: center !important;
+
+    align-items: center !important;
+
+    font-size: 50px;
+
+    background: #222;
+
+    border-radius: 15px;
+
+}
+
+
+</style>
 
 </head>
 
@@ -20,97 +59,78 @@
 <div class="game-container">
 
 
-    <h1 class="game-title">
-        🎰 Slots
-    </h1>
+<h1 class="game-title">
+🎰 Slots
+</h1>
 
 
 
-    <div class="game-balance">
+<div class="game-balance">
 
-        💰 Coins:
-        <span id="coins">
-            0
-        </span>
+💰 Coins:
+<span id="coins">0</span>
 
+</div>
+
+
+
+
+
+<div class="slots">
+
+
+    <div class="slot" id="slot1">
+        ❔
     </div>
 
 
-
-
-
-    <div class="slots">
-
-
-        <div class="slot" id="slot1">
-            ❔
-        </div>
-
-
-        <div class="slot" id="slot2">
-            ❔
-        </div>
-
-
-        <div class="slot" id="slot3">
-            ❔
-        </div>
-
-
+    <div class="slot" id="slot2">
+        ❔
     </div>
 
 
-
-
-
-
-    <input
-
-        id="bet"
-
-        type="number"
-
-        placeholder="Enter bet amount"
-
-        min="1"
-
-    >
-
-
-
-
-
-
-    <button onclick="spinSlots()">
-
-        🎰 Spin
-
-    </button>
-
-
-
-
-
-
-    <h2 id="result">
-
-    </h2>
-
-
-
-
-
-
-
-    <a class="back" href="../index.html">
-
-        ← Back to Lobby
-
-    </a>
+    <div class="slot" id="slot3">
+        ❔
+    </div>
 
 
 </div>
 
+
+
+
+
+<input 
+id="bet"
+type="number"
+placeholder="Enter bet amount"
+>
+
+
+
+<button onclick="spinSlots()">
+
+🎰 Spin
+
+</button>
+
+
+
+
+<h2 id="result"></h2>
+
+
+
+
+
+<a class="back" href="../index.html">
+
+← Back
+
+</a>
+
+
+</div>
 
 
 
@@ -122,7 +142,6 @@
 <script src="../js/sounds.js"></script>
 
 <script src="../js/slots.js"></script>
-
 
 
 </body>
