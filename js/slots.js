@@ -1,19 +1,18 @@
-// =================================
-// Lucky Lounge Slots
-// =================================
-
-
 let spinning = false;
+
 
 
 const symbols = [
 
-    "🍒",
-    "🍋",
-    "🍀",
-    "⭐",
-    "💎",
-    "7️⃣"
+"🍒",
+
+"💎",
+
+"7️⃣",
+
+"👑",
+
+"🍀"
 
 ];
 
@@ -25,38 +24,19 @@ function spin(){
 
 
 
-    // Stop double spinning
-
-    if(spinning){
-
-        return;
-
-    }
+    if(spinning) return;
 
 
 
-
-    let betInput =
-    document.getElementById("bet");
-
-
-
-    let bet =
-    Number(
-    betInput.value
-    );
+    const bet =
+    Number(document.getElementById("bet").value);
 
 
 
+    if(!bet || bet <=0){
 
 
-    if(!bet || bet <= 0){
-
-
-        alert(
-        "Enter a bet amount!"
-        );
-
+        result.innerHTML="Enter a bet!";
 
         return;
 
@@ -64,15 +44,10 @@ function spin(){
 
 
 
+    if(bet > getCoins()){
 
 
-
-    if(bet > coins){
-
-
-        alert(
-        "Not enough coins!"
-        );
+        result.innerHTML="Not enough coins!";
 
 
         return;
@@ -83,70 +58,27 @@ function spin(){
 
 
 
-
-
-    spinning = true;
-
+    spinning=true;
 
 
 
-
-    let spinButton =
-    document.querySelector(
-    ".game-action"
-    );
+    removeCoins(bet);
 
 
 
-    if(spinButton){
-
-        spinButton.disabled = true;
-
-        spinButton.innerHTML =
-        "🎰 Spinning...";
-
-    }
+    LuckySounds.spin();
 
 
 
 
 
+    const slots=[
 
-    coins -= bet;
+    document.getElementById("slot1"),
 
+    document.getElementById("slot2"),
 
-    updateCoins();
-
-
-
-
-
-
-    let slot1 =
-    document.getElementById(
-    "slot1"
-    );
-
-
-    let slot2 =
-    document.getElementById(
-    "slot2"
-    );
-
-
-    let slot3 =
-    document.getElementById(
-    "slot3"
-    );
-
-
-
-
-    let slots = [
-
-        slot1,
-        slot2,
-        slot3
+    document.getElementById("slot3")
 
     ];
 
@@ -154,46 +86,12 @@ function spin(){
 
 
 
-
-
-    let result =
-    document.getElementById(
-    "result"
-    );
+    let count=0;
 
 
 
 
-    result.innerHTML =
-    "🎰 Rolling...";
-
-
-
-
-
-
-
-    slots.forEach(slot=>{
-
-
-        slot.classList.add(
-        "spin"
-        );
-
-
-    });
-
-
-
-
-
-
-
-
-
-    let rollAnimation =
-    setInterval(()=>{
-
+    let animation=setInterval(()=>{
 
 
         slots.forEach(slot=>{
@@ -202,292 +100,114 @@ function spin(){
             slot.innerHTML =
 
             symbols[
-            Math.floor(
-            Math.random()
-            *
-            symbols.length
-            )
+            Math.floor(Math.random()*symbols.length)
             ];
-
 
 
         });
 
+
+
+        count++;
+
+
+
+        if(count>=20){
+
+
+            clearInterval(animation);
+
+
+
+            finishSpin(slots,bet);
+
+
+
+        }
 
 
     },100);
 
 
 
+}
 
 
 
 
 
 
-    setTimeout(()=>{
+function finishSpin(slots,bet){
 
 
 
-        clearInterval(
-        rollAnimation
-        );
+    let resultSlots = slots.map(slot=>slot.innerHTML);
 
 
 
+    if(
 
+    resultSlots[0] === resultSlots[1] &&
 
-        let final = [];
+    resultSlots[1] === resultSlots[2]
 
+    ){
 
 
+        let multiplier=3;
 
 
-        slots.forEach(slot=>{
 
+        if(resultSlots[0]=="💎")
+        multiplier=5;
 
-            let symbol =
 
-            symbols[
-            Math.floor(
-            Math.random()
-            *
-            symbols.length
-            )
-            ];
+        if(resultSlots[0]=="7️⃣")
+        multiplier=10;
 
 
+        if(resultSlots[0]=="👑")
+        multiplier=25;
 
-            slot.innerHTML =
-            symbol;
 
 
+        let reward =
+        bet * multiplier;
 
-            final.push(
-            symbol
-            );
 
 
+        addCoins(reward);
 
-            slot.classList.remove(
-            "spin"
-            );
 
 
-        });
+        result.innerHTML =
+        "🎉 WIN +" + reward;
 
 
 
+        LuckySounds.win();
 
 
 
+    }
 
+    else{
 
 
+        result.innerHTML =
+        "❌ Lost";
 
-        let reward = 0;
 
+        LuckySounds.lose();
 
 
+    }
 
 
 
 
 
-
-        // JACKPOT
-
-        if(
-
-        final[0] === final[1]
-
-        &&
-
-        final[1] === final[2]
-
-        ){
-
-
-
-            switch(final[0]){
-
-
-                case "7️⃣":
-
-
-                    reward =
-                    bet * 25;
-
-
-                    result.innerHTML =
-                    "🔥 JACKPOT 7s! +" 
-                    + reward 
-                    + " coins";
-
-
-                    break;
-
-
-
-
-
-                case "💎":
-
-
-                    reward =
-                    bet * 15;
-
-
-                    result.innerHTML =
-                    "💎 DIAMOND JACKPOT! +"
-                    + reward
-                    + " coins";
-
-
-                    break;
-
-
-
-
-
-
-                default:
-
-
-                    reward =
-                    bet * 10;
-
-
-                    result.innerHTML =
-                    "🎉 THREE MATCH! +"
-                    + reward
-                    + " coins";
-
-
-                    break;
-
-
-
-            }
-
-
-
-        }
-
-
-
-
-
-
-
-        // TWO MATCH
-
-
-        else if(
-
-        final[0] === final[1]
-
-        ||
-
-        final[1] === final[2]
-
-        ||
-
-        final[0] === final[2]
-
-        ){
-
-
-
-            reward =
-            bet * 2;
-
-
-
-            result.innerHTML =
-
-            "✨ Two Match! +"
-
-            + reward
-
-            + " coins";
-
-
-
-        }
-
-
-
-
-
-
-
-        // LOSS
-
-
-        else{
-
-
-
-            result.innerHTML =
-
-            "❌ No match";
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-        coins += reward;
-
-
-
-        updateCoins();
-
-
-
-
-
-
-
-
-
-        spinning = false;
-
-
-
-
-
-
-        if(spinButton){
-
-
-            spinButton.disabled = false;
-
-
-            spinButton.innerHTML =
-
-            "🎰 Spin";
-
-
-        }
-
-
-
-
-
-
-
-    },3000);
-
-
+    spinning=false;
 
 
 
