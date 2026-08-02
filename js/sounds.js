@@ -1,9 +1,17 @@
 /* =========================================================
    LUCKY LOUNGE SOUND SYSTEM
+   Assets/Sounds Version
 ========================================================= */
 
 
-const soundPath = "/sounds/";
+const soundPath =
+window.location.pathname.includes("/games/")
+?
+"../assets/sounds/"
+:
+"assets/sounds/";
+
+
 
 
 
@@ -14,40 +22,50 @@ const Sounds = {
     new Audio(soundPath + "click.mp3"),
 
 
+
     slotSpin:
     new Audio(soundPath + "slot-spin.mp3"),
+
 
 
     slotStop:
     new Audio(soundPath + "slot-stop.mp3"),
 
 
+
     cardDeal:
     new Audio(soundPath + "card-deal.mp3"),
+
 
 
     cardFlip:
     new Audio(soundPath + "card-flip.mp3"),
 
 
+
     coinFlip:
     new Audio(soundPath + "coin-flip.mp3"),
+
 
 
     fish:
     new Audio(soundPath + "fish.mp3"),
 
 
+
     jackpot:
     new Audio(soundPath + "jackpot.mp3"),
+
 
 
     reward:
     new Audio(soundPath + "reward.mp3"),
 
 
+
     win:
     new Audio(soundPath + "win.mp3"),
+
 
 
     lose:
@@ -62,11 +80,19 @@ const Sounds = {
 
 
 
+
+// Volume settings
+
 Object.values(Sounds).forEach(sound=>{
+
 
     sound.volume = 0.5;
 
+
 });
+
+
+
 
 
 
@@ -76,7 +102,23 @@ Object.values(Sounds).forEach(sound=>{
 function playSound(name){
 
 
-    if(!Sounds[name]) return;
+
+    if(!Sounds[name]){
+
+
+        console.log(
+            "Sound missing:",
+            name
+        );
+
+
+        return;
+
+
+    }
+
+
+
 
 
 
@@ -84,11 +126,17 @@ function playSound(name){
 
 
 
-    Sounds[name].play().catch(()=>{
+
+
+
+    Sounds[name]
+    .play()
+    .catch(error=>{
 
 
         console.log(
-        "Audio waiting for user interaction"
+            "Sound blocked:",
+            error
         );
 
 
@@ -104,95 +152,143 @@ function playSound(name){
 
 
 
+
+
 window.LuckySounds = {
+
 
 
 
     click(){
 
+
         playSound("click");
 
+
     },
+
+
 
 
 
     slotSpin(){
 
+
         playSound("slotSpin");
 
+
     },
+
+
 
 
 
     slotStop(){
 
+
         playSound("slotStop");
 
+
     },
+
+
 
 
 
     cardDeal(){
 
+
         playSound("cardDeal");
 
+
     },
+
+
 
 
 
     cardFlip(){
 
+
         playSound("cardFlip");
 
+
     },
+
+
 
 
 
     coinFlip(){
 
+
         playSound("coinFlip");
 
+
     },
+
+
 
 
 
     fish(){
 
+
         playSound("fish");
 
+
     },
+
+
 
 
 
     jackpot(){
 
+
         playSound("jackpot");
 
+
     },
+
+
 
 
 
     reward(){
 
+
         playSound("reward");
 
+
     },
+
+
 
 
 
     win(){
 
+
         playSound("win");
+
 
     },
 
 
 
+
+
     lose(){
+
 
         playSound("lose");
 
+
     }
+
+
+
 
 
 };
@@ -203,7 +299,53 @@ window.LuckySounds = {
 
 
 
-// Button click sound
+
+
+// Unlock browser audio after first interaction
+
+document.addEventListener(
+"click",
+()=>{
+
+
+    if(!window.audioUnlocked){
+
+
+        window.audioUnlocked = true;
+
+
+        Sounds.click.play()
+        .then(()=>{
+
+
+            Sounds.click.pause();
+
+            Sounds.click.currentTime = 0;
+
+
+        })
+        .catch(()=>{});
+
+
+
+    }
+
+
+
+},
+{
+    once:true
+});
+
+
+
+
+
+
+
+
+
+// Add click sounds to all buttons
 
 document.addEventListener(
 "DOMContentLoaded",
@@ -226,7 +368,9 @@ document.addEventListener(
         });
 
 
+
     });
+
 
 
 });
