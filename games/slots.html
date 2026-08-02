@@ -2,237 +2,84 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+    <title>Lucky Lounge Slots</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Lucky Lounge Slots</title>
-
-<link rel="stylesheet" href="../style.css">
-
+    <link rel="stylesheet" href="../style.css">
 </head>
-
 
 <body>
 
-
-
 <div class="game-page">
 
+    <div class="game-container">
 
-<div class="game-container">
+        <h1 class="game-title">
+            🎰 Slots
+        </h1>
 
+        <div class="money">
+            🪙 Coins:
+            <span id="coins">0</span>
+        </div>
 
+        <div class="bet-box">
 
-<h1 class="game-title">
+            <input
+                id="bet"
+                type="number"
+                placeholder="Enter Bet Amount"
+                min="1"
+            >
 
-🎰 Slots
+        </div>
 
-</h1>
+        <div class="slots">
 
+            <div class="slot" id="slot1">❔</div>
 
+            <div class="slot" id="slot2">❔</div>
 
+            <div class="slot" id="slot3">❔</div>
 
+        </div>
 
+        <button
+            class="game-action"
+            onclick="spin()">
+            🎰 Spin
+        </button>
 
-<div class="money">
+        <h2 id="result">
+            Good Luck!
+        </h2>
 
-🪙 Coins:
+        <div class="slot-info">
 
-<span id="coins">
+            <h3>Possible Wins</h3>
 
-0
+            <p>🍒 Three Cherries - 3x</p>
+            <p>💎 Three Diamonds - 5x</p>
+            <p>7️⃣ Three Sevens - 10x</p>
+            <p>👑 Jackpot - 25x</p>
 
-</span>
+        </div>
 
-</div>
+        <button
+            class="game-action"
+            onclick="window.location.href='../index.html'">
+            ← Back To Menu
+        </button>
 
-
-
-
-
-
-
-
-
-<div class="bet-box">
-
-
-<input
-
-id="bet"
-
-type="number"
-
-placeholder="Enter Bet Amount"
-
-min="1">
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="slots">
-
-
-
-<div class="slot" id="slot1">
-
-❔
+    </div>
 
 </div>
-
-
-
-<div class="slot" id="slot2">
-
-❔
-
-</div>
-
-
-
-<div class="slot" id="slot3">
-
-❔
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<button
-
-class="game-action"
-
-onclick="spin()">
-
-🎰 Spin
-
-</button>
-
-
-
-
-
-
-
-<h2 id="result">
-
-Good Luck!
-
-</h2>
-
-
-
-
-
-
-
-
-
-<div class="slot-info">
-
-
-<h3>
-
-Possible Wins
-
-</h3>
-
-
-<p>
-
-🍒 Three Cherries - 3x
-
-</p>
-
-
-<p>
-
-💎 Three Diamonds - 5x
-
-</p>
-
-
-<p>
-
-7️⃣ Three Sevens - 10x
-
-</p>
-
-
-<p>
-
-👑 Jackpot - 25x
-
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<button
-
-class="game-action"
-
-onclick="window.location.href='../index.html'">
-
-← Back To Menu
-
-</button>
-
-
-
-
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
 
 <script src="../js/currency.js"></script>
-
 <script src="../js/slots.js"></script>
-
 <script src="../js/sounds.js"></script>
 
-
-
 </body>
-
 </html>
