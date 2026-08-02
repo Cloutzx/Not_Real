@@ -3,11 +3,12 @@
 ========================================================= */
 
 
-const SOUND_VOLUME = 0.1; // Change volume here (0.0 - 1.0)
+const MASTER_VOLUME = 0.10; // 10% overall volume
 
 
 
 const sounds = {
+
 
     click: new Audio("assets/sounds/click.mp3"),
 
@@ -37,13 +38,46 @@ const sounds = {
 
 
 
-/*
-    Set volume for every sound
-*/
+// Different volumes for different sounds
 
-Object.values(sounds).forEach(sound => {
+const soundLevels = {
 
-    sound.volume = SOUND_VOLUME;
+    click: 0.5,
+
+    cardDeal: 0.4,
+
+    cardFlip: 0.4,
+
+    coinFlip: 0.35,
+
+    fish: 0.25,
+
+    jackpot: 0.3,
+
+    lose: 0.3,
+
+    reward: 0.35,
+
+    slotSpin: 0.25,
+
+    slotStop: 0.25,
+
+    win: 0.35
+
+};
+
+
+
+
+
+
+
+Object.keys(sounds).forEach(sound => {
+
+
+    sounds[sound].volume =
+        MASTER_VOLUME * soundLevels[sound];
+
 
 });
 
@@ -53,14 +87,6 @@ Object.values(sounds).forEach(sound => {
 
 
 
-/*
-    Play Sound Function
-
-    Example:
-    playSound("click");
-    playSound("fish");
-*/
-
 
 function playSound(name){
 
@@ -68,14 +94,7 @@ function playSound(name){
     let sound = sounds[name];
 
 
-
-    if(!sound){
-
-        console.log("Missing sound:", name);
-
-        return;
-
-    }
+    if(!sound) return;
 
 
 
@@ -98,17 +117,12 @@ function playSound(name){
 
 
 
-/*
-    Add button click sounds automatically
-*/
-
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
 
 
-    document
-    .querySelectorAll("button")
+    document.querySelectorAll("button")
     .forEach(button=>{
 
 
