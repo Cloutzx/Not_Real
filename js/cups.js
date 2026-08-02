@@ -1,268 +1,157 @@
-// ==========================
-// Lucky Lounge Cups Game
-// ==========================
-
-
-let winningCup = 0;
-
-let cupGameActive = false;
+let cupLocked = false;
 
 
 
+function chooseCup(choice){
 
 
-function startCupGame(){
-
-
-    winningCup =
-    Math.floor(Math.random() * 3) + 1;
+    if(cupLocked) return;
 
 
 
-    cupGameActive = true;
+    const bet =
+    Number(document.getElementById("bet").value);
 
 
 
-    document.getElementById("result")
-    .innerText =
-    "🥤 Pick a cup!";
+    if(!bet || bet <= 0){
 
 
+        document.getElementById("result").innerHTML =
+        "Enter a bet amount!";
 
-    document.getElementById("result")
-    .className = "";
-
-
-
-    document.querySelectorAll(".cup")
-    .forEach(cup => {
-
-        cup.innerText = "🥤";
-
-    });
-
-
-}
-
-
-
-
-
-function pickCup(number){
-
-
-
-    if(!cupGameActive){
-
-        startCupGame();
 
         return;
+
 
     }
 
 
 
-
-    let bet =
-    Number(
-        document.getElementById("bet").value
-    );
-
-
-
-    if(bet <= 0){
-
-        alert("Enter a bet amount");
-
-        return;
-
-    }
-
+    let coins = getCoins();
 
 
 
     if(bet > coins){
 
-        alert("Not enough coins");
+
+        document.getElementById("result").innerHTML =
+        "Not enough coins!";
+
 
         return;
 
-    }
-
-
-
-
-    coins -= bet;
-
-
-
-    updateCoins();
-
-
-
-    if(typeof playSound === "function"){
-
-        playSound("click");
 
     }
 
 
 
-
-
-    let result =
-    document.getElementById("result");
+    cupLocked = true;
 
 
 
-    let multiplier = 0;
+    removeCoins(bet);
+
+
+
+    const cups =
+    document.querySelectorAll(".cup");
+
+
+
+    cups.forEach(cup=>{
+
+
+        cup.style.pointerEvents="none";
+
+
+    });
 
 
 
 
-    if(number === winningCup){
+
+    document.getElementById("result").innerHTML =
+    "🥤 Mixing cups...";
 
 
 
-        let chance =
-        Math.random();
+    LuckySounds.click();
 
 
 
 
-        if(chance < 0.05){
 
-            multiplier = 20;
+    setTimeout(()=>{
+
+
+        const winningCup =
+        Math.floor(Math.random()*3)+1;
+
+
+
+        if(choice === winningCup){
+
+
+
+            let reward =
+            bet * 3;
+
+
+
+            addCoins(reward);
+
+
+
+            document.getElementById("result").innerHTML =
+
+            "🎉 Correct Cup! +" + reward + " Coins";
+
+
+
+            LuckySounds.win();
+
+
 
         }
 
-
-        else if(chance < 0.25){
-
-            multiplier = 5;
-
-        }
-
-
-        else{
-
-            multiplier = 2;
-
-        }
+        else {
 
 
 
+            document.getElementById("result").innerHTML =
 
-        let winnings =
-        bet * multiplier;
-
-
-
-        coins += winnings;
+            "❌ Wrong Cup!";
 
 
 
-        updateCoins();
+            LuckySounds.lose();
 
 
-
-
-        result.innerText =
-        "🎉 Correct Cup! x"
-        + multiplier
-        + " +"
-        + winnings.toLocaleString()
-        + " coins";
-
-
-
-        result.className =
-        "win";
-
-
-
-        if(multiplier >= 20){
-
-            if(typeof playSound === "function"){
-
-                playSound("jackpot");
-
-            }
-
-        }
-
-        else{
-
-
-            if(typeof playSound === "function"){
-
-                playSound("win");
-
-            }
 
         }
 
 
 
-    }
 
 
 
-    else{
+        cups.forEach(cup=>{
+
+
+            cup.style.pointerEvents="auto";
+
+
+        });
 
 
 
-        result.innerText =
-        "❌ Wrong Cup! Lost "
-        + bet.toLocaleString()
-        + " coins";
+        cupLocked=false;
 
 
 
-        result.className =
-        "lose";
+    },2000);
 
-
-
-        if(typeof playSound === "function"){
-
-            playSound("lose");
-
-        }
-
-
-
-    }
-
-
-
-
-
-    document.querySelectorAll(".cup")
-    [winningCup - 1]
-    .innerText =
-    "💰";
-
-
-
-    cupGameActive = false;
 
 
 }
-
-
-
-
-
-function resetGame(){
-
-
-    startCupGame();
-
-
-}
-
-
-
-
-startCupGame();
