@@ -1,45 +1,44 @@
-// ==========================
-// Lucky Lounge Currency System
-// ==========================
+/* =========================================================
+   LUCKY LOUNGE CURRENCY SYSTEM
+========================================================= */
 
 
-// Load saved coins
-
-let coins = Number(
-    localStorage.getItem("coins")
-) || 1000;
+const DEFAULT_COINS = 1000;
 
 
 
+// Get coins
 
-// Update all coin displays
-
-function updateCoins(){
+function getCoins(){
 
 
-    localStorage.setItem(
-        "coins",
-        coins
-    );
+    let coins = localStorage.getItem("coins");
 
 
 
-    let coinDisplays =
-    document.querySelectorAll("#coins");
+    if(coins === null){
+
+
+        localStorage.setItem(
+            "coins",
+            DEFAULT_COINS
+        );
+
+
+        return DEFAULT_COINS;
+
+
+    }
 
 
 
-    coinDisplays.forEach(display => {
+    return Number(coins);
 
-
-        display.innerText =
-        coins.toLocaleString();
-
-
-    });
 
 
 }
+
+
 
 
 
@@ -50,13 +49,27 @@ function updateCoins(){
 function addCoins(amount){
 
 
+    let coins = getCoins();
+
+
+
     coins += amount;
+
+
+
+    localStorage.setItem(
+        "coins",
+        coins
+    );
+
 
 
     updateCoins();
 
 
+
 }
+
 
 
 
@@ -68,117 +81,25 @@ function addCoins(amount){
 function removeCoins(amount){
 
 
-    if(amount > coins){
-
-        return false;
-
-    }
+    let coins = getCoins();
 
 
 
     coins -= amount;
 
 
-    updateCoins();
 
+    if(coins < 0){
 
-    return true;
-
-
-}
-
-
-
-
-
-
-// Check coins
-
-function hasCoins(amount){
-
-
-    return coins >= amount;
-
-
-}
-
-
-
-
-
-
-// ==========================
-// Daily Reward
-// ==========================
-
-
-function claimDailyReward(){
-
-
-
-    let lastClaim =
-    Number(
-        localStorage.getItem("dailyReward")
-    ) || 0;
-
-
-
-    let now =
-    Date.now();
-
-
-
-    let cooldown =
-    24 * 60 * 60 * 1000;
-
-
-
-
-
-    if(now - lastClaim < cooldown){
-
-
-
-        let remaining =
-        cooldown - (now - lastClaim);
-
-
-
-        let hours =
-        Math.ceil(
-            remaining / 3600000
-        );
-
-
-
-        alert(
-            "🎁 Come back in "
-            + hours
-            + " hours"
-        );
-
-
-
-        return false;
-
+        coins = 0;
 
     }
-
-
-
-
-
-    let reward = 1000;
-
-
-
-    coins += reward;
 
 
 
     localStorage.setItem(
-        "dailyReward",
-        now
+        "coins",
+        coins
     );
 
 
@@ -187,24 +108,34 @@ function claimDailyReward(){
 
 
 
-
-    if(typeof playSound === "function"){
-
-        playSound("reward");
-
-    }
+}
 
 
 
-    alert(
-        "🎉 You received "
-        + reward.toLocaleString()
-        + " coins!"
-    );
 
 
 
-    return true;
+
+// Update all coin displays
+
+function updateCoins(){
+
+
+    const displays =
+    document.querySelectorAll("#coins");
+
+
+
+    displays.forEach(display=>{
+
+
+        display.innerHTML =
+        getCoins().toLocaleString();
+
+
+
+    });
+
 
 
 }
@@ -215,65 +146,15 @@ function claimDailyReward(){
 
 
 
-// ==========================
-// Reset Coins
-// ==========================
-
-
-function resetCoins(){
-
-
-    coins = 1000;
-
-
-    updateCoins();
-
-
-}
-
-
-
-
-
-
-// ==========================
-// Load Coins On Every Page
-// ==========================
-
-
-function loadCoins(){
-
-
-    let savedCoins =
-    localStorage.getItem("coins");
-
-
-
-    if(savedCoins !== null){
-
-
-        coins =
-        Number(savedCoins);
-
-
-    }
-
-
-
-    updateCoins();
-
-
-}
-
-
-
+// Load coins when page opens
 
 document.addEventListener(
 "DOMContentLoaded",
-function(){
+()=>{
 
 
-    loadCoins();
+    updateCoins();
+
 
 
 });
