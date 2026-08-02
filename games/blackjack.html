@@ -1,1 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blackjack | Lucky Lounge</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="game-container">
+
+
+    <h1 class="game-title">
+        🃏 Blackjack
+    </h1>
+
+
+
+    <div class="game-balance">
+
+        💰 Coins:
+        <span id="coins">0</span>
+
+    </div>
+
+
+
+
+    <h2>
+        Your Cards
+    </h2>
+
+
+    <div class="cards" id="playerCards">
+
+        <div class="card back">
+            ?
+        </div>
+
+    </div>
+
+
+
+    <h2>
+        Your Score:
+        <span id="playerScore">
+            0
+        </span>
+    </h2>
+
+
+
+
+    <h2>
+        Dealer Cards
+    </h2>
+
+
+    <div class="cards" id="dealerCards">
+
+        <div class="card back">
+            ?
+        </div>
+
+    </div>
+
+
+
+    <h2>
+        Dealer Score:
+        <span id="dealerScore">
+            ?
+        </span>
+    </h2>
+
+
+
+
+    <input
+        id="bet"
+        type="number"
+        placeholder="Enter bet amount"
+        min="1"
+    >
+
+
+
+    <br>
+
+
+
+    <button onclick="startGame()">
+
+        🃏 Start Game
+
+    </button>
+
+
+
+    <button onclick="hit()">
+
+        ➕ Hit
+
+    </button>
+
+
+
+    <button onclick="stand()">
+
+        ✋ Stand
+
+    </button>
+
+
+
+
+
+    <h2 id="result">
+
+    </h2>
+
+
+
+
+    <a class="back" href="../index.html">
+
+        ← Back to Lobby
+
+    </a>
+
+
+</div>
+
+
+
+
+<script src="../js/currency.js"></script>
+
+<script src="../js/blackjack.js"></script>
+
+
+</body>
+
+</html>
