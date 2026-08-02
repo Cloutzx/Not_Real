@@ -1,1 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Slots | Lucky Lounge</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="game-container">
+
+
+    <h1 class="game-title">
+        🎰 Slots
+    </h1>
+
+
+    <div class="game-balance">
+
+        💰 Coins:
+        <span id="coins">0</span>
+
+    </div>
+
+
+
+    <div class="slot-machine">
+
+
+        <div class="slot" id="slot1">
+            ❔
+        </div>
+
+
+        <div class="slot" id="slot2">
+            ❔
+        </div>
+
+
+        <div class="slot" id="slot3">
+            ❔
+        </div>
+
+
+    </div>
+
+
+
+
+    <input 
+        id="bet"
+        type="number"
+        placeholder="Enter bet amount"
+        min="1"
+    >
+
+
+
+    <br>
+
+
+
+    <button onclick="spinSlots()">
+
+        🎰 Spin
+
+    </button>
+
+
+
+    <h2 id="result">
+
+    </h2>
+
+
+
+    <a class="back" href="../index.html">
+
+        ← Back to Lobby
+
+    </a>
+
+
+</div>
+
+
+
+
+<script src="../js/currency.js"></script>
+
+<script src="../js/slots.js"></script>
+
+
+</body>
+
+</html>
