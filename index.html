@@ -40,18 +40,36 @@ Lucky Lounge
 
 
 
-        <div class="coins">
+        <div class="header-actions">
 
-            🪙
 
-            <span id="coins">
-                0
-            </span>
+            <button 
+            class="sound-btn"
+            onclick="toggleMute()"
+            id="soundButton">
+
+                🔊
+
+            </button>
+
+
+
+            <div class="coins">
+
+                🪙
+
+                <span id="coins">
+                    0
+                </span>
+
+            </div>
+
 
         </div>
 
 
     </div>
+
 
 
 
@@ -89,6 +107,7 @@ Lucky Lounge
 
 
 
+
     <!-- TITLE -->
 
 
@@ -97,6 +116,7 @@ Lucky Lounge
         GAMES
 
     </h1>
+
 
 
 
@@ -113,7 +133,7 @@ Lucky Lounge
 
         <button
         class="game-btn"
-        onclick="location.href='games/slots.html'">
+        onclick="openGame('games/slots.html')">
 
 
             <span>
@@ -133,9 +153,10 @@ Lucky Lounge
 
 
 
+
         <button
         class="game-btn"
-        onclick="location.href='games/blackjack.html'">
+        onclick="openGame('games/blackjack.html')">
 
 
             <span>
@@ -155,9 +176,10 @@ Lucky Lounge
 
 
 
+
         <button
         class="game-btn"
-        onclick="location.href='games/cups.html'">
+        onclick="openGame('games/cups.html')">
 
 
             <span>
@@ -180,7 +202,7 @@ Lucky Lounge
 
         <button
         class="game-btn"
-        onclick="location.href='games/coinflip.html'">
+        onclick="openGame('games/coinflip.html')">
 
 
             <span>
@@ -203,7 +225,7 @@ Lucky Lounge
 
         <button
         class="game-btn"
-        onclick="location.href='games/fishing.html'">
+        onclick="openGame('games/fishing.html')">
 
 
             <span>
@@ -226,7 +248,7 @@ Lucky Lounge
 
         <button
         class="game-btn"
-        onclick="location.href='rewards.html'">
+        onclick="openGame('rewards.html')">
 
 
             <span>
@@ -250,6 +272,7 @@ Lucky Lounge
 
 
 
+
 </div>
 
 
@@ -257,13 +280,65 @@ Lucky Lounge
 
 
 
-<!-- SCRIPTS -->
 
 <script src="js/currency.js"></script>
 
 <script src="js/sounds.js"></script>
 
 <script src="js/rewards.js"></script>
+
+
+
+<script>
+
+
+function openGame(page){
+
+
+    if(window.LuckySounds){
+
+        LuckySounds.click();
+
+    }
+
+
+
+    setTimeout(()=>{
+
+
+        window.location.href = page;
+
+
+    },200);
+
+
+}
+
+
+
+
+
+function toggleMute(){
+
+
+    if(window.LuckySounds){
+
+
+        let muted = LuckySounds.toggleMute();
+
+
+
+        document.getElementById("soundButton").innerHTML =
+        muted ? "🔇" : "🔊";
+
+
+    }
+
+
+}
+
+
+</script>
 
 
 
