@@ -24,12 +24,18 @@
     </h1>
 
 
+
+
     <div class="game-balance">
 
         💰 Coins:
-        <span id="coins">0</span>
+        <span id="coins">
+            0
+        </span>
 
     </div>
+
+
 
 
 
@@ -39,40 +45,71 @@
 
 
 
+
+
     <input
+
         id="bet"
+
         type="number"
+
         placeholder="Enter bet amount"
+
         min="1"
+
     >
+
+
+
+
+
+    <br><br>
+
+
 
 
 
     <div class="cups">
 
 
-        <div class="cup" onclick="pickCup(1)">
+        <button class="cup" onclick="pickCup(1)">
+
             🥤
-        </div>
+
+        </button>
 
 
-        <div class="cup" onclick="pickCup(2)">
+
+        <button class="cup" onclick="pickCup(2)">
+
             🥤
-        </div>
+
+        </button>
 
 
-        <div class="cup" onclick="pickCup(3)">
+
+        <button class="cup" onclick="pickCup(3)">
+
             🥤
-        </div>
+
+        </button>
 
 
     </div>
 
 
 
+
+
+
+
     <h2 id="result">
 
     </h2>
+
+
+
+
 
 
 
@@ -84,7 +121,15 @@
 
 
 
-    <br>
+
+
+
+
+    <br><br>
+
+
+
+
 
 
 
@@ -100,9 +145,15 @@
 
 
 
+
+
+
 <script src="../js/currency.js"></script>
 
+<script src="../js/sounds.js"></script>
+
 <script src="../js/cups.js"></script>
+
 
 
 </body>
