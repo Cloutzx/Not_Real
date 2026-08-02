@@ -3,12 +3,25 @@
 // =================================
 
 
+let spinning = false;
+
+
+
 function spin(){
+
+
+    if(spinning){
+
+        return;
+
+    }
+
 
 
     let bet = Number(
         document.getElementById("bet").value
     );
+
 
 
     if(!bet || bet <= 0){
@@ -31,20 +44,26 @@ function spin(){
 
 
 
+    spinning = true;
+
+
+
     coins -= bet;
 
     updateCoins();
 
 
 
-    let slot1 =
-    document.getElementById("slot1");
 
-    let slot2 =
-    document.getElementById("slot2");
+    let slots = [
 
-    let slot3 =
-    document.getElementById("slot3");
+        document.getElementById("slot1"),
+
+        document.getElementById("slot2"),
+
+        document.getElementById("slot3")
+
+    ];
 
 
 
@@ -52,28 +71,69 @@ function spin(){
 
         "🍒",
 
-        "💎",
-
-        "7️⃣",
+        "🍋",
 
         "🍀",
 
-        "⭐"
+        "💎",
+
+        "⭐",
+
+        "7️⃣"
 
     ];
 
 
 
 
-    slot1.innerHTML = "❔";
-    slot2.innerHTML = "❔";
-    slot3.innerHTML = "❔";
+
+    let result =
+    document.getElementById("result");
 
 
 
-    slot1.classList.add("spin");
-    slot2.classList.add("spin");
-    slot3.classList.add("spin");
+    result.innerHTML =
+    "🎰 Spinning...";
+
+
+
+
+    slots.forEach(slot=>{
+
+        slot.classList.add("spin");
+
+    });
+
+
+
+
+
+    let spinTime = 3000;
+
+
+
+    let animation = setInterval(()=>{
+
+
+        slots.forEach(slot=>{
+
+
+            slot.innerHTML =
+            symbols[
+            Math.floor(
+            Math.random()*symbols.length
+            )
+            ];
+
+
+        });
+
+
+
+    },100);
+
+
+
 
 
 
@@ -81,32 +141,36 @@ function spin(){
     setTimeout(()=>{
 
 
-        let a =
-        symbols[
-        Math.floor(Math.random()*symbols.length)
-        ];
-
-        let b =
-        symbols[
-        Math.floor(Math.random()*symbols.length)
-        ];
-
-        let c =
-        symbols[
-        Math.floor(Math.random()*symbols.length)
-        ];
+        clearInterval(animation);
 
 
 
-        slot1.innerHTML = a;
-        slot2.innerHTML = b;
-        slot3.innerHTML = c;
+        let final = [];
+
+
+        slots.forEach(slot=>{
+
+
+            let symbol =
+            symbols[
+            Math.floor(
+            Math.random()*symbols.length
+            )
+            ];
+
+
+            slot.innerHTML = symbol;
+
+
+            final.push(symbol);
 
 
 
-        slot1.classList.remove("spin");
-        slot2.classList.remove("spin");
-        slot3.classList.remove("spin");
+            slot.classList.remove("spin");
+
+
+        });
+
 
 
 
@@ -115,38 +179,83 @@ function spin(){
 
 
 
-        if(a === b && b === c){
+
+        if(
+        final[0] === final[1] &&
+        final[1] === final[2]
+        ){
 
 
-            reward = bet * 10;
+            if(final[0] === "7️⃣"){
 
 
-            document.getElementById("result").innerHTML =
-            "🎉 JACKPOT! +" + reward + " coins";
+                reward = bet * 25;
+
+
+                result.innerHTML =
+                "🔥 JACKPOT 7s! +" + reward + " coins";
+
+
+            }
+
+            else if(final[0] === "💎"){
+
+
+                reward = bet * 10;
+
+
+                result.innerHTML =
+                "💎 Diamond Win! +" + reward + " coins";
+
+
+            }
+
+            else{
+
+
+                reward = bet * 5;
+
+
+                result.innerHTML =
+                "🎉 Big Win! +" + reward + " coins";
+
+
+            }
 
 
         }
 
-        else if(a === b || a === c || b === c){
+
+        else if(
+
+        final[0] === final[1] ||
+
+        final[1] === final[2] ||
+
+        final[0] === final[2]
+
+        ){
 
 
             reward = bet * 2;
 
 
-            document.getElementById("result").innerHTML =
-            "✨ Nice Win! +" + reward + " coins";
+            result.innerHTML =
+            "✨ Small Win! +" + reward + " coins";
 
 
         }
+
 
         else{
 
 
-            document.getElementById("result").innerHTML =
-            "❌ Lost";
+            result.innerHTML =
+            "❌ No Match";
 
 
         }
+
 
 
 
@@ -158,7 +267,12 @@ function spin(){
 
 
 
-    },1500);
+        spinning = false;
+
+
+
+    },spinTime);
+
 
 
 }
