@@ -4,21 +4,16 @@
 
 
 const slotSymbols = [
-
     "🍒",
     "🍋",
     "🍀",
     "⭐",
     "💎",
     "7️⃣"
-
 ];
 
 
 let spinning = false;
-
-
-
 
 
 
@@ -59,8 +54,6 @@ function spinSlots(){
 
 
 
-
-
     spinning = true;
 
 
@@ -71,16 +64,11 @@ function spinSlots(){
 
 
 
-
-
     if(typeof playSound === "function"){
 
         playSound("slotSpin");
 
     }
-
-
-
 
 
 
@@ -96,11 +84,8 @@ function spinSlots(){
     document.getElementById("slot3");
 
 
-
     let result =
     document.getElementById("result");
-
-
 
 
 
@@ -109,13 +94,7 @@ function spinSlots(){
 
 
 
-    result.className = "";
-
-
-
-
-
-    let spins = 0;
+    let count = 0;
 
 
 
@@ -125,26 +104,26 @@ function spinSlots(){
 
 
         slot1.innerText =
-        getRandomSymbol();
+        randomSlot();
+
 
 
         slot2.innerText =
-        getRandomSymbol();
+        randomSlot();
+
 
 
         slot3.innerText =
-        getRandomSymbol();
+        randomSlot();
+
+
+
+        count++;
 
 
 
 
-        spins++;
-
-
-
-
-        if(spins >= 25){
-
+        if(count >= 25){
 
 
             clearInterval(animation);
@@ -159,7 +138,7 @@ function spinSlots(){
 
 
 
-            checkResult(
+            finishSlots(
 
                 bet,
 
@@ -170,7 +149,6 @@ function spinSlots(){
                 slot3.innerText
 
             );
-
 
 
         }
@@ -189,8 +167,7 @@ function spinSlots(){
 
 
 
-
-function getRandomSymbol(){
+function randomSlot(){
 
 
     return slotSymbols[
@@ -209,8 +186,7 @@ function getRandomSymbol(){
 
 
 
-
-function checkResult(
+function finishSlots(
 
     bet,
     first,
@@ -220,7 +196,6 @@ function checkResult(
 ){
 
 
-
     let multiplier = 0;
 
     let message = "";
@@ -228,9 +203,6 @@ function checkResult(
 
 
 
-
-
-    // 777 Jackpot
 
     if(
 
@@ -244,22 +216,16 @@ function checkResult(
         multiplier = 100;
 
         message =
-        "🔥 JACKPOT 777 x100";
+        "🔥 777 JACKPOT x100";
 
 
-        if(typeof playSound === "function"){
 
-            playSound("jackpot");
-
-        }
+        playGameSound("jackpot");
 
 
     }
 
 
-
-
-    // Diamond jackpot
 
     else if(
 
@@ -276,20 +242,13 @@ function checkResult(
         "💎 Diamond Jackpot x50";
 
 
-        if(typeof playSound === "function"){
 
-            playSound("jackpot");
-
-        }
+        playGameSound("jackpot");
 
 
     }
 
 
-
-
-
-    // Triple match
 
     else if(
 
@@ -308,10 +267,6 @@ function checkResult(
     }
 
 
-
-
-
-    // Two matching
 
     else if(
 
@@ -332,8 +287,6 @@ function checkResult(
 
 
 
-
-
     else{
 
 
@@ -347,17 +300,12 @@ function checkResult(
 
 
 
-
-
     let winnings =
     bet * multiplier;
 
 
 
-
-
     coins += winnings;
-
 
 
     updateCoins();
@@ -365,12 +313,8 @@ function checkResult(
 
 
 
-
-
     let result =
     document.getElementById("result");
-
-
 
 
 
@@ -392,17 +336,13 @@ function checkResult(
 
 
 
-        if(typeof playSound === "function"){
+        playGameSound("win");
 
-            playSound("win");
-
-        }
 
 
     }
 
     else{
-
 
 
         result.innerText =
@@ -415,11 +355,7 @@ function checkResult(
 
 
 
-        if(typeof playSound === "function"){
-
-            playSound("lose");
-
-        }
+        playGameSound("lose");
 
 
     }
@@ -428,8 +364,24 @@ function checkResult(
 
 
 
-
     spinning = false;
+
+
+}
+
+
+
+
+
+
+function playGameSound(sound){
+
+
+    if(typeof playSound === "function"){
+
+        playSound(sound);
+
+    }
 
 
 }
