@@ -4,51 +4,12 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Slots | Lucky Lounge</title>
+<title>Lucky Lounge Slots</title>
 
 <link rel="stylesheet" href="../style.css">
-
-<style>
-
-.slots {
-
-    display: flex !important;
-
-    flex-direction: row !important;
-
-    justify-content: center !important;
-
-    align-items: center !important;
-
-    gap: 20px !important;
-
-}
-
-
-.slot {
-
-    width: 100px;
-
-    height: 100px;
-
-    display: flex !important;
-
-    justify-content: center !important;
-
-    align-items: center !important;
-
-    font-size: 50px;
-
-    background: #222;
-
-    border-radius: 15px;
-
-}
-
-
-</style>
 
 </head>
 
@@ -56,21 +17,64 @@
 <body>
 
 
+
+<div class="game-page">
+
+
 <div class="game-container">
 
 
+
 <h1 class="game-title">
+
 🎰 Slots
+
 </h1>
 
 
 
-<div class="game-balance">
 
-💰 Coins:
-<span id="coins">0</span>
+
+
+<div class="money">
+
+🪙 Coins:
+
+<span id="coins">
+
+0
+
+</span>
 
 </div>
+
+
+
+
+
+
+
+
+
+<div class="bet-box">
+
+
+<input
+
+id="bet"
+
+type="number"
+
+placeholder="Enter Bet Amount"
+
+min="1">
+
+
+</div>
+
+
+
+
 
 
 
@@ -79,19 +83,29 @@
 <div class="slots">
 
 
-    <div class="slot" id="slot1">
-        ❔
-    </div>
+
+<div class="slot" id="slot1">
+
+❔
+
+</div>
 
 
-    <div class="slot" id="slot2">
-        ❔
-    </div>
+
+<div class="slot" id="slot2">
+
+❔
+
+</div>
 
 
-    <div class="slot" id="slot3">
-        ❔
-    </div>
+
+<div class="slot" id="slot3">
+
+❔
+
+</div>
+
 
 
 </div>
@@ -100,15 +114,15 @@
 
 
 
-<input 
-id="bet"
-type="number"
-placeholder="Enter bet amount"
->
 
 
 
-<button onclick="spinSlots()">
+
+<button
+
+class="game-action"
+
+onclick="spin()">
 
 🎰 Spin
 
@@ -117,17 +131,59 @@ placeholder="Enter bet amount"
 
 
 
-<h2 id="result"></h2>
+
+
+
+<h2 id="result">
+
+Good Luck!
+
+</h2>
 
 
 
 
 
-<a class="back" href="../index.html">
 
-← Back
 
-</a>
+
+
+<div class="slot-info">
+
+
+<h3>
+
+Possible Wins
+
+</h3>
+
+
+<p>
+
+🍒 Three Cherries - 3x
+
+</p>
+
+
+<p>
+
+💎 Three Diamonds - 5x
+
+</p>
+
+
+<p>
+
+7️⃣ Three Sevens - 10x
+
+</p>
+
+
+<p>
+
+👑 Jackpot - 25x
+
+</p>
 
 
 </div>
@@ -137,11 +193,44 @@ placeholder="Enter bet amount"
 
 
 
+
+
+
+<button
+
+class="game-action"
+
+onclick="window.location.href='../index.html'">
+
+← Back To Menu
+
+</button>
+
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
 <script src="../js/currency.js"></script>
+
+<script src="../js/slots.js"></script>
 
 <script src="../js/sounds.js"></script>
 
-<script src="../js/slots.js"></script>
 
 
 </body>
